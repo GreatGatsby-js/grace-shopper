@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //Action types
-const GET_PRODUCTS = 'GET_PRODUCTS'
+const GOT_PRODUCTS = 'GOT_PRODUCTS'
 
 const initialState = {
   allProducts: null,
