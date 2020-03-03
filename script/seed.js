@@ -166,10 +166,6 @@ const seed = async () => {
     await product3.addOrder(order2)
     await product3.addOrder(order3)
 
-    // await transaction1.addUser(user1)
-    // await transaction2.addUser(user2)
-    // await transaction3.addUser(user3)
-
     await transaction1.addOrder(order1)
     await transaction2.addOrder(order2)
     await transaction3.addOrder(order3)
