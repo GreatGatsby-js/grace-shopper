@@ -1,5 +1,5 @@
 const {green, red} = require('chalk')
-const {db, User, Product, Order, Transaction} = require('./server/db')
+const {db, User, Product, Order, Transaction} = require('./server/db/models')
 
 const users = [
   {
