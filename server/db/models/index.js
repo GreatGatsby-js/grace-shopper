@@ -18,10 +18,10 @@ const Transaction = require('./transaction')
  * instead of: const User = require('../db/models/user')
  */
 
-Product.belongsToMany(User, {through: 'Product_User'})
-Product.belongsToMany(Order, {through: 'Product_Order'})
-User.hasMany(Product)
-User.hasMany(Order)
+Product.belongsToMany(User, {through: Order, foreignKey: 'userId'})
+//Product.belongsToMany(Order, {through: Order})
+User.belongsToMany(Product, {through: Order, foreignKey: 'productId'})
+//User.hasMany(Order)
 Transaction.belongsTo(User)
 Transaction.hasMany(Order)
 
