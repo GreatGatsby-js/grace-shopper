@@ -9,7 +9,7 @@ const initialState = {
 }
 
 //Action creators
-const getProducts = allProducts => {
+const gotProducts = allProducts => {
   return {
     type: GET_PRODUCTS,
     allProducts
@@ -20,7 +20,7 @@ const getProducts = allProducts => {
 export const fetchProducts = () => async dispatch => {
   try {
     const res = await axios.get('/api/products')
-    dispatch(getProducts(res.data))
+    dispatch(gotProducts(res.data))
   } catch (err) {
     console.error(err)
   }
