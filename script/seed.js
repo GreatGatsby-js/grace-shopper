@@ -136,7 +136,6 @@ const seed = async () => {
     const product3 = allProducts[2]
 
     const user1 = allUsers[0]
-
     const user2 = allUsers[1]
     const user3 = allUsers[2]
 
@@ -149,26 +148,27 @@ const seed = async () => {
     const transaction3 = allTransactions[2]
 
     await user1.addProduct(product1)
-
     await user2.addProduct(product3)
     await user2.addProduct(product1)
-
     await user3.addProduct(product3)
 
     await user1.addOrder(order1)
-
     await user2.addOrder(order2)
     await user3.addOrder(order3)
 
-    // await product1.addUser(user1)
-    // await product3.addUser(user2)
-    // await product1.addUser(user2)
-    //
-    // await product3.addUser(user3)
+    await product1.addUser(user1)
+    await product3.addUser(user2)
+    await product1.addUser(user2)
+    await product3.addUser(user3)
 
-    await transaction1.addUser(user1)
-    await transaction2.addUser(user2)
-    await transaction3.addUser(user3)
+    await product1.addOrder(order1)
+    await product1.addOrder(order2)
+    await product3.addOrder(order2)
+    await product3.addOrder(order3)
+
+    // await transaction1.addUser(user1)
+    // await transaction2.addUser(user2)
+    // await transaction3.addUser(user3)
 
     await transaction1.addOrder(order1)
     await transaction2.addOrder(order2)
