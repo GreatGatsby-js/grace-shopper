@@ -4,6 +4,11 @@ import axios from 'axios'
 const GOT_PRODUCTS = 'GOT_PRODUCTS'
 const GOT_SINGLE_PRODUCT = 'GOT_SINGLE_PRODUCT'
 
+const initialState = {
+  allProducts: null,
+  singleProduct: null
+}
+
 //Action creators
 const gotProducts = allProducts => {
   return {
@@ -39,13 +44,8 @@ export const fetchSingleProduct = id => async dispatch => {
 }
 
 //Reducer
-export default function(state = {}, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-    case GOT_SINGLE_PRODUCT:
-      return {
-        ...state,
-        singleProduct: action.singleProduct
-      }
     case GOT_PRODUCTS:
       return {
         ...state,
