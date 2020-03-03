@@ -11,7 +11,7 @@ const initialState = {
 //Action creators
 const gotProducts = allProducts => {
   return {
-    type: GET_PRODUCTS,
+    type: GOT_PRODUCTS,
     allProducts
   }
 }
@@ -29,7 +29,7 @@ export const fetchProducts = () => async dispatch => {
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
+    case GOT_PRODUCTS:
       return {
         ...state,
         allProducts: action.allProducts
