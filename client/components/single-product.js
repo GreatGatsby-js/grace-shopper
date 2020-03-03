@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {fetchSingleProduct} from '../store'
-import {Product} from './product'
+// import {ProductPreview} from './product-preview'
 
 /**
  * COMPONENT
  */
 class SingleProduct extends Component {
   componentDidMount() {
-    this.props.fetchSingleProduct()
+    this.props.fetchSingleProduct(this.props.match.params.id)
   }
 
   render() {
@@ -17,12 +17,14 @@ class SingleProduct extends Component {
       <div>
         Testing. Single Product View
         <div>
-          <h2>SingleProduct</h2>
-          <ul>
-            <div key={product.id}>
-              <Product product={product} />
-            </div>
-          </ul>
+          <h2>{this.props.product.name}</h2>
+          <div key={this.props.product.id}>
+            <p>Name: {this.props.product.name}</p>
+            <p>Info: {this.props.product.description}</p>
+            <p>Price: {this.props.product.price}</p>
+            <img src={this.props.product.imageUrl} />
+          </div>
+          {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
         </div>
       </div>
     )
@@ -34,7 +36,7 @@ class SingleProduct extends Component {
  */
 const mapState = state => {
   return {
-    product: state.SingleProduct //placeholder text. might need to update based on what's in the store
+    product: state.singleProduct //placeholder text. might need to update based on what's in the store
   }
 }
 
