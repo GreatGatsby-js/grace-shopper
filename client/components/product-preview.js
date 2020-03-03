@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ProductPreview = props => {
+export const ProductPreview = props => {
   const {product} = props
 
   return (
-    <div key={product.id}>
+    <div>
       {/* <p>Name: {product.name}</p> */}
       <p>Info: {product.description}</p>
       {/* <p>Price: {product.price}</p> */}

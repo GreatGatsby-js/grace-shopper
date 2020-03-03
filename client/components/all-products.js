@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch, Link} from 'react-router-dom'
 // import PropTypes from 'prop-types'
 // import {Login, Signup, UserHome} from './components'
-import {fetchProducts} from '../store'
-import {ProductPreview} from './product-preview'
+import {fetchProducts} from '../store/products.js'
+import ProductPreview from './product-preview'
 
 /**
  * COMPONENT
@@ -12,7 +12,6 @@ import {ProductPreview} from './product-preview'
 class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchProducts()
-    // this.props.products
   }
 
   render() {
@@ -45,8 +44,9 @@ class AllProducts extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state)
   return {
-    products: state.allProducts //placeholder text. might need to update based on what's in the store
+    products: state.products.allProducts
   }
 }
 
