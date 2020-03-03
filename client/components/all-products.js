@@ -26,7 +26,7 @@ class AllProducts extends Component {
                 this.props.products.map(product => (
                   <div key={product.id}>
                     <Link to={`/products/${product.id}`}>
-                      <h3>{product.title}</h3>
+                      <h3>{product.name}</h3>
                     </Link>
                     <ProductPreview product={product} />
                   </div>
@@ -44,7 +44,6 @@ class AllProducts extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state)
   return {
     products: state.products.allProducts
   }

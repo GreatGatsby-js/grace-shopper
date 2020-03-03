@@ -36,13 +36,13 @@ class SingleProduct extends Component {
  */
 const mapState = state => {
   return {
-    product: state.singleProduct //placeholder text. might need to update based on what's in the store
+    product: state.products.singleProduct //placeholder text. might need to update based on what's in the store
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchSingleProduct: () => dispatch(fetchSingleProduct())
+    fetchSingleProduct: id => dispatch(fetchSingleProduct(id))
   }
 }
 
