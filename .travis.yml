@@ -17,9 +17,6 @@ before_script:
 script:
   - npm test             # test the code
   - npm run build-client # make the bundle
-branches:
-  only:
-    - travis
 
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
