@@ -29,17 +29,23 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
-// export const fetchSingleProduct = () => async dispatch => {
-//   try {
-
-//   } catch(err){
-//     console.error(err);
-//   }
-// }
+export const fetchSingleProduct = id => async dispatch => {
+  try {
+    const singleProduct = await axios.get(`/api/products/${id}`)
+    dispatch(gotSingleProduct(singleProduct))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 //Reducer
 export default function(state = {}, action) {
   switch (action.type) {
+    case GOT_SINGLE_PRODUCT:
+      return {
+        ...state,
+        singleProduct: action.singleProduct
+      }
     case GOT_PRODUCTS:
       return {
         ...state,
