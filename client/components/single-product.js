@@ -42,7 +42,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchSingleProduct: () => dispatch(fetchSingleProduct())
+    fetchSingleProduct: id => dispatch(fetchSingleProduct(id))
   }
 }
 

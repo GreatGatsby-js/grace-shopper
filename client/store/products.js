@@ -56,9 +56,9 @@ const gotSingleProduct = singleProduct => {
 //Thunks
 export const fetchProducts = () => async dispatch => {
   try {
-    // const res = await axios.get('/api/products')
-    // dispatch(gotProducts(res.data))
-    dispatch(gotProducts(dummyProducts))
+    const res = await axios.get('/api/products')
+    dispatch(gotProducts(res.data))
+    // dispatch(gotProducts(dummyProducts))
   } catch (err) {
     console.error(err)
   }
@@ -67,7 +67,8 @@ export const fetchProducts = () => async dispatch => {
 export const fetchSingleProduct = id => async dispatch => {
   try {
     const singleProduct = await axios.get(`/api/products/${id}`)
-    dispatch(gotSingleProduct(singleProduct))
+    console.log('singleproduct thunk', singleProduct)
+    dispatch(gotSingleProduct(singleProduct.data))
   } catch (err) {
     console.error(err)
   }
