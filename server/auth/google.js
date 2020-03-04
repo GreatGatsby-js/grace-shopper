@@ -26,6 +26,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK
   }
+  console.log('google config', googleConfig)
 
   const strategy = new GoogleStrategy(
     googleConfig,
@@ -37,11 +38,16 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const lastName = profile.name.familyName
       const fullName = profile.displayName
 
+      console.log('hiii')
+
       User.findOrCreate({
         where: {googleId},
         defaults: {email, imgUrl, firstName, lastName, fullName}
       })
-        .then(([user]) => done(null, user))
+        .then(([user]) => {
+          console.log('hay')
+          done(null, user)
+        })
         .catch(done)
     }
   )
