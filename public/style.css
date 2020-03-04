@@ -19,3 +19,8 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.cartimage {
+  height: 60px;
+  /* width: 50%; */
+}

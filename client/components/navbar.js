@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
+import CartButton from './navbar-cart'
+
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>Welcome to Great Gatsby's Shop!!</h1>
@@ -21,6 +23,15 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          {/* <Link to="/cart">Cart</Link> */}
+          {/* <CartButton /> */}
+          <Link to="/cart">
+            <img
+              src="duckcart.png"
+              className="cartimage"
+              onClick={() => handleClick()}
+            />
+          </Link>
         </div>
       )}
     </nav>
