@@ -16,7 +16,6 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => {
-  console.log('get user', user)
   return {type: GET_USER, user}
 }
 const removeUser = () => ({type: REMOVE_USER})
@@ -42,9 +41,7 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    console.log('hiiiiii')
     dispatch(getUser(res.data))
-    console.log('got usr')
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -67,7 +64,6 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER: {
-      console.log('reducer', action.user)
       return action.user
     }
     case REMOVE_USER:
