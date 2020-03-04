@@ -1,3 +1,5 @@
+//for guest users??????? if we have them??
+
 //add to cart
 function addToCart(product) {
   const id = product.id.toString()
