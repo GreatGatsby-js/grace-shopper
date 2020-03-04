@@ -5,6 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
+    console.log('products', products)
     //NOTE: sending product objects with all their information intact.
     res.json(products)
   } catch (err) {

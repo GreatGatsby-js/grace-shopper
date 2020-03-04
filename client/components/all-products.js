@@ -44,6 +44,7 @@ class AllProducts extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log('state', state)
   return {
     products: state.products.allProducts
   }

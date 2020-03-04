@@ -35,7 +35,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
-        <Route component={NoMatches} />
+        {/* <Route component={NoMatches} /> */}
 
         {isLoggedIn && (
           <Switch>
