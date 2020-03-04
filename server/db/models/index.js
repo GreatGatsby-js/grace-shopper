@@ -19,11 +19,13 @@ const Transaction = require('./transaction')
  */
 
 Product.belongsToMany(User, {through: Order, foreignKey: 'userId'})
-//Product.belongsToMany(Order, {through: Order})
 User.belongsToMany(Product, {through: Order, foreignKey: 'productId'})
-//User.hasMany(Order)
+
 Transaction.belongsTo(User)
 Transaction.hasMany(Order)
+
+// Product.belongsToMany(Order, {through: 'product_order'})
+// User.hasMany(Order)
 
 module.exports = {
   User,
