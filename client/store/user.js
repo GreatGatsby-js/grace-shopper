@@ -9,6 +9,7 @@ const REMOVE_USER = 'REMOVE_USER'
 const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
+console.log('hey')
 
 /**
  * INITIAL STATE
