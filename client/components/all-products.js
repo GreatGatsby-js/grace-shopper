@@ -20,11 +20,11 @@ class AllProducts extends Component {
         Testing. All products to show up here
         <div>
           <h2>All Products</h2>
-          <ul>
+          <div className="productBox">
             {this.props.products.length
               ? // if there are products, render them
                 this.props.products.map(product => (
-                  <div key={product.id}>
+                  <div key={product.id} className="product">
                     <Link to={`/products/${product.id}`}>
                       <h3>{product.name}</h3>
                     </Link>
@@ -33,7 +33,7 @@ class AllProducts extends Component {
                 ))
               : // else if there are none,
                 'No Products Yet'}
-          </ul>
+          </div>
         </div>
       </div>
     )
