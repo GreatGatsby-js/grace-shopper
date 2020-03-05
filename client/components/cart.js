@@ -4,12 +4,12 @@ import {connect} from 'react-redux'
 class DisconnectedCart extends Component {
   render() {
     console.log('cart props', this.props)
-    if (this.props.lineItems.length === 0) {
+    if (this.props.cart.length === 0) {
       return <div>Whoops! No items in your cart!</div>
     } else {
       return (
         <div>
-          {this.props.lineItems.map(item => {
+          {this.props.cart.map(item => {
             return <div>item.product.name</div>
           })}
           <button type="button">Checkout</button>
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
   return {
     userId: id, //might be null
     orderId: state.user.orderId, //might be null
-    lineItems: [...state.user.lineItems]
+    cart: [...state.user.cart]
   }
 }
 

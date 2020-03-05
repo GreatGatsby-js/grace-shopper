@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout, fetchLineItems, fetchOrderId} from '../store'
+import {logout, fetchOrderId} from '../store'
 
 const Navbar = props => {
   return (
@@ -15,13 +15,7 @@ const Navbar = props => {
             <a href="#" onClick={props.handleClick}>
               Logout
             </a>
-            <Link
-              to="/cart"
-              className="navButtons"
-              onClick={() => {
-                props.fetchLineItems(props.orderId)
-              }}
-            >
+            <Link to="/cart" className="navButtons">
               Cart
             </Link>
           </div>
@@ -66,9 +60,8 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     },
-    fetchLineItems: orderId => {
-      dispatch(fetchLineItems(orderId))
-    },
+    // fetchLineItems: orderId => {
+    //   dispatch(fetchLineItems(orderId))}
     fetchOrderId: userId => {
       dispatch(fetchOrderId(userId))
     }
