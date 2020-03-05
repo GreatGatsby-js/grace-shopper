@@ -15,6 +15,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link to="/cart" className="navButtons" onClick={fetchLineItems}>
+            Cart
+          </Link>
         </div>
       ) : (
         <div>
@@ -28,7 +31,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup" className="navButtons">
             Sign Up
           </Link>
-          <Link to="/cart" className="navButtons">
+          <Link to="/cart" className="navButtons" onClick={fetchLocalStorage}>
             Cart
           </Link>
         </div>
@@ -44,7 +47,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    orderId: state.orderId
   }
 }
 

@@ -6,11 +6,17 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
+const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  databaseUser: {},
+  lineItems: [],
+  orderId: null
+}
 
 /**
  * ACTION CREATORS
@@ -19,6 +25,20 @@ const getUser = user => {
   return {type: GET_USER, user}
 }
 const removeUser = () => ({type: REMOVE_USER})
+
+const gotLineItems = lineItems => {
+  return {
+    type: GOT_LINE_ITEMS,
+    lineItems
+  }
+}
+
+const gotLocalStorage = products => {
+  return {
+    type: GOT_LOCAL_STORAGE,
+    products
+  }
+}
 
 /**
  * THUNK CREATORS
@@ -58,16 +78,32 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const fetchLineItems = orderId => async dispatch => {
+  try {
+    const lineItems = await axios.get(`/api/cart/${orderId}`)
+    dispatch(gotLineItems(lineItems.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 /**
  * REDUCER
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
-    case GET_USER: {
-      return action.user
-    }
+    case GET_USER:
+      return {
+        ...state,
+        databaseUser: action.user
+      }
     case REMOVE_USER:
       return defaultUser
+    case GOT_LINE_ITEMS:
+      return {
+        ...state,
+        lineItems: {...action.lineItems}
+      }
     default:
       return state
   }
