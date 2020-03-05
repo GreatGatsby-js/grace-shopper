@@ -2,23 +2,25 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 class DisconnectedCart extends Component {
-  constructor() {
-    super()
-    console.log('cart props', this.props)
-  }
   render() {
-    return (
-      <div>
-        {this.props.lineItems.map(item => {
-          return <div>item.product.name</div>
-        })}
-        <button type="button">Checkout</button>
-      </div>
-    )
+    console.log('cart props', this.props)
+    if (this.props.lineItems.length === 0) {
+      return <div>Whoops! No items in your cart!</div>
+    } else {
+      return (
+        <div>
+          {this.props.lineItems.map(item => {
+            return <div>item.product.name</div>
+          })}
+          <button type="button">Checkout</button>
+        </div>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => {
+  console.log('cart state', state)
   let id = null
   if (state.user.databaseUser) {
     id = state.user.databaseUser.id
@@ -31,7 +33,9 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {}
+const mapDispatchToProps = dispatch => {
+  return {}
+}
 
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
 

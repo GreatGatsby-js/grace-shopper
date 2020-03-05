@@ -27,15 +27,36 @@ const getUser = user => {
 }
 const removeUser = () => ({type: REMOVE_USER})
 
+const gotLineItems = lineItems => {
+  return {
+    type: GOT_LINE_ITEMS,
+    lineItems
+  }
+}
+
 const gotOrderId = orderId => {
   return {type: GOT_ORDER_ID, orderId}
 }
 
-const fetchOrderId = userId => async dispatch => {
+export const fetchOrderId = userId => async dispatch => {
   try {
     const orderId = await axios.get(`/api/cart/order/${userId}`)
+    console.log('store orderid', orderId)
     if (orderId) {
       dispatch(gotOrderId(orderId))
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchLineItems = orderId => async dispatch => {
+  try {
+    if (orderId) {
+      const {data} = await axios.get(`/api/cart/${orderId}`)
+      dispatch(gotLineItems(data))
+    } else {
+      dispatch(gotLineItems([]))
     }
   } catch (err) {
     console.error(err)
@@ -84,8 +105,23 @@ export const logout = () => async dispatch => {
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
+    case GOT_LINE_ITEMS: {
+      return {
+        ...state,
+        lineItems: [...action.lineItems]
+      }
+    }
+    case GOT_ORDER_ID: {
+      return {
+        ...state,
+        orderId: action.orderId
+      }
+    }
     case GET_USER: {
-      return action.user
+      return {
+        ...state,
+        databaseUser: {...action.user}
+      }
     }
     case REMOVE_USER:
       return defaultUser

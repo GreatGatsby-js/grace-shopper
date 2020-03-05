@@ -1,10 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout, fetchLineItems} from '../store'
+import {logout, fetchLineItems, fetchOrderId} from '../store'
 
 const Navbar = props => {
-  console.log('props', props)
   return (
     <div id="navPanel">
       <h1>Welcome to Great Gatsby's Shop!!</h1>
@@ -16,7 +15,15 @@ const Navbar = props => {
             <a href="#" onClick={props.handleClick}>
               Logout
             </a>
-            {/* <Link to="/cart" className="navButtons" onClick={() => props.fetchLineItems(props.orderId)}>Cart</Link> */}
+            <Link
+              to="/cart"
+              className="navButtons"
+              onClick={() => {
+                props.fetchLineItems(props.orderId)
+              }}
+            >
+              Cart
+            </Link>
           </div>
         ) : (
           <div>
@@ -46,8 +53,10 @@ const Navbar = props => {
  * CONTAINER
  */
 const mapState = state => {
+  const id = state.user.databaseUser.id
   return {
-    isLoggedIn: !!state.user.id,
+    isLoggedIn: !!id,
+    userId: id, //might be null
     orderId: state.user.orderId
   }
 }
@@ -57,17 +66,12 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     },
-    fetchLineItems: orderId => dispatch(fetchLineItems(orderId))
+    fetchLineItems: orderId => {
+      dispatch(fetchLineItems(orderId))
+    },
+    fetchOrderId: userId => {
+      dispatch(fetchOrderId(userId))
+    }
   }
 }
-
 export default connect(mapState, mapDispatch)(Navbar)
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired,
-//   orderId: PropTypes.number.isRequired
-// }
