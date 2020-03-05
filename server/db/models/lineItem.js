@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LineItems = db.define('lineitem', {
+const LineItem = db.define('lineitem', {
   purchasedPrice: {
     type: Sequelize.FLOAT,
     allowNull: false
@@ -14,4 +14,4 @@ const LineItems = db.define('lineitem', {
 
 //foreign key OrderId and ProductId established through associations
 
-module.exports = LineItems
+module.exports = LineItem

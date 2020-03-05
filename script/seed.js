@@ -2,7 +2,7 @@
 
 const {green, red} = require('chalk')
 const db = require('../server/db')
-const {User, Product, Order, LineItems} = require('../server/db/models')
+const {User, Product, Order, LineItem} = require('../server/db/models')
 
 const users = [
   {
@@ -137,7 +137,7 @@ const seed = async () => {
     // const allLineItems =
     await Promise.all(
       lineitems.map(lineItem => {
-        return LineItems.create(lineItem)
+        return LineItem.create(lineItem)
       })
     )
 
