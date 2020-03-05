@@ -2,7 +2,7 @@
 
 const {green, red} = require('chalk')
 const db = require('../server/db')
-const {User, Product, Order, Transaction} = require('../server/db/models')
+const {User, Product, Order, LineItem} = require('../server/db/models')
 
 const users = [
   {
@@ -64,48 +64,49 @@ const products = [
 
 const orders = [
   {
-    userId: 1,
-    productId: 1,
-    quantity: 1,
-    price: 100,
+    totalQuantity: 1,
+    totalCost: 100,
     shipping_Date: new Date(2020, 8, 19),
     delivery_Date: new Date(2020, 9, 29),
     shipping_address: 'Hanover street, NewYork'
   },
   {
-    userId: 2,
-    productId: 2,
-    quantity: 2,
-    price: 200,
+    totalQuantity: 2,
+    totalCost: 400,
     shipping_Date: new Date(2020, 8, 19),
     delivery_Date: new Date(2020, 9, 29),
     shipping_address: 'Hanover street, NewYork'
   },
 
   {
-    userId: 3,
-    productId: 3,
-    quantity: 2,
-    price: 300,
+    totalQuantity: 3,
+    totalCost: 900,
     shipping_Date: new Date(2020, 8, 19),
     delivery_Date: new Date(2020, 9, 29),
     shipping_address: 'Hanover street, NewYork'
   }
 ]
 
-const transactions = [
+const lineitems = [
   {
-    totalCost: 100,
-    status: 'Pending'
+    orderId: 1,
+    productId: 1,
+    purchasedPrice: 10,
+    quantity: 1
   },
 
   {
-    totalCost: 400,
-    status: 'Shipped'
+    orderId: 2,
+    productId: 2,
+    purchasedPrice: 200,
+    quantity: 2
   },
+
   {
-    totalCost: 600,
-    status: 'Delivered'
+    orderId: 3,
+    productId: 3,
+    purchasedPrice: 300,
+    quantity: 3
   }
 ]
 
@@ -113,15 +114,17 @@ const seed = async () => {
   try {
     await db.sync({force: true})
 
-    const allProducts = await Promise.all(
-      products.map(product => {
-        return Product.create(product)
-      })
-    )
-
+    //creates and seeds the User database model
     const allUsers = await Promise.all(
       users.map(user => {
         return User.create(user)
+      })
+    )
+
+    // const allProducts =
+    await Promise.all(
+      products.map(product => {
+        return Product.create(product)
       })
     )
 
@@ -131,15 +134,12 @@ const seed = async () => {
       })
     )
 
-    const allTransactions = await Promise.all(
-      transactions.map(transaction => {
-        return Transaction.create(transaction)
+    // const allLineItems =
+    await Promise.all(
+      lineitems.map(lineItem => {
+        return LineItem.create(lineItem)
       })
     )
-
-    const product1 = allProducts[0]
-    const product2 = allProducts[1]
-    const product3 = allProducts[2]
 
     const user1 = allUsers[0]
     const user2 = allUsers[1]
@@ -149,44 +149,18 @@ const seed = async () => {
     const order2 = allOrders[1]
     const order3 = allOrders[2]
 
-    const transaction1 = allTransactions[0]
-    const transaction2 = allTransactions[1]
-    const transaction3 = allTransactions[2]
+    //setup magic methods so userId populates in orders
+    await user1.addOrder(order1)
+    await user2.addOrder(order2)
+    await user3.addOrder(order3)
 
-    //
-    // await user1.addProduct(product1,{quantity: 1,
-    //   price: 100,
-    //   shipping_Date: new Date(2020, 8, 19),
-    //   delivery_Date: new Date(2020, 9, 29),
-    //   shipping_address: 'Hanover street, NewYork'})
-    // await user2.addProduct(product3)
-    // await user2.addProduct(product1)
-    // await user3.addProduct(product3)
+    // const product1 = allProducts[0]
+    // const product2 = allProducts[1]
+    // const product3 = allProducts[2]
 
-    //
-    //
-    //await product1.addUser(user1)
-    // await product3.addUser(user2)
-    // await product1.addUser(user2)
-    // await product3.addUser(user3)
-
-    //
-    await transaction1.addOrder(order1)
-    await transaction2.addOrder(order2)
-    await transaction3.addOrder(order3)
-
-    await transaction1.setUser(user1)
-    await transaction2.setUser(user2)
-    await transaction3.setUser(user3)
-
-    // await user1.addOrder(order1)
-    // await user2.addOrder(order2)
-    // await user3.addOrder(order3)
-    //
-    // await product1.addOrder(order1)
-    // await product1.addOrder(order2)
-    // await product3.addOrder(order2)
-    // await product3.addOrder(order3)
+    // const lineitem1 = allLineItems[0]
+    // const lineitem2 = allLineItems[1]
+    // const lineitem3 = allLineItems[2]
   } catch (err) {
     console.log(red(err))
   }

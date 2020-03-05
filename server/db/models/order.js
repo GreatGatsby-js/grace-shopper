@@ -2,11 +2,11 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  quantity: {
+  totalQuantity: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  price: {
+  totalCost: {
     type: Sequelize.FLOAT,
     allowNull: false
   },
@@ -20,7 +20,14 @@ const Order = db.define('order', {
     type: Sequelize.STRING,
     allowNull: false
   }
+  // leaving status out for now. could be added in future tiers
+  // status: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false,
+  //   validate: {
+  //     isIn: [['Pending', 'Shipped', 'Cancelled', 'Delivered']]
+  //   }
+  // }
 })
-//foreign keys TransactionId and UserId established through associations
 
 module.exports = Order
