@@ -31,7 +31,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               src="duckcart.png"
               className="cartimage"
               onClick={() => handleClick()}
-            />
+            />Cart - Placeholder#
           </Link>
         </div>
       )}
