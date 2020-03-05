@@ -19,15 +19,14 @@ const Order = db.define('order', {
   shipping_address: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['Cart', 'Placed']]
+    }
   }
-  // leaving status out for now. could be added in future tiers
-  // status: {
-  //   type: Sequelize.STRING,
-  //   allowNull: false,
-  //   validate: {
-  //     isIn: [['Pending', 'Shipped', 'Cancelled', 'Delivered']]
-  //   }
-  // }
 })
 
 module.exports = Order
