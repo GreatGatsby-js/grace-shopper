@@ -53,6 +53,7 @@ router.put('/order/:orderId', async (req, res, next) => {
       totalCost: oldPrice + req.body.product.price,
       totalQuantity: oldTotalQty + req.body.qty
     })
+    await order.save()
 
     await order.addProduct(req.body.product, {
       through: {
