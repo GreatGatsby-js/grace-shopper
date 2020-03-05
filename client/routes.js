@@ -45,8 +45,9 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
           </Switch>
         )}
+
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* <Route component={Login} /> */}
       </Switch>
     )
   }
