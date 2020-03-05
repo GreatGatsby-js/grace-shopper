@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LineItems = db.define('lineitems', {
+const LineItems = db.define('lineitem', {
   purchasedPrice: {
     type: Sequelize.FLOAT,
     allowNull: false
