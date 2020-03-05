@@ -41,7 +41,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         where: {googleId},
         defaults: {email, imgUrl, firstName, lastName, fullName}
       })
-        .then(([user]) => done(null, user))
+        .then(([user]) => {
+          done(null, user)
+        })
         .catch(done)
     }
   )
