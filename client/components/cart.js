@@ -7,3 +7,5 @@ class Cart extends Component {
     return <div>CART!</div>
   }
 }
+
+export default Cart
