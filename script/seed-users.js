@@ -3,13 +3,15 @@ const users = [
     email: 'kpetworth0@kickstarter.com',
     password: 'Lwiw4KV',
     salt: 'ante',
-    googleId: '5108758682601185'
+    googleId: '5108758682601185',
+    isAdmin: true
   },
   {
     email: 'blathwood1@auda.org.au',
     password: 'i5olyZ3PE4OB',
     salt: 'orci',
-    googleId: '3571494812692778'
+    googleId: '3571494812692778',
+    isAdmin: true
   },
   {
     email: 'fstapels2@hhs.gov',
