@@ -9,7 +9,6 @@ describe('Product model', () => {
     return db.sync({force: true})
   })
 
-
   // describe('Product Created', () => {
   //   beforeEach(async () => {
   //     await Product.create({
@@ -28,9 +27,6 @@ describe('Product model', () => {
   // }) // end describe('product create')
 
   describe('instanceMethods', () => {
-    //instance method tests here if any
-    // let batmanDuck;
-    
     beforeEach(async () => {
       await Product.create({
         name: 'batman duck',
@@ -48,19 +44,19 @@ describe('Product model', () => {
       expect(batmanDuck.name).to.be.equal('batman duck')
     })
 
-    it('expects testDuck name to be changed', async () => {
+    it('expects testDuck name to be edited', async () => {
       let duck = await Product.findOne({where: {name: 'batman duck'}})
       duck.editName('Ricardo')
 
       expect(duck.name).to.be.equal('Ricardo')
     })
 
-    // it('expects testDuck to be deleted', async function () {
-    // let byebyeDuck = await Product.findOne({where: {name: 'batman duck'}})
-    // await byebyeDuck.delete();
-    // // console.log("byebyeduck", byebyeDuck);
-    // expect(byebyeDuck).to.be.equal(undefined)
-    // })
+    it('expects testDuck to be deleted', async function() {
+      const duck = await Product.findOne({where: {name: 'batman duck'}})
+      await duck.delete()
 
+      const deletedDuck = await Product.findOne({where: {name: 'batman duck'}})
+      expect(deletedDuck).to.be.equal(null)
+    })
   }) // end describe('instanceMethods')
 }) // end describe('Product model')

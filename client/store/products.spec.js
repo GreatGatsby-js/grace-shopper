@@ -10,7 +10,7 @@ import Reducer, {fetchProducts, fetchSingleProduct} from './products'
 let store
 let mockAxios
 
-describe.only('Thunks', () => {
+describe('Thunks', () => {
   beforeEach(() => {
     mockAxios = new MockAxiosAdapter(axios)
     store = createStore(
