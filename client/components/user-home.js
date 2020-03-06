@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
+import AdminViewUsers from './admin-viewUsers'
+import AdminViewProducts from './admin-viewProducts'
+
 /**
  * COMPONENT
  */
@@ -13,6 +16,10 @@ export const UserHome = props => {
       <div>
         <h3>Welcome, {email}</h3>
         <p> You are an admin.</p>
+        <div id="adminComponentsContainer">
+          <AdminViewUsers />
+          <AdminViewProducts />
+        </div>
       </div>
     )
   }
