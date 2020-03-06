@@ -15,32 +15,26 @@ class SingleProduct extends Component {
   render() {
     console.log('single product props')
     return (
-      <div>
-        Testing. Single Product View
-        <div>
-          <h2>{this.props.product.name}</h2>
-          <div key={this.props.product.id}>
-            <p>Name: {this.props.product.name}</p>
-            <p>Info: {this.props.product.description}</p>
-            <p>Price: {this.props.product.price}</p>
-            <img src={this.props.product.imageUrl} />
-            {/* conditionally render diff add to cart buttonfor if logged in or not */}
-            <button
-              type="button"
-              onClick={() => {
-                console.log('clicked')
-                this.props.fetchAddToCart(
-                  this.props.product,
-                  this.props.userId,
-                  1
-                )
-              }}
-            >
-              add to cart
-            </button>
+      <div id="single-container">
+        <h2 className="single-name">{this.props.product.name}</h2>
+        <div key={this.props.product.id} id="single">
+          <img src={this.props.product.imageUrl} className="singleImg" />
+          <div id="single-info">
+            {/* <p>Name: {this.props.product.name}</p> */}
+            <p>{this.props.product.description}</p>
+            <p>${this.props.product.price}</p>
           </div>
-          {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            console.log('clicked')
+            this.props.fetchAddToCart(this.props.product, this.props.userId, 1)
+          }}
+        >
+          add to cart
+        </button>
+        {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
       </div>
     )
   }
