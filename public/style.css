@@ -1,15 +1,14 @@
 body {
   font-family: 'Avenir';
-  /* font-family: "Baskerville"; */
 }
 
 a {
   text-decoration: none;
 }
 
-label {
+/* label {
   display: block;
-}
+} */
 
 /* nav a {
   display: inline-block;
@@ -98,7 +97,20 @@ h2 {
 .space {
   height: 10px;
 }
-@media screen and (min-width: 600px) {
+
+#adminComponentsContainer {
+  display: flex;
+}
+
+.adminComponent {
+  /* display: flex; */
+  margin: 10px;
+  /* margin- */
+  border: solid;
+  border-color: black;
+  padding: 10px;
+}
+/* @media screen and (min-width: 600px) {
   .nav li {
     width: 120px;
     border-bottom: none;
@@ -117,12 +129,12 @@ h2 {
   }
 
   /* Option 1 - Display Inline */
-  .nav li {
+/* .nav li {
     display: inline-block;
     margin-right: -4px;
-  }
+  } */
 
-  /* Options 2 - Float
+/* Options 2 - Float
   .nav li {
     float: left;
   }
@@ -134,8 +146,8 @@ h2 {
   .nav {
     background-color: #444;
   }
-  */
-}
+
+} */
 
 .productBox {
   display: flex;
