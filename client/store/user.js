@@ -1,6 +1,10 @@
 import axios from 'axios'
 import history from '../history'
 
+/*cart notes:
+ * Should be updating line items on every call to add to cart, but not updating the cart on this store state. the cart on this store state should be updated when user clicks their cart icon, and the database makes a call to line items and populates the "cart" state.
+*/
+
 /**
  * ACTION TYPES
  */
@@ -23,8 +27,12 @@ const defaultUser = {
 /**
  * ACTION CREATORS
  */
-const getUser = user => {
-  return {type: GET_USER, user}
+const getUser = (/*cart=[],*/ user) => {
+  return {
+    type: GET_USER,
+    user
+    // cart
+  }
 }
 const removeUser = () => ({type: REMOVE_USER})
 
@@ -91,7 +99,7 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
       })
     }
 
-    // dispatch(addedToCart(product, qty))
+    dispatch(addedToCart(product, qty))
   } catch (error) {
     console.log('thunk error')
     console.error(error)
@@ -103,7 +111,7 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    dispatch(getUser(res.data || {}))
   } catch (err) {
     console.error(err)
   }
@@ -156,6 +164,7 @@ export default function(state = defaultUser, action) {
       return {
         ...state,
         databaseUser: {...action.user}
+        // cart: [...action.cart]
       }
     }
     case REMOVE_USER:
@@ -163,7 +172,7 @@ export default function(state = defaultUser, action) {
     case ADDED_TO_CART:
       return {
         ...state,
-        cart: [...this.state.cart, {product: action.product, qty: action.qty}]
+        cart: [...state.cart, {product: action.product, qty: action.qty}]
       }
     default:
       return state

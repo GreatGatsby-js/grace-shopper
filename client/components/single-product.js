@@ -13,6 +13,7 @@ class SingleProduct extends Component {
   }
 
   render() {
+    console.log('single product props')
     return (
       <div>
         Testing. Single Product View

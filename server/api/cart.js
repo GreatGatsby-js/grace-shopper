@@ -12,7 +12,7 @@ router.get('/order/:userId', async (req, res, next) => {
       }
     })
     // console.log('order', order)
-    res.json(order)
+    res.send(order)
   } catch (err) {
     console.error(err)
   }
@@ -47,10 +47,10 @@ router.put('/order/:orderId', async (req, res, next) => {
     await order.save()
 
     //user.addProject(project, { through: { role: 'manager' }});
-    await order.addProduct(req.body.product, {
-      quantity: req.body.qty,
-      purchasedPrice: req.body.product.price * req.body.qty
-    })
+    // await order.addProduct(req.body.product, {
+    //   quantity: req.body.qty,
+    //   purchasedPrice: req.body.product.price * req.body.qty
+    // })
 
     res.send(200)
   } catch (error) {
