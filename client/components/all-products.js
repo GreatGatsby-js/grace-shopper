@@ -17,7 +17,6 @@ class AllProducts extends Component {
   render() {
     return (
       <div>
-        Testing. All products to show up here
         <div>
           <h2>All Products</h2>
           <div className="productBox">
