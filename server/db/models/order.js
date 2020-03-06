@@ -22,10 +22,7 @@ const Order = db.define('order', {
   },
   status: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isIn: [['Cart', 'Placed']]
-    }
+    defaultValue: 'Cart'
   }
 })
 

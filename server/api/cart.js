@@ -7,10 +7,11 @@ router.get('/order/:userId', async (req, res, next) => {
   try {
     let order = await Order.findAll({
       where: {
-        id: req.params.userId,
+        userId: req.params.userId,
         status: 'Cart'
       }
     })
+    // console.log('order', order)
     res.json(order)
   } catch (err) {
     console.error(err)
@@ -18,8 +19,6 @@ router.get('/order/:userId', async (req, res, next) => {
 })
 
 router.post('/order', async (req, res, next) => {
-  console.log('hit POST')
-  console.log('body is ', req.body)
   const price = req.body.product.price * req.body.qty
   try {
     const order = await Order.create({
@@ -28,15 +27,8 @@ router.post('/order', async (req, res, next) => {
       status: 'Cart',
       shipping_address: 'temp',
       userId: req.body.userId
-      //double check on if we can do this :-)
     })
-    console.log('order is ', order)
-
-    // console.log('final order id', order.id)
-    // await order.addProduct(req.body.product,{through: {
-    //   quantity: req.body.qty,
-    //   purchasedPrice: price
-    // }})
+    res.send(200)
   } catch (error) {
     next(error)
   }
@@ -44,7 +36,6 @@ router.post('/order', async (req, res, next) => {
 
 router.put('/order/:orderId', async (req, res, next) => {
   try {
-    // await req.body.data.update
     const order = await Order.findByPk(req.params.orderId)
     const oldPrice = order.totalCost
     const oldTotalQty = order.totalQuantity
@@ -55,14 +46,13 @@ router.put('/order/:orderId', async (req, res, next) => {
     })
     await order.save()
 
+    //user.addProject(project, { through: { role: 'manager' }});
     await order.addProduct(req.body.product, {
-      through: {
-        quantity: req.body.qty,
-        purchasedPrice: req.body.product.price * req.body.qty
-      }
+      quantity: req.body.qty,
+      purchasedPrice: req.body.product.price * req.body.qty
     })
 
-    res.json()
+    res.send(200)
   } catch (error) {
     next(error)
   }
