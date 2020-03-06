@@ -15,7 +15,7 @@ const Navbar = props => {
             <a href="#" onClick={props.handleClick}>
               Logout
             </a>
-            <Link to="/cart" className="navButtons">
+            <Link to={`/cart/${props.userId}`} className="navButtons">
               Cart
             </Link>
           </div>
@@ -60,8 +60,6 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     },
-    // fetchLineItems: orderId => {
-    //   dispatch(fetchLineItems(orderId))}
     fetchOrderId: userId => {
       dispatch(fetchOrderId(userId))
     }

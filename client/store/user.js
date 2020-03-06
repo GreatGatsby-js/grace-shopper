@@ -57,6 +57,7 @@ const addedToCart = (product, qty) => {
 
 export const fetchOrderId = userId => async dispatch => {
   try {
+    console.log('fetching order id')
     const orderId = await axios.get(`/api/cart/order/${userId}`)
     console.log('store orderid', orderId)
     if (orderId) {
@@ -67,18 +68,14 @@ export const fetchOrderId = userId => async dispatch => {
   }
 }
 
-// export const fetchLineItems = orderId => async dispatch => {
-//   try {
-//     if (orderId) {
-//       const {data} = await axios.get(`/api/cart/${orderId}`)
-//       dispatch(gotLineItems(data))
-//     } else {
-//       dispatch(gotLineItems([]))
-//     }
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
+export const fetchLineItems = userId => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/cart/${userId}`)
+    dispatch(gotLineItems(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
   try {
@@ -101,7 +98,6 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 
     dispatch(addedToCart(product, qty))
   } catch (error) {
-    console.log('thunk error')
     console.error(error)
   }
 }

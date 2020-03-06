@@ -58,22 +58,17 @@ router.put('/order/:orderId', async (req, res, next) => {
   }
 })
 
-// router.get('/:orderId', async (req, res, next) => {
-//   try {
-//     const orderId = req.params.orderId
-//     // const lineItems = await Order.findAll({
-//     //   where: {
-//     //     id: orderId,
-//     //     include: [{model: Product}]
-//     //   }
-//     // })
-//     const lineItems = await Order.findByPk({
-//       where: {
-//         id: orderId,
-//         include: [{model: Product}]
-//       }
-//     })
-//   } catch (error) {
-//     next(error)
-//   }
-// })
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const lineItems = await Order.findAll({
+      where: {
+        userId: req.params.userId,
+        status: 'Cart'
+      },
+      include: [Product]
+    })
+    res.send(lineItems)
+  } catch (error) {
+    next(error)
+  }
+})
