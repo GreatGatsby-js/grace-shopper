@@ -46,6 +46,14 @@ router.put('/order/:orderId', async (req, res, next) => {
     })
     await order.save()
 
+    // const product = await Product.findByPk(req.body.product.id);
+    // await order.addProduct(product, {
+    //   quantity: 1,
+    //   purchasedPrice: 3
+    // })
+
+    // await order.addProduct(req.body.product, )
+
     //user.addProject(project, { through: { role: 'manager' }});
     // await order.addProduct(req.body.product, {
     //   quantity: req.body.qty,
