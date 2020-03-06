@@ -4,38 +4,7 @@ const {green, red} = require('chalk')
 const db = require('../server/db')
 const {User, Product, Order, LineItem} = require('../server/db/models')
 
-// import users from './seed-users'
 const users = require('./seed-users')
-
-// const users = [
-//   {
-//     email: 'abc@abc.com',
-//     password: '12345',
-//     salt: 'abc',
-//     googleId: 'abc'
-//   },
-
-//   {
-//     email: 'cdf@cdf.com',
-//     password: '6789',
-//     salt: 'cdf',
-//     googleId: 'cdf'
-//   },
-
-//   {
-//     email: 'ghi@ghi.com',
-//     password: '345688',
-//     salt: 'ghi',
-//     googleId: 'ghi'
-//   },
-
-//   {
-//     email: 'jkl@jkl.com',
-//     password: '998776',
-//     salt: 'jkl',
-//     googleId: 'jkl'
-//   }
-// ]
 
 const products = [
   {
