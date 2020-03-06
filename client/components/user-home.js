@@ -6,11 +6,21 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {email, isAdmin} = props
+
+  if (isAdmin === true) {
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+        <p> You are an admin.</p>
+      </div>
+    )
+  }
 
   return (
     <div>
       <h3>Welcome, {email}</h3>
+      <p> You are not an admin.</p>
     </div>
   )
 }
@@ -19,8 +29,10 @@ export const UserHome = props => {
  * CONTAINER
  */
 const mapState = state => {
+  console.log('state', state)
   return {
-    email: state.user.databaseUser.email
+    email: state.user.databaseUser.email,
+    isAdmin: state.user.databaseUser.isAdmin
   }
 }
 
