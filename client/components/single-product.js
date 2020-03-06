@@ -15,14 +15,15 @@ class SingleProduct extends Component {
   render() {
     return (
       <div>
-        Testing. Single Product View
-        <div>
-          <h2>{this.props.product.name}</h2>
-          <div key={this.props.product.id}>
-            <p>Name: {this.props.product.name}</p>
-            <p>Info: {this.props.product.description}</p>
-            <p>Price: {this.props.product.price}</p>
-            <img src={this.props.product.imageUrl} />
+        <div id="single-container">
+          <h2 className="single-name">{this.props.product.name}</h2>
+          <div key={this.props.product.id} id="single">
+            <img src={this.props.product.imageUrl} className="singleImg" />
+            <div id="single-info">
+              {/* <p>Name: {this.props.product.name}</p> */}
+              <p>{this.props.product.description}</p>
+              <p>${this.props.product.price}</p>
+            </div>
           </div>
           {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
         </div>
