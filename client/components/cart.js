@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchLineItems} from '../store'
+import {fetchLineItems, fetchCheckout} from '../store'
 
 class DisconnectedCart extends Component {
   componentDidMount() {
@@ -8,14 +8,24 @@ class DisconnectedCart extends Component {
   }
   render() {
     if (this.props.cart.length === 0) {
-      return <div>Whoops! No items in your cart!</div>
+      return (
+        <div>
+          <div>Whoops! No items in your cart!</div>
+          {/* <button type="button">Checkout</button> */}
+        </div>
+      )
     } else {
       return (
         <div>
           {this.props.cart.map(item => {
             return <div>{item.product.name}</div>
           })}
-          <button type="button">Checkout</button>
+          <button
+            type="button"
+            onClick={this.props.fetchCheckout(this.props.orderId)}
+          >
+            Checkout
+          </button>
         </div>
       )
     }
@@ -39,6 +49,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchLineItems: userId => {
       dispatch(fetchLineItems(userId))
+    },
+    fetchCheckout: orderId => {
+      dispatch(fetchCheckout(orderId))
     }
   }
 }
