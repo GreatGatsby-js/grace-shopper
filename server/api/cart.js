@@ -66,16 +66,29 @@ router.put('/order/:orderId', async (req, res, next) => {
   }
 })
 
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId)
+    await order.update({
+      status: 'Placed'
+    })
+    await order.save()
+    res.sendStatus(200)
+  } catch (err) {
+    console.error(err)
+  }
+})
+
 router.get('/:userId', async (req, res, next) => {
   try {
-    const lineItems = await Order.findAll({
+    const response = await Order.findAll({
       where: {
         userId: req.params.userId,
         status: 'Cart'
       },
       include: [Product]
     })
-    res.send(lineItems)
+    const products = res.send(response[0].products)
   } catch (error) {
     next(error)
   }

@@ -14,6 +14,7 @@ const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const ADDED_TO_CART = 'ADDED_TO_CART'
+const PLACE_ORDER = 'PLACE_ORDER'
 
 /**
  * INITIAL STATE
@@ -52,6 +53,22 @@ const addedToCart = (product, qty) => {
     type: ADDED_TO_CART,
     product,
     qty
+  }
+}
+
+const placeOrder = () => {
+  return {
+    type: PLACE_ORDER
+  }
+}
+
+export const fetchPlaceOrder = orderId => async dispatch => {
+  try {
+    console.log('fetching place order')
+    const {data} = await axios.put(`/api/cart${orderId}`)
+    dispatch(placeOrder())
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -144,12 +161,13 @@ export const logout = () => async dispatch => {
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
-    // case GOT_LINE_ITEMS: {
-    //   return {
-    //     ...state,
-    //     cart: [...action.lineItems]
-    //   }
-    // }
+    case GOT_LINE_ITEMS: {
+      console.log('line items', action.lineItems)
+      return {
+        ...state,
+        cart: [...action.lineItems]
+      }
+    }
     case GOT_ORDER_ID: {
       return {
         ...state,
@@ -169,6 +187,12 @@ export default function(state = defaultUser, action) {
       return {
         ...state,
         cart: [...state.cart, {product: action.product, qty: action.qty}]
+      }
+    case PLACE_ORDER:
+      return {
+        ...state,
+        cart: [],
+        orderId: null
       }
     default:
       return state

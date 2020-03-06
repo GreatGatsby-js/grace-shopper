@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchLineItems, fetchCheckout} from '../store'
+import {fetchLineItems, fetchPlaceOrder} from '../store'
 
 class DisconnectedCart extends Component {
   componentDidMount() {
@@ -50,8 +50,8 @@ const mapDispatchToProps = dispatch => {
     fetchLineItems: userId => {
       dispatch(fetchLineItems(userId))
     },
-    fetchCheckout: orderId => {
-      dispatch(fetchCheckout(orderId))
+    fetchPlaceOrder: orderId => {
+      dispatch(fetchPlaceOrder(orderId))
     }
   }
 }
