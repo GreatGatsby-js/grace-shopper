@@ -15,13 +15,16 @@ const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 
+const ADMIN_GET_USERS = 'ADMIN_GET_USERS'
+
 /**
  * INITIAL STATE
  */
 const defaultUser = {
   databaseUser: {},
   orderId: null,
-  cart: []
+  cart: [],
+  allDatabaseUsers: []
 }
 
 /**
@@ -52,6 +55,13 @@ const addedToCart = (product, qty) => {
     type: ADDED_TO_CART,
     product,
     qty
+  }
+}
+
+const gotAllUsers = allUsers => {
+  return {
+    type: ADMIN_GET_USERS,
+    allUsers
   }
 }
 
@@ -139,6 +149,15 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const fetchUsers = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/users')
+    dispatch(gotAllUsers(data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -169,6 +188,11 @@ export default function(state = defaultUser, action) {
       return {
         ...state,
         cart: [...state.cart, {product: action.product, qty: action.qty}]
+      }
+    case ADMIN_GET_USERS:
+      return {
+        ...state,
+        allDatabaseUsers: [...action.allUsers]
       }
     default:
       return state

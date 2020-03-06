@@ -36,7 +36,6 @@ export const UserHome = props => {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     email: state.user.databaseUser.email,
     isAdmin: state.user.databaseUser.isAdmin
