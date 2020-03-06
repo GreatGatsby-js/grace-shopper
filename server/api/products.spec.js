@@ -55,72 +55,34 @@ describe('Product routes', () => {
     })
   })
 
-  //   describe('GET /api/products/:productId',  ()=> {
+  ///Working on the last spec
+
+  //   describe('GET /api/products/:prodId', () => {
+  //     const prodName = 'happy duck'
+  //     let prodId
   //
-  //     beforeEach(()=>{
-  //
-  //       return Product.create(
-  //         {
-  //           name: 'book worm duck',
-  //           description:
-  //             'We all love reading a good book, so why shouldnt your rubber duck enjoy one too? Please note, this duck does not squeak',
-  //           price: 100,
-  //           imageUrl:
-  //             'https://cdn.shopify.com/s/files/1/1184/9194/products/literary-rubber-duck-1322-p_600x.jpeg?v=1457991497'
-  //         })
+  //     beforeEach(() => {
+  //       const newProd = Product.create({
+  //         name: prodName
+  //       })
+  //       prodId = newProd.id
   //     })
   //
-  //
-  //
-  //    it('gets the product with the productId', async () => {
-  //
-  //       const res = await request(app).get(`/api/products/${Product.id}`).expect(200)
-  //         .then((res) => {
-  //           expect(res.body).to.be.an('object')
-  //           expect(res.body.some(product => product.name ===Product.name )).to.be.equal(true)
-  //           expect(res.body.some(product => product.description ===Product.description )).to.be.equal(true)
-  //           expect(res.body.some(product => product.price ===Product.price )).to.be.equal(true)
-  //           expect(res.body.some(product => product.imageUrl ===Product.imageUrl )).to.be.equal(true)
-  //
-  //       expect(res.body).to.have.lengthOf(1)
-  //
-  //
+  //     afterEach(() => {
+  //       Product.destroy({
+  //         where: {
+  //           id: prodId
+  //         }
+  //       })
   //     })
   //
+  //     it('GET /api/products/:prodId', async () => {
+  //       const res = await request(app)
+  //         .get(`/api/products/${prodId}`)
+  //         .expect(200)
+  //
+  //       expect(res.body).to.be.an('object')
+  //       expect(res.body.name).to.be.equal(prodName)
+  //     })
   //   })
-  //
-  //
-  //
-  //
-  // })
-  // })
-
-  describe('GET /api/products/:prodId', () => {
-    const prodName = 'happy duck'
-    let prodId
-
-    beforeEach(() => {
-      const newProd = Product.create({
-        name: prodName
-      })
-      prodId = newProd.id
-    })
-
-    afterEach(() => {
-      Product.destroy({
-        where: {
-          id: prodId
-        }
-      })
-    })
-
-    it('GET /api/products/:prodId', async () => {
-      const res = await request(app)
-        .get(`/api/products/${prodId}`)
-        .expect(200)
-
-      expect(res.body).to.be.an('object')
-      expect(res.body.name).to.be.equal(prodName)
-    })
-  })
 })
