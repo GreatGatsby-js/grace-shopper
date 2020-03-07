@@ -1,19 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchLineItems, fetchPlaceOrder, fetchOrderId} from '../store'
+import {
+  fetchLineItems,
+  fetchPlaceOrder,
+  fetchIncreaseProductQty,
+  fetchDecreaseProductQty
+} from '../store'
+import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
-  constructor() {
-    super()
-    this.state = {
-      cart: []
-    }
-  }
   componentDidMount() {
-    this.props.fetchOrderId(this.props.match.params.userId)
+    this.props.fetchLineItems(this.props.match.params.userId)
   }
   render() {
-    console.log('cart component props', this.props)
     if (this.props.cart.length === 0) {
       return (
         <div>
@@ -26,16 +25,45 @@ class DisconnectedCart extends Component {
           {this.props.cart.map(item => {
             return (
               <div key={item.id}>
-                {item.lineitem.quantity} of the {item.name}
+                {item.lineitem.quantity}
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log('hi')
+                    this.props.fetchIncreaseProductQty(
+                      this.props.userId,
+                      this.props.orderId,
+                      item.id
+                    )
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.props.fetchDecreaseProductQty(
+                      this.props.userId,
+                      this.props.orderId,
+                      item.id
+                    )
+                  }}
+                >
+                  -
+                </button>
+                of the {item.name}
               </div>
             )
           })}
           <button
             type="button"
-            onClick={() => this.props.fetchPlaceOrder(this.props.orderId)}
+            onClick={() => {
+              this.props.fetchPlaceOrder(this.props.orderId)
+            }}
           >
             Checkout
           </button>
+          {/* <Link to={`/checkout/${this.props.userId}`}>Checkout</Link> */}
         </div>
       )
     }
@@ -60,12 +88,15 @@ const mapDispatchToProps = dispatch => {
     fetchLineItems: userId => {
       dispatch(fetchLineItems(userId))
     },
+    fetchIncreaseProductQty: (userId, orderId, productId) => {
+      dispatch(fetchIncreaseProductQty(userId, orderId, productId))
+    },
+    fetchDecreaseProductQty: (userId, orderId, productId) => {
+      dispatch(fetchDecreaseProductQty(userId, orderId, productId))
+    },
     fetchPlaceOrder: orderId => {
       dispatch(fetchPlaceOrder(orderId))
     }
-    // fetchOrderId: userId => {
-    //   dispatch(fetchOrderId(userId))
-    // }
   }
 }
 

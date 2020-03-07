@@ -15,6 +15,7 @@ const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 // const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
+const INCREASED_CART_QTY = 'INCREASED_CART_QTY'
 
 /**
  * INITIAL STATE
@@ -62,6 +63,38 @@ const placeOrder = () => {
   }
 }
 
+export const fetchIncreaseProductQty = (
+  userId,
+  orderId,
+  productId
+) => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `/api/cart/${userId}/${orderId}/${productId}`,
+      {action: 'increase'}
+    )
+    dispatch(gotLineItems(data.products))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchDecreaseProductQty = (
+  userId,
+  orderId,
+  productId
+) => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `/api/cart/${userId}/${orderId}/${productId}`,
+      {action: 'decrease'}
+    )
+    dispatch(gotLineItems(data.products))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const fetchPlaceOrder = orderId => async dispatch => {
   try {
     const {data} = await axios.put(`/api/cart/${orderId}`)
@@ -86,7 +119,11 @@ export const fetchPlaceOrder = orderId => async dispatch => {
 export const fetchLineItems = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/cart/${userId}`)
-    dispatch(gotLineItems(data))
+    if (data) {
+      dispatch(gotLineItems(data.products))
+    } else {
+      dispatch(gotLineItems([]))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -95,7 +132,6 @@ export const fetchLineItems = userId => async dispatch => {
 export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
   try {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
-    data = data[0]
 
     if (!data) {
       const response = await axios.post(`/api/cart/order`, {
@@ -181,11 +217,11 @@ export default function(state = defaultUser, action) {
     }
     case REMOVE_USER:
       return defaultUser
-    // case ADDED_TO_CART:
-    //   return {
-    //     ...state,
-    //     cart: [...state.cart, {product: action.product, qty: action.qty}]
-    //   }
+    case ADDED_TO_CART:
+      return {
+        ...state,
+        cart: [...state.cart, {product: action.product, qty: action.qty}]
+      }
     case PLACE_ORDER:
       return {
         ...state,

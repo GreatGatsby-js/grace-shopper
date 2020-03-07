@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = props => {
-  console.log('nav bar props', props)
   return (
     <div id="navPanel">
       <h1>Great Gatsby's Shop!!</h1>
