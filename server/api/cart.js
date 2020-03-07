@@ -5,7 +5,7 @@ module.exports = router
 
 router.get('/order/:userId', async (req, res, next) => {
   try {
-    let order = await Order.findAll({
+    let order = await Order.findOne({
       where: {
         userId: req.params.userId,
         status: 'Cart'
@@ -14,7 +14,7 @@ router.get('/order/:userId', async (req, res, next) => {
     // console.log('order', order)
     res.send(order)
   } catch (err) {
-    console.error(err)
+    next(err)
   }
 })
 
@@ -28,7 +28,7 @@ router.post('/order', async (req, res, next) => {
       shipping_address: 'temp',
       userId: req.body.userId
     })
-    res.send(200)
+    res.sendStatus(200)
   } catch (error) {
     next(error)
   }
@@ -66,16 +66,79 @@ router.put('/order/:orderId', async (req, res, next) => {
   }
 })
 
-router.get('/:userId', async (req, res, next) => {
+//method for increasing or decreasing product quantity in the cart. Returns the updated order
+router.put('/:userId/:orderId/:productId', async (req, res, next) => {
   try {
-    const lineItems = await Order.findAll({
+    console.log('order id', req.params.orderId)
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId
+      },
+      include: [
+        {
+          model: Product,
+          through: {
+            where: {
+              productId: req.params.productId
+            }
+          }
+        }
+      ]
+    })
+    const product = order.dataValues.products[0]
+    const lineitem = product.lineitem
+    const oldQty = lineitem.dataValues.quantity
+    if (req.body.action === 'increase') {
+      await lineitem.update({
+        quantity: oldQty + 1
+      })
+    } else {
+      await lineitem.update({
+        quantity: oldQty - 1
+      })
+    }
+    await lineitem.save()
+    const response = await Order.findOne({
       where: {
         userId: req.params.userId,
         status: 'Cart'
       },
       include: [Product]
     })
-    res.send(lineItems)
+    // console.log('order', order)
+    res.send(response)
+    //decrease quantity on this product
+  } catch (err) {
+    next(err)
+  }
+})
+
+//method for "checkout", changing an order from cart to placed
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId)
+    await order.update({
+      status: 'Placed'
+    })
+    await order.save()
+    res.sendStatus(200)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//method for getting the cart, aka lineitems
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const response = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: 'Cart'
+      },
+      include: [Product]
+    })
+    console.log('backend response is', response)
+    res.send(response)
   } catch (error) {
     next(error)
   }

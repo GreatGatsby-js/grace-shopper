@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout, fetchOrderId} from '../store'
+import {logout} from '../store'
 
 const Navbar = props => {
   return (
@@ -61,9 +61,6 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    },
-    fetchOrderId: userId => {
-      dispatch(fetchOrderId(userId))
     }
   }
 }
