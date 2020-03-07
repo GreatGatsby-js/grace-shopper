@@ -92,6 +92,9 @@ router.put('/:userId/:orderId/:productId', async (req, res, next) => {
       await lineitem.update({
         quantity: oldQty + 1
       })
+    } else if (oldQty === 1) {
+      //delete from db
+      await lineitem.destroy()
     } else {
       await lineitem.update({
         quantity: oldQty - 1
