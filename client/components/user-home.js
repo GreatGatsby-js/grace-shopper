@@ -9,12 +9,12 @@ import AdminViewProducts from './admin-viewProducts'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, isAdmin} = props
+  const {name, isAdmin} = props
 
   if (isAdmin === true) {
     return (
       <div>
-        <h3>Welcome, {email}</h3>
+        <h3>Welcome, {name}</h3>
         <p> You are an admin.</p>
         <div id="adminComponentsContainer">
           <AdminViewUsers />
@@ -26,7 +26,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {name}</h3>
       <p> You are not an admin.</p>
     </div>
   )
@@ -37,7 +37,7 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.databaseUser.email,
+    name: state.user.databaseUser.name,
     isAdmin: state.user.databaseUser.isAdmin
   }
 }

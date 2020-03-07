@@ -15,7 +15,12 @@ class AdminViewUsers extends Component {
       <div className="adminComponent">
         ALL USERS
         <div>
-          {users.map(user => <div key={user.id}>Name: {user.name}</div>)}
+          {users.map(user => (
+            <li key={user.id}>
+              Name: {user.name}
+              Email: {user.email}
+            </li>
+          ))}
         </div>
       </div>
     )
