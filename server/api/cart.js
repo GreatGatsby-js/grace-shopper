@@ -5,7 +5,7 @@ module.exports = router
 
 router.get('/order/:userId', async (req, res, next) => {
   try {
-    let order = await Order.findAll({
+    let order = await Order.findOne({
       where: {
         userId: req.params.userId,
         status: 'Cart'
@@ -81,14 +81,15 @@ router.put('/:orderId', async (req, res, next) => {
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const response = await Order.findAll({
+    const response = await Order.findOne({
       where: {
         userId: req.params.userId,
         status: 'Cart'
       },
       include: [Product]
     })
-    const products = res.send(response[0].products)
+    console.log('backend response is', response.products)
+    res.send(response.products)
   } catch (error) {
     next(error)
   }
