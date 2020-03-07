@@ -18,7 +18,6 @@ class DisconnectedCart extends Component {
       return (
         <div>
           <div>Whoops! No items in your cart!</div>
-          {/* <button type="button">Checkout</button> */}
         </div>
       )
     } else {
