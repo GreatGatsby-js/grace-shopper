@@ -2,33 +2,45 @@
 
 //when a guest presses add to cart
 
-function addToCart(product) {
-  //if that id already exists increase the quantity  of that product in cart by 1
-
-  //else add that product to storage
-  // (id, stringifiedArr)
-  //arr [qty, productObj]
-
+//i really hope this function works
+export function addToGuestCart(product) {
+  console.log('clicked addToGuestCart')
+  //guest user clicks add to cart button, it adds one at a time!!!!!!!!
   const id = product.id.toString()
-  const stringified = JSON.stringify(product)
-
-  localStorage.setItem(id, stringified)
+  let duck = localStorage.getItem(id)
+  //if something w that id exists in localStorage increase qty by 1
+  if (duck) {
+    //if the duck exists do soemthing
+    let newDuck = JSON.parse(duck)
+    newDuck.qty++
+    newDuck = JSON.stringify(newDuck)
+    localStorage.setItem(id, newDuck)
+  } else {
+    //create a new duck obj
+    duck = {
+      qty: 1,
+      product
+    }
+    //set local storage to be
+    //key: product id, value: our new duck obj
+    localStorage.setItem(id, duck)
+  }
+  console.log('end of add to cart func')
 }
 
-//when a guest looks at their cart
-//display cart items in cart page
+export function decreaseQty(product) {
+  console.log('clicked decreaseQty')
+  const id = product.id.toString()
+  let duck = JSON.parse(localStorage.getItem(id))
+  //in this case we can assume duck exists bc they cannot access decrease button if there's no duck
+  duck.qty--
+  duck = JSON.stringify(duck)
 
-//when a guest updates an items qty
-//update item in cart
-//might have to be some sort of doc.elementById thing for qty form(?) field?
-//and qty in local storage is just === that?
-
-//add to qty
-
-//remove qty
+  localStorage.setItem(id, duck)
+}
 
 //remove entire items from the cart
-function removeItem(product) {
+export function removeFromCart(product) {
   const id = product.id.toString()
   localStorage.removeItem(id)
 }
@@ -36,13 +48,7 @@ function removeItem(product) {
 //when a guest checks out
 //they can't checkout without an account
 //they will have to create an account, once account is created,
-
 //clear cart/storage on checkout
-function clearStorage() {
+export function clearCartStorage() {
   localStorage.clear()
 }
-
-//add qty key to obj when adding it to localStorage
-//update qty field when they add/remove
-
-//get rid of that field when it goes to the database?????
