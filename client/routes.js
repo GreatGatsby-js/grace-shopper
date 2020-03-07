@@ -8,8 +8,10 @@ import {
   UserHome,
   AllProducts,
   SingleProducts,
-  Cart
+  Cart,
+  GuestHome
 } from './components'
+import GuestCart from './components/guestCart'
 import {me} from './store'
 
 /**
@@ -31,7 +33,8 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={GuestHome} />
+        <Route exact path="/products" component={AllProducts} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
@@ -39,15 +42,20 @@ class Routes extends Component {
         {/* <Route component={NoMatches} /> */}
         <Route path="/cart/:userId" component={Cart} />
 
+        <Route path="/TESTcart" component={GuestCart} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/userhome" component={UserHome} />
           </Switch>
         )}
 
         {/* Displays our Login component as a fallback */}
         {/* <Route component={Login} /> */}
+
+        {/* Displays when things are broken */}
+        <Route component={NoMatches} />
       </Switch>
     )
   }

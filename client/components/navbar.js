@@ -7,12 +7,13 @@ const Navbar = props => {
   console.log('nav bar props', props)
   return (
     <div id="navPanel">
-      <h1>Welcome to Great Gatsby's Shop!!</h1>
+      <h1>Great Gatsby's Shop!!</h1>
       <nav className="nav">
         {props.isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
+            <Link to="/userhome">Home</Link>
+            <Link to="/products">Products</Link>
             <a href="#" onClick={props.handleClick}>
               Logout
             </a>
@@ -26,6 +27,7 @@ const Navbar = props => {
             <Link to="/" className="navButtons">
               Home
             </Link>
+            <Link to="/products">Products</Link>
             <Link to="/login" className="navButtons">
               Login
             </Link>
