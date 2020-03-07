@@ -23,10 +23,10 @@ class DisconnectedCheckout extends Component {
 
 const mapState = state => {
   console.log('state is', state)
-  // return {
-  //   isLoggedIn: !!state.user.dataBaseUser.id,
-  //   orderId: state.user.orderId
-  // }
+  return {
+    isLoggedIn: !!state.user.dataBaseUser.id,
+    orderId: state.user.orderId
+  }
 }
 
 const mapDispatch = dispatch => {
