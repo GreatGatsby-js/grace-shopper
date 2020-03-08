@@ -20,20 +20,24 @@ class SingleProduct extends Component {
         <div key={this.props.product.id} id="single">
           <img src={this.props.product.imageUrl} className="singleImg" />
           <div id="single-info">
-            {/* <p>Name: {this.props.product.name}</p> */}
+            <p className="price">${this.props.product.price}</p>
             <p>{this.props.product.description}</p>
-            <p>${this.props.product.price}</p>
+            <button
+              type="button"
+              id="add-to-cart"
+              onClick={() => {
+                console.log('clicked')
+                this.props.fetchAddToCart(
+                  this.props.product,
+                  this.props.userId,
+                  1
+                )
+              }}
+            >
+              add to cart
+            </button>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            console.log('clicked')
-            this.props.fetchAddToCart(this.props.product, this.props.userId, 1)
-          }}
-        >
-          add to cart
-        </button>
         {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
       </div>
     )
