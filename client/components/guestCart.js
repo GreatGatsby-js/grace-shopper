@@ -13,58 +13,14 @@ class GuestCart extends Component {
     increaseGuestQty.bind(this)
   }
 
-  // componentDidMount(){
-  //   console.log('component mounted')
-  //   this.getLocalStorage()
-  // }
-
   getLocalStorage() {
-    //for testing purposes!!!
-    //creating some fake products
-
-    let happyDuck = {
-      id: 1,
-      name: 'happy duck',
-      description:
-        'Life is even more fun with this cheerful rubber duck! This duck becomes everyones playmate',
-      price: 200,
-      imageUrl:
-        'https://www.internet-toys.com/producten/large/free_and_easy_badeend_26_x_20_x_22_cm_geel_268798_20190103155226.jpg'
-    }
-    let bookDuck = {
-      id: 2,
-      name: 'book worm duck',
-      description:
-        'We all love reading a good book, so why shouldnt your rubber duck enjoy one too? Please note, this duck does not squeak',
-      price: 100,
-      imageUrl:
-        'https://cdn.shopify.com/s/files/1/1184/9194/products/literary-rubber-duck-1322-p_600x.jpeg?v=1457991497'
-    }
-
-    let duck1 = {
-      qty: 10,
-      product: happyDuck
-    }
-    let duck2 = {
-      qty: 20,
-      product: bookDuck
-    }
-
-    //stringifying them and adding them to local storage
-    duck1 = JSON.stringify(duck1)
-    duck2 = JSON.stringify(duck2)
-
-    localStorage.setItem('1', duck1)
-    localStorage.setItem('2', duck2)
-    // end of test data
-
     //getting products from local storage and setting them on the state
     const keys = Object.keys(localStorage)
     console.log('keys are ', keys)
     let startState = {}
     keys.forEach(key => {
+      //making sure to ignore anything in local storage that isn't one of our products
       try {
-        //making sure to ignore anything in local storage that isn't one of our products
         let curr = localStorage.getItem(key)
         let parsed = JSON.parse(curr)
         console.log(curr)

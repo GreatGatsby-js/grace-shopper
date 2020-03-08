@@ -1,5 +1,3 @@
-//for guest users??????? if we have them??
-
 //when a guest presses add to cart
 export function increaseGuestQty(product) {
   console.log('clicked addToGuestCart')
@@ -8,7 +6,6 @@ export function increaseGuestQty(product) {
   let duck = localStorage.getItem(id)
   //if something w that id exists in localStorage increase qty by 1
   if (duck) {
-    //if the duck exists do soemthing
     let newDuck = JSON.parse(duck)
     newDuck.qty++
     newDuck = JSON.stringify(newDuck)
@@ -19,9 +16,10 @@ export function increaseGuestQty(product) {
       qty: 1,
       product
     }
-    //set local storage to be
+    const stringDuck = JSON.stringify(duck)
+    //stringify and set local storage to be that new obj
     //key: product id, value: our new duck obj
-    localStorage.setItem(id, duck)
+    localStorage.setItem(id, stringDuck)
   }
   console.log('end of add to cart func')
 }
@@ -55,7 +53,7 @@ export function removeFromCart(product) {
 //when a guest checks out
 //they can't checkout without an account
 //they will have to create an account, once account is created,
-//clear cart/storage on checkout
+//clear cart/localstorage on checkout
 export function clearCartStorage() {
   localStorage.clear()
 }
