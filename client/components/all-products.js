@@ -17,17 +17,16 @@ class AllProducts extends Component {
   render() {
     return (
       <div>
-        <div>
-          <h2>All Products</h2>
+        <div id="all-products">
+          {/* <h2>All Products</h2> */}
           <div className="productBox">
             {this.props.products.length
               ? // if there are products, render them
                 this.props.products.map(product => (
-                  <div key={product.id} className="product">
+                  <div key={product.id} id="product-container">
                     <Link to={`/products/${product.id}`}>
-                      <h3>{product.name}</h3>
+                      <ProductPreview product={product} />
                     </Link>
-                    <ProductPreview product={product} />
                   </div>
                 ))
               : // else if there are none,
