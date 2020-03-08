@@ -1,9 +1,7 @@
 //for guest users??????? if we have them??
 
 //when a guest presses add to cart
-
-//i really hope this function works
-export function addToGuestCart(product) {
+export function increaseGuestQty(product) {
   console.log('clicked addToGuestCart')
   //guest user clicks add to cart button, it adds one at a time!!!!!!!!
   const id = product.id.toString()
@@ -28,7 +26,7 @@ export function addToGuestCart(product) {
   console.log('end of add to cart func')
 }
 
-export function decreaseQty(product) {
+export function decreaseGuestQty(product) {
   console.log('clicked decreaseQty')
   const id = product.id.toString()
   let duck = JSON.parse(localStorage.getItem(id))

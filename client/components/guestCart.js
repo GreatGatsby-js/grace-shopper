@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {
-  addToGuestCart,
-  decreaseQty,
+  increaseGuestQty,
+  decreaseGuestQty,
   removeFromCart
 } from '../store/guestCartFuncs'
 
@@ -10,16 +10,12 @@ class GuestCart extends Component {
     super()
     this.state = this.getLocalStorage()
     this.getLocalStorage = this.getLocalStorage.bind(this)
-    addToGuestCart.bind(this)
+    increaseGuestQty.bind(this)
   }
 
   // componentDidMount(){
+  //   console.log('component mounted')
   //   this.getLocalStorage()
-  // }
-  // componentDidUpdate(){
-  //   console.log('in update')
-  //   this.setState(this.getLocalStorage())
-  //   console.log('state', this.state)
   // }
 
   getLocalStorage() {
@@ -64,12 +60,20 @@ class GuestCart extends Component {
 
     //getting products from local storage and setting them on the state
     const keys = Object.keys(localStorage)
+    console.log('keys are ', keys)
     let startState = {}
     keys.forEach(key => {
-      let curr = localStorage.getItem(key)
-      let parsed = JSON.parse(curr)
+      try {
+        //making sure to ignore anything in local storage that isn't one of our products
+        let curr = localStorage.getItem(key)
+        let parsed = JSON.parse(curr)
+        console.log(curr)
 
-      startState[key] = parsed
+        //if the item we got from local storage has a product property add it to our state
+        if (parsed.qty && parsed.product) startState[key] = parsed
+      } catch (error) {
+        console.error('ignored- not a product for our state')
+      }
     })
     return startState
   }
@@ -89,7 +93,7 @@ class GuestCart extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  addToGuestCart(this.state[key].product)
+                  increaseGuestQty(this.state[key].product)
 
                   this.setState(
                     {[key]: JSON.parse(localStorage.getItem(key))},
@@ -103,7 +107,7 @@ class GuestCart extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  decreaseQty(this.state[key].product)
+                  decreaseGuestQty(this.state[key].product)
 
                   this.setState(
                     {[key]: JSON.parse(localStorage.getItem(key))},
@@ -122,14 +126,3 @@ class GuestCart extends Component {
 }
 
 export default GuestCart
-
-/*
-local storage:
-'1': '[1, {blueDuck}]'
-'2': '[2, {yellowDuck}]'
-
-Object.keys(localStorage)
-  ['1', '2']
-
-
-*/
