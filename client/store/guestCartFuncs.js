@@ -31,10 +31,19 @@ export function decreaseGuestQty(product) {
   const id = product.id.toString()
   let duck = JSON.parse(localStorage.getItem(id))
   //in this case we can assume duck exists bc they cannot access decrease button if there's no duck
-  duck.qty--
-  duck = JSON.stringify(duck)
 
-  localStorage.setItem(id, duck)
+  //make sure qty isnt at 1 already before decreasing
+  if (duck.qty > 1) {
+    duck.qty--
+    duck = JSON.stringify(duck)
+
+    localStorage.setItem(id, duck)
+  }
+  //  else {
+  //   //if it is at 1 then we have to remove the item
+  //   removeFromCart(product)
+
+  // }
 }
 
 //remove entire items from the cart

@@ -117,6 +117,25 @@ class GuestCart extends Component {
               >
                 decrease qty
               </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  try {
+                    const prodToDelete = this.state[key].product
+                    this.setState({[key]: undefined}, () =>
+                      console.log('new state ', this.state)
+                    )
+                    //remove item from local storage
+                    removeFromCart(prodToDelete)
+                    //take it of the state
+                  } catch (error) {
+                    console.error('hey u hit the error')
+                  }
+                }}
+              >
+                delete
+              </button>
             </div>
           ))}
         </div>
