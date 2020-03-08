@@ -43,7 +43,7 @@ class Routes extends Component {
         {/* <Route component={NoMatches} /> */}
         <Route path="/cart/:userId" component={Cart} />
 
-        <Route path="/TESTcart" component={GuestCart} />
+        <Route exact path="/guest/cart" component={GuestCart} />
         <Route path="/checkout/:userId" component={Checkout} />
 
         {isLoggedIn && (
