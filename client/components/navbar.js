@@ -5,7 +5,7 @@ import {logout} from '../store'
 
 const Navbar = props => {
   return (
-    <div>
+    <div id="nav-container">
       {/* added an extra div to pull the title  out into its own div */}
       <div id="header">
         {/* <p className="title">Lux Ducks</p> */}

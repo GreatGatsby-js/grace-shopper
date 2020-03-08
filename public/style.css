@@ -27,10 +27,17 @@ h2 {
   text-align: center;
 }
 
+#components {
+  position: relative;
+  top: 10rem;
+}
+
 #header {
   display: flex;
   height: 80px;
-  width: 60%;
+  width: 100%;
+  background-color: var(--main-bg-color);
+  /* position: fixed; */
   /* border: 2px solid red; */
 }
 
@@ -95,6 +102,14 @@ h2 {
   background-color: #fff;
   color: #444;
   cursor: default;
+}
+
+#nav-container {
+  /* border: 1px solid yellow; */
+  position: fixed;
+  top: 0rem;
+  z-index: 9999;
+  width: 100%;
 }
 
 .space {
@@ -177,7 +192,7 @@ h2 {
 }
 
 #product-container {
-  /* border: 1px solid blue; */
+  /* border: 1px solid bluse; */
   width: 26%;
 }
 
