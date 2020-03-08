@@ -20,9 +20,8 @@ class SingleProduct extends Component {
         <div key={this.props.product.id} id="single">
           <img src={this.props.product.imageUrl} className="singleImg" />
           <div id="single-info">
-            {/* <p>Name: {this.props.product.name}</p> */}
+            <p className="price">${this.props.product.price}</p>
             <p>{this.props.product.description}</p>
-            <p>${this.props.product.price}</p>
             <button
               type="button"
               id="add-to-cart"
