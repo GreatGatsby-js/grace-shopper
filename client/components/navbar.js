@@ -16,6 +16,7 @@ const Navbar = props => {
         />
         {/* <p className="logo">logo</p> */}
       </div>
+      <Link to="/cart" className="item" />
       <div id="navPanel">
         <nav className="nav">
           {props.isLoggedIn ? (
