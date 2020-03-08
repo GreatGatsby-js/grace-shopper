@@ -6,7 +6,9 @@ import {logout} from '../store'
 const Navbar = props => {
   return (
     <div id="navPanel">
-      <h1>Great Gatsby's Shop!!</h1>
+      <div id="header">
+        <h1 className="title">Lux Ducks</h1>
+      </div>
       <nav className="nav">
         {props.isLoggedIn ? (
           <div>

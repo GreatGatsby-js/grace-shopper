@@ -56,16 +56,28 @@ h2 {
 } */
 
 #navPanel {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  border: 2px solid yellow;
+}
+
+.title {
+  border: 1px solid black;
+  text-align: left;
+  font-size: 3rem;
+  padding: 5px;
 }
 
 .nav {
+  border: 1px solid red;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
   align-items: center;
   height: 50px;
+  padding: 10px;
   background-color: var(--nav-bar-color);
 }
 .nav a {
