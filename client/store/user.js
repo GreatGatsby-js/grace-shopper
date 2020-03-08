@@ -202,12 +202,6 @@ export default function(state = defaultUser, action) {
         cart: [...action.lineItems]
       }
     }
-    // case GOT_ORDER_ID: {
-    //   return {
-    //     ...state,
-    //     orderId: action.orderId
-    //   }
-    // }
     case GET_USER: {
       return {
         ...state,
