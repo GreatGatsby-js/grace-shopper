@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 const router = require('express').Router()
-const {Order, Product} = require('../db/models')
+const {Order, Product, LineItem} = require('../db/models')
 module.exports = router
 
 router.get('/order/:userId', async (req, res, next) => {
@@ -36,6 +36,33 @@ router.post('/order', async (req, res, next) => {
 
 router.put('/order/:orderId', async (req, res, next) => {
   try {
+    //lineitem.create with prod id and order id
+    //check if lineitem with this order and product exists already
+    let lineitem = await LineItem.findOne({
+      where: {
+        orderId: req.params.orderId,
+        productId: req.body.product.id
+      }
+    })
+    if (lineitem) {
+      const oldQty = lineitem.quantity
+      const oldPrice_lineitem = lineitem.purchasedPrice
+      await lineitem.update({
+        orderId: req.params.orderId,
+        productId: req.body.product.id,
+        quantity: oldQty + 1,
+        purchasedPrice: oldPrice_lineitem + req.body.product.price
+      })
+      await lineitem.save()
+    } else {
+      lineitem = await LineItem.create({
+        orderId: req.params.orderId,
+        productId: req.body.product.id,
+        purchasedPrice: req.body.product.price,
+        quantity: 1
+      })
+    }
+
     const order = await Order.findByPk(req.params.orderId)
     const oldPrice = order.totalCost
     const oldTotalQty = order.totalQuantity
@@ -45,20 +72,6 @@ router.put('/order/:orderId', async (req, res, next) => {
       totalQuantity: oldTotalQty + req.body.qty
     })
     await order.save()
-
-    // const product = await Product.findByPk(req.body.product.id);
-    // await order.addProduct(product, {
-    //   quantity: 1,
-    //   purchasedPrice: 3
-    // })
-
-    // await order.addProduct(req.body.product, )
-
-    //user.addProject(project, { through: { role: 'manager' }});
-    // await order.addProduct(req.body.product, {
-    //   quantity: req.body.qty,
-    //   purchasedPrice: req.body.product.price * req.body.qty
-    // })
 
     res.send(200)
   } catch (error) {
