@@ -24,7 +24,6 @@ const defaultUser = {
   databaseUser: {},
   orderId: null,
   cart: []
-  // allDatabaseUsers: []
 }
 
 /**
@@ -208,15 +207,6 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
-
-// export const fetchUsers = () => async dispatch => {
-//   try {
-//     const {data} = await axios.get('/api/users')
-//     dispatch(gotAllUsers(data))
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
 
 /**
  * REDUCER
