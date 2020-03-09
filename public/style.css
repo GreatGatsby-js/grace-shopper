@@ -284,6 +284,122 @@ h2 {
   color: var(--detail-color);
 }
 
+
+#cart-page {
+  /* border: 2px solid yellow; */
+  display: flex;
+  flex-direction: column;
+}
+
+#cart-container {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row-reverse;
+  align-self: center;
+  width: 90%;
+}
+
+#checkout {
+  /* border: 1px solid green; */
+  width: 65%;
+  height: 15rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  font-weight: bold;
+}
+.total-price {
+  color: var(--detail-color);
+}
+.checkout-btn {
+  /* background-color: var(--detail-color); */
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--detail-color);
+  font-size: 1.5rem;
+  height: 4rem;
+  transition: ease-in-out 0.2s;
+}
+
+.checkout-btn:hover {
+  transition: ease-in-out 0.2s;
+  background-color: var(--detail-color);
+  box-shadow: 0px 3px 28px rgb(243, 223, 112);
+}
+
+/* #cart-item-list {
+  border: 1px solid orange;
+} */
+
+#item-container {
+  border-bottom: 1px dotted var(--nav-bar-color);
+  margin: 15px;
+  padding: 15px;
+}
+
+#cart-item {
+  /* border: 1px solid black; */
+  display: flex;
+  height: 10rem;
+  width: 70%;
+  /* margin: 10px; */
+  padding: 15px;
+}
+
+.cart-pic {
+  width: 30%;
+  height: auto;
+  box-shadow: 0px 5px 22px var(--nav-bar-color);
+}
+
+.cart-item-name {
+  border-bottom: 1px solid orange;
+  padding: 5px;
+}
+.indiv-price {
+  /* border: 1px solid hotpink; */
+  font-style: italic;
+  margin: 0;
+}
+
+#cartinfo-container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  /* border: 1px solid green; */
+  padding: 5px;
+  margin: 10px;
+}
+
+.edit-button {
+  /* border: 1px solid purple; */
+  margin: 6px;
+  outline: none;
+  background-color: var(--duck-box-color);
+  color: var(--nav-bar-color);
+  position: relative;
+  top: 0.4rem;
+  border: 1px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.edit-button:active {
+  background-color: #d1b44d;
+  border: 1px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+
+#cart-qty {
+  /* border: 1px solid yellow; */
+  display: flex;
+  padding: 4px;
+  height: 2.5rem;
+
+  
 label {
   display: block;
 }
@@ -360,4 +476,5 @@ form div {
   /*display: block;*/
   font-weight: bold;
   background-color: mintcream;
+
 }
