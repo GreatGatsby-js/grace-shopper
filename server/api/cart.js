@@ -18,6 +18,17 @@ router.get('/order/:userId', async (req, res, next) => {
   }
 })
 
+//getting order total, only
+router.get(`/order/total/:orderId`, async (req, res, next) => {
+  console.log('\ngetting total\n')
+  try {
+    let order = await Order.findByPk(req.params.orderId)
+    res.send(order.dataValues.totalCost)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/order', async (req, res, next) => {
   const price = req.body.product.price * req.body.qty
   try {
@@ -69,7 +80,6 @@ router.put('/order/:orderId', async (req, res, next) => {
 //method for increasing or decreasing product quantity in the cart. Returns the updated order
 router.put('/:userId/:orderId/:productId', async (req, res, next) => {
   try {
-    console.log('order id', req.params.orderId)
     const order = await Order.findOne({
       where: {
         id: req.params.orderId
@@ -140,7 +150,6 @@ router.get('/:userId', async (req, res, next) => {
       },
       include: [Product]
     })
-    console.log('backend response is', response)
     res.send(response)
   } catch (error) {
     next(error)

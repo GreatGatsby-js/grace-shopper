@@ -48,7 +48,7 @@ class Routes extends Component {
         <Route path="/cart/:userId" component={Cart} />
 
         <Route exact path="/guest/cart" component={GuestCart} />
-        <Route path="/checkout/:userId" component={Checkout} />
+        <Route path="/checkout/:orderId" component={Checkout} />
 
         {isLoggedIn && (
           <Switch>

@@ -6,6 +6,7 @@ import {
   fetchIncreaseProductQty,
   fetchDecreaseProductQty
 } from '../store'
+import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
@@ -63,7 +64,9 @@ class DisconnectedCart extends Component {
           >
             Proceed to Checkout
           </button> */}
-          <Link to={`/checkout/${this.props.userId}`}>Proceed to Checkout</Link>
+          <Link to={`/checkout/${this.props.orderId}`}>
+            Proceed to Checkout
+          </Link>
         </div>
       )
     }
