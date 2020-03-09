@@ -48,12 +48,16 @@ router.put('/order/:orderId', async (req, res, next) => {
       const oldQty = lineitem.quantity
       const oldPrice_lineitem = lineitem.purchasedPrice
       await lineitem.update({
+        orderId: req.params.orderId,
+        productId: req.body.product.id,
         quantity: oldQty + 1,
         purchasedPrice: oldPrice_lineitem + req.body.product.price
       })
       await lineitem.save()
     } else {
       lineitem = await LineItem.create({
+        orderId: req.params.orderId,
+        productId: req.body.product.id,
         purchasedPrice: req.body.product.price,
         quantity: 1
       })
