@@ -7,15 +7,12 @@ import {getLocalStorage} from './guestCart'
 const Navbar = props => {
   return (
     <div id="nav-container">
-      {/* added an extra div to pull the title  out into its own div */}
       <div id="header">
-        {/* <p className="title">Lux Ducks</p> */}
         <p className="title">Lux Ducks</p>
         <img
           src="https://image.flaticon.com/icons/svg/421/421167.svg"
           className="logo"
         />
-        {/* <p className="logo">logo</p> */}
       </div>
       <Link to="/cart" className="item" />
       <div id="navPanel">
@@ -45,14 +42,14 @@ const Navbar = props => {
               <Link to="/signup" className="navButtons">
                 Sign Up
               </Link>
-              <Link to="/cart" className="navButtons" onClick={getLocalStorage}>
+
+              <Link to="/cart" className="navButtons">
                 Cart
               </Link>
             </div>
           )}
         </nav>
         <div className="space" />
-        {/* <hr /> */}
       </div>
     </div>
   )
