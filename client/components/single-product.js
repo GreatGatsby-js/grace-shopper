@@ -41,6 +41,7 @@ class SingleProduct extends Component {
               </button>
             ) : (
               <button
+                id="add-to-cart"
                 type="button"
                 onClick={() => increaseGuestQty(this.props.product)}
               >

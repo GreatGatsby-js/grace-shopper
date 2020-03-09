@@ -36,64 +36,96 @@ class GuestCart extends Component {
 
   render() {
     return (
-      <div>
+      <div id="cart-page">
         <center>
-          <h1>your guest cart</h1>
+          <h1>your cart</h1>
         </center>
-        <div>
-          {Object.keys(this.state).map(key => (
-            <div key={key}>
-              <h1>{this.state[key].product.name}</h1>
-              <h3>qty: {this.state[key].qty}</h3>
+        <div id="cart-container">
+          <div id="checkout">
+            <p className="total">
+              total price here: <span className="total-price">many dollar</span>{' '}
+            </p>
+            <button className="checkout-btn" type="button">
+              checkout
+            </button>
+          </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  increaseGuestQty(this.state[key].product)
+          <div id="cart-item-list">
+            {Object.keys(this.state).map(key => (
+              <div key={key} id="item-container">
+                <div id="cart-item">
+                  <img
+                    className="cart-pic"
+                    src={this.state[key].product.imageUrl}
+                  />
 
-                  this.setState(
-                    {[key]: JSON.parse(localStorage.getItem(key))},
-                    () => console.log('increase state', this.state)
-                  )
-                }}
-              >
-                increase qty
-              </button>
+                  <div id="cartinfo-container">
+                    <p className="cart-item-name">
+                      {this.state[key].product.name}
+                    </p>
+                    <p className="indiv-price">
+                      ${this.state[key].product.price}
+                    </p>
 
-              <button
-                type="button"
-                onClick={() => {
-                  decreaseGuestQty(this.state[key].product)
+                    <div id="cart-qty">
+                      <p>qty: {this.state[key].qty}</p>
+                      <button
+                        className="edit-button"
+                        type="button"
+                        onClick={() => {
+                          increaseGuestQty(this.state[key].product)
 
-                  this.setState(
-                    {[key]: JSON.parse(localStorage.getItem(key))},
-                    () => console.log('decrease state', this.state)
-                  )
-                }}
-              >
-                decrease qty
-              </button>
+                          this.setState(
+                            {[key]: JSON.parse(localStorage.getItem(key))},
+                            () => console.log('increase state', this.state)
+                          )
+                        }}
+                      >
+                        {/* increase qty */}
+                        +
+                      </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  try {
-                    const prodToDelete = this.state[key].product
-                    this.setState({[key]: undefined}, () =>
-                      console.log('new state ', this.state)
-                    )
-                    //remove item from local storage
-                    removeFromCart(prodToDelete)
-                    //take it of the state
-                  } catch (error) {
-                    console.error('hey u hit the error')
-                  }
-                }}
-              >
-                delete
-              </button>
-            </div>
-          ))}
+                      <button
+                        className="edit-button"
+                        type="button"
+                        onClick={() => {
+                          decreaseGuestQty(this.state[key].product)
+
+                          this.setState(
+                            {[key]: JSON.parse(localStorage.getItem(key))},
+                            () => console.log('decrease state', this.state)
+                          )
+                        }}
+                      >
+                        {/* decrease qty */}
+                        -
+                      </button>
+
+                      <button
+                        className="edit-button"
+                        type="button"
+                        onClick={() => {
+                          try {
+                            const prodToDelete = this.state[key].product
+                            this.setState({[key]: undefined}, () =>
+                              console.log('new state ', this.state)
+                            )
+                            //remove item from local storage
+                            removeFromCart(prodToDelete)
+                            //take it of the state
+                          } catch (error) {
+                            console.error('hey u hit the error')
+                          }
+                        }}
+                      >
+                        delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
