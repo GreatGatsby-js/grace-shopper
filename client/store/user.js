@@ -95,6 +95,21 @@ export const fetchDecreaseProductQty = (
   }
 }
 
+export const fetchDeleteItem = (
+  userId,
+  orderId,
+  productId
+) => async dispatch => {
+  try {
+    const {data} = await axios.delete(
+      `/api/cart/${userId}/${orderId}/${productId}`
+    )
+    dispatch(gotLineItems(data.products))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const fetchPlaceOrder = orderId => async dispatch => {
   try {
     const {data} = await axios.put(`/api/cart/${orderId}`)
@@ -216,6 +231,7 @@ export default function(state = defaultUser, action) {
         ...state,
         cart: [...state.cart, {product: action.product, qty: action.qty}]
       }
+
     case PLACE_ORDER:
       return {
         ...state,

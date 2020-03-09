@@ -4,7 +4,8 @@ import {
   fetchLineItems,
   fetchPlaceOrder,
   fetchIncreaseProductQty,
-  fetchDecreaseProductQty
+  fetchDecreaseProductQty,
+  fetchDeleteItem
 } from '../store'
 import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
@@ -30,7 +31,6 @@ class DisconnectedCart extends Component {
                 <button
                   type="button"
                   onClick={() => {
-                    console.log('hi')
                     this.props.fetchIncreaseProductQty(
                       this.props.userId,
                       this.props.orderId,
@@ -53,6 +53,18 @@ class DisconnectedCart extends Component {
                   -
                 </button>
                 of the {item.name}
+                <button
+                  type="button"
+                  onClick={() => {
+                    this.props.fetchDeleteItem(
+                      this.props.userId,
+                      this.props.orderId,
+                      item.id
+                    )
+                  }}
+                >
+                  delete
+                </button>
               </div>
             )
           })}
@@ -96,6 +108,9 @@ const mapDispatchToProps = dispatch => {
     },
     fetchDecreaseProductQty: (userId, orderId, productId) => {
       dispatch(fetchDecreaseProductQty(userId, orderId, productId))
+    },
+    fetchDeleteItem: (userId, orderId, productId) => {
+      dispatch(fetchDeleteItem(userId, orderId, productId))
     },
     fetchPlaceOrder: orderId => {
       dispatch(fetchPlaceOrder(orderId))
