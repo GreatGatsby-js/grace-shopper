@@ -4,11 +4,17 @@ const db = require('../db')
 const LineItem = db.define('lineitem', {
   purchasedPrice: {
     type: Sequelize.FLOAT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   }
 })
 
