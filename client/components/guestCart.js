@@ -8,22 +8,26 @@ import {
 class GuestCart extends Component {
   constructor() {
     super()
-    this.state = this.getLocalStorage()
+    // this.state = this.getLocalStorage()
+    this.state = {}
     this.getLocalStorage = this.getLocalStorage.bind(this)
-    increaseGuestQty.bind(this)
+  }
+
+  componentDidMount() {
+    console.log('mounted')
+    this.setState(this.getLocalStorage())
   }
 
   getLocalStorage() {
     //getting products from local storage and setting them on the state
     const keys = Object.keys(localStorage)
-    console.log('keys are ', keys)
+
     let startState = {}
     keys.forEach(key => {
       //making sure to ignore anything in local storage that isn't one of our products
       try {
         let curr = localStorage.getItem(key)
         let parsed = JSON.parse(curr)
-        console.log(curr)
 
         //if the item we got from local storage has a product property add it to our state
         if (parsed.qty && parsed.product) startState[key] = parsed
@@ -43,7 +47,7 @@ class GuestCart extends Component {
         <div id="cart-container">
           <div id="checkout">
             <p className="total">
-              total price here: <span className="total-price">many dollar</span>{' '}
+              total price here: <span className="total-price">many dollar</span>
             </p>
             <button className="checkout-btn" type="button">
               checkout
@@ -106,13 +110,17 @@ class GuestCart extends Component {
                         type="button"
                         onClick={() => {
                           try {
+                            console.log('clicked delete')
                             const prodToDelete = this.state[key].product
-                            this.setState({[key]: undefined}, () =>
-                              console.log('new state ', this.state)
-                            )
+
                             //remove item from local storage
                             removeFromCart(prodToDelete)
-                            //take it of the state
+
+                            //take it off the state
+                            const newState = this.getLocalStorage()
+                            this.setState(newState)
+
+                            window.location.reload(false)
                           } catch (error) {
                             console.error('hey u hit the error')
                           }
