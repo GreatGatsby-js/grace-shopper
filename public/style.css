@@ -283,3 +283,81 @@ h2 {
   font-size: 3em;
   color: var(--detail-color);
 }
+
+label {
+  display: block;
+}
+
+form div {
+  margin: 1em;
+  width: 300px;
+}
+
+.email-div {
+  border: 1px solid black;
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+  background-color: rgb(181, 189, 184);
+  display: block;
+  width: 300px;
+  font-weight: bold;
+}
+
+.password-div {
+  border: 1px solid black;
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+  background-color: rgb(181, 189, 184);
+  display: block;
+  font-weight: bold;
+}
+
+.login {
+  width: 80px;
+  font-weight: bold;
+  font-size: small;
+  margin-left: 110px;
+}
+
+/*google{*/
+/*  color:red;*/
+/*   padding-left:300px;*/
+/* }*/
+
+.auth-form {
+  display: block;
+  height: 300px;
+  width: 300px;
+  padding-left: 300px;
+  font-weight: bold;
+  padding-right: 300px;
+  padding-top: 95px;
+  /*background-color: lightgoldenrodyellow ;*/
+  margin-left: 200px;
+  border: 10px solid gray;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgb(255, 238, 204), rgb(255, 195, 77));
+}
+
+.email-input {
+  display: block;
+  width: 293px;
+  font-weight: bold;
+}
+
+.password-input {
+  display: block;
+  width: 293px;
+  font-weight: bold;
+}
+
+#goog {
+  margin-left: 95px;
+  border: 1px solid gray;
+  border-left: 3px solid gray;
+  border-top: 3px solid gray;
+  /*background-color: rgb(181, 189, 184);*/
+  /*display: block;*/
+  font-weight: bold;
+  background-color: mintcream;
+}
