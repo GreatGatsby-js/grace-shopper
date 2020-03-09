@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
-import {fetchUsers} from '../store/user.js'
+import {fetchUsers} from '../store/admin-users.js'
 
 class AdminViewUsers extends Component {
   componentDidMount() {
@@ -11,6 +11,7 @@ class AdminViewUsers extends Component {
 
   render() {
     const users = this.props.users
+    console.log(users)
     return (
       <div className="adminComponent">
         ALL USERS
@@ -33,7 +34,7 @@ class AdminViewUsers extends Component {
 const mapState = state => {
   console.log('state', state)
   return {
-    users: state.user.allDatabaseUsers
+    users: state.adminUsers.allDatabaseUsers
   }
 }
 

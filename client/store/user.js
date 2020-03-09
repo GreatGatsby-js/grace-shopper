@@ -12,10 +12,10 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
-const GOT_ORDER_ID = 'GOT_ORDER_ID'
+// const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const ADDED_TO_CART = 'ADDED_TO_CART'
-
-const ADMIN_GET_USERS = 'ADMIN_GET_USERS'
+const PLACE_ORDER = 'PLACE_ORDER'
+const INCREASED_CART_QTY = 'INCREASED_CART_QTY'
 
 /**
  * INITIAL STATE
@@ -23,18 +23,18 @@ const ADMIN_GET_USERS = 'ADMIN_GET_USERS'
 const defaultUser = {
   databaseUser: {},
   orderId: null,
-  cart: [],
-  allDatabaseUsers: []
+  cart: []
+  // allDatabaseUsers: []
 }
 
 /**
  * ACTION CREATORS
  */
-const getUser = (/*cart=[],*/ user) => {
+const getUser = (user, orderId = null) => {
   return {
     type: GET_USER,
-    user
-    // cart
+    user,
+    orderId
   }
 }
 const removeUser = () => ({type: REMOVE_USER})
@@ -42,13 +42,13 @@ const removeUser = () => ({type: REMOVE_USER})
 const gotLineItems = lineItems => {
   return {
     type: GOT_LINE_ITEMS,
-    cart: lineItems
+    lineItems
   }
 }
 
-const gotOrderId = orderId => {
-  return {type: GOT_ORDER_ID, orderId}
-}
+// const gotOrderId = orderId => {
+//   return {type: GOT_ORDER_ID, orderId}
+// }
 
 const addedToCart = (product, qty) => {
   return {
@@ -58,30 +58,75 @@ const addedToCart = (product, qty) => {
   }
 }
 
-const gotAllUsers = allUsers => {
-  return {
-    type: ADMIN_GET_USERS,
-    allUsers
+export const fetchOrderId = userId => async dispatch => {
+  const placeOrder = () => {
+    return {
+      type: PLACE_ORDER
+    }
   }
 }
 
-export const fetchOrderId = userId => async dispatch => {
+export const fetchIncreaseProductQty = (
+  userId,
+  orderId,
+  productId
+) => async dispatch => {
   try {
-    console.log('fetching order id')
-    const orderId = await axios.get(`/api/cart/order/${userId}`)
-    console.log('store orderid', orderId)
-    if (orderId) {
-      dispatch(gotOrderId(orderId))
-    }
+    const {data} = await axios.put(
+      `/api/cart/${userId}/${orderId}/${productId}`,
+      {action: 'increase'}
+    )
+    dispatch(gotLineItems(data.products))
   } catch (err) {
     console.error(err)
   }
 }
 
+export const fetchDecreaseProductQty = (
+  userId,
+  orderId,
+  productId
+) => async dispatch => {
+  try {
+    const {data} = await axios.put(
+      `/api/cart/${userId}/${orderId}/${productId}`,
+      {action: 'decrease'}
+    )
+    dispatch(gotLineItems(data.products))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const fetchPlaceOrder = orderId => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/cart/${orderId}`)
+    dispatch(placeOrder())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+// export const fetchOrderId = userId => async dispatch => {
+//   try {
+//     const order = await axios.get(`/api/cart/order/${userId}`)
+//     console.log('store orderid', order)
+//     if (order) {
+//       dispatch(gotOrderId(order.data.id))
+//     }
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
 export const fetchLineItems = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/cart/${userId}`)
-    dispatch(gotLineItems(data))
+    if (data) {
+      dispatch(gotLineItems(data.products))
+    } else {
+      dispatch(gotLineItems([]))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -90,7 +135,6 @@ export const fetchLineItems = userId => async dispatch => {
 export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
   try {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
-    data = data[0]
 
     if (!data) {
       const response = await axios.post(`/api/cart/order`, {
@@ -106,7 +150,7 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
       })
     }
 
-    dispatch(addedToCart(product, qty))
+    // dispatch(addedToCart(product, qty))
   } catch (error) {
     console.error(error)
   }
@@ -117,7 +161,8 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || {}))
+    const order = await axios.get(`/api/cart/order/${res.data.id}`)
+    dispatch(getUser(res.data || {}, order.data.id))
   } catch (err) {
     console.error(err)
   }
@@ -149,37 +194,31 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const fetchUsers = () => async dispatch => {
-  try {
-    const {data} = await axios.get('/api/users')
-    dispatch(gotAllUsers(data))
-  } catch (err) {
-    console.log(err)
-  }
-}
+// export const fetchUsers = () => async dispatch => {
+//   try {
+//     const {data} = await axios.get('/api/users')
+//     dispatch(gotAllUsers(data))
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 /**
  * REDUCER
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
-    // case GOT_LINE_ITEMS: {
-    //   return {
-    //     ...state,
-    //     cart: [...action.lineItems]
-    //   }
-    // }
-    case GOT_ORDER_ID: {
+    case GOT_LINE_ITEMS: {
       return {
         ...state,
-        orderId: action.orderId
+        cart: [...action.lineItems]
       }
     }
     case GET_USER: {
       return {
         ...state,
-        databaseUser: {...action.user}
-        // cart: [...action.cart]
+        databaseUser: {...action.user},
+        orderId: action.orderId
       }
     }
     case REMOVE_USER:
@@ -189,10 +228,12 @@ export default function(state = defaultUser, action) {
         ...state,
         cart: [...state.cart, {product: action.product, qty: action.qty}]
       }
-    case ADMIN_GET_USERS:
+
+    case PLACE_ORDER:
       return {
         ...state,
-        allDatabaseUsers: [...action.allUsers]
+        cart: [],
+        orderId: null
       }
     default:
       return state

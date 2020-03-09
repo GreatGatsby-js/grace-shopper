@@ -9,8 +9,10 @@ import {
   AllProducts,
   SingleProducts,
   Cart,
-  GuestHome
+  GuestHome,
+  Checkout
 } from './components'
+import GuestCart from './components/guestCart'
 import {me} from './store'
 
 /**
@@ -18,7 +20,11 @@ import {me} from './store'
  */
 
 const NoMatches = () => {
-  return <h1> 404 - Not Found </h1>
+  return (
+    <center>
+      <h1> Oops! there's nothing here!</h1>
+    </center>
+  )
 }
 
 class Routes extends Component {
@@ -38,8 +44,11 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
+        {/* <Route component={NoMatches} /> */}
+        <Route path="/cart/:userId" component={Cart} />
 
-        <Route path="/cart" component={Cart} />
+        <Route exact path="/guest/cart" component={GuestCart} />
+        <Route path="/checkout/:userId" component={Checkout} />
 
         {isLoggedIn && (
           <Switch>

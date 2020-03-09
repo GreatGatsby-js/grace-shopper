@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {fetchSingleProduct, fetchAddToCart} from '../store'
+import {increaseGuestQty} from '../store/guestCartFuncs'
 // import {ProductPreview} from './product-preview'
 
 /**
@@ -20,20 +21,35 @@ class SingleProduct extends Component {
         <div key={this.props.product.id} id="single">
           <img src={this.props.product.imageUrl} className="singleImg" />
           <div id="single-info">
-            {/* <p>Name: {this.props.product.name}</p> */}
+            <p className="price">${this.props.product.price}</p>
             <p>{this.props.product.description}</p>
-            <p>${this.props.product.price}</p>
+
+            {this.props.isLoggedIn ? (
+              <button
+                type="button"
+                id="add-to-cart"
+                onClick={() => {
+                  console.log('clicked')
+                  this.props.fetchAddToCart(
+                    this.props.product,
+                    this.props.userId,
+                    1
+                  )
+                }}
+              >
+                add to cart
+              </button>
+            ) : (
+              <button
+                id="add-to-cart"
+                type="button"
+                onClick={() => increaseGuestQty(this.props.product)}
+              >
+                add to cart
+              </button>
+            )}
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            console.log('clicked')
-            this.props.fetchAddToCart(this.props.product, this.props.userId, 1)
-          }}
-        >
-          add to cart
-        </button>
         {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
       </div>
     )
@@ -44,8 +60,10 @@ class SingleProduct extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  const id = state.user.databaseUser.id
   return {
-    userId: state.user.databaseUser.id,
+    isLoggedIn: !!id,
+    userId: id,
     product: state.products.singleProduct //placeholder text. might need to update based on what's in the store
   }
 }
