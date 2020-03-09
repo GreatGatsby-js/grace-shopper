@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {getLocalStorage} from './guestCart'
 
 const Navbar = props => {
   return (
@@ -44,9 +45,9 @@ const Navbar = props => {
               <Link to="/signup" className="navButtons">
                 Sign Up
               </Link>
-              {/* <Link to="/cart" className="navButtons" onClick={fetchLocalStorage}>
-            Cart
-          </Link> */}
+              <Link to="/cart" className="navButtons" onClick={getLocalStorage}>
+                Cart
+              </Link>
             </div>
           )}
         </nav>
