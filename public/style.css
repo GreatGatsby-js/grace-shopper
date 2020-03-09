@@ -284,7 +284,6 @@ h2 {
   color: var(--detail-color);
 }
 
-
 #cart-page {
   /* border: 2px solid yellow; */
   display: flex;
@@ -398,8 +397,8 @@ h2 {
   display: flex;
   padding: 4px;
   height: 2.5rem;
+}
 
-  
 label {
   display: block;
 }
@@ -476,5 +475,4 @@ form div {
   /*display: block;*/
   font-weight: bold;
   background-color: mintcream;
-
 }
