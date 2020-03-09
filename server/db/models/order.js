@@ -4,11 +4,19 @@ const db = require('../db')
 const Order = db.define('order', {
   totalQuantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isNumeric: true,
+      min: 0
+    }
   },
   totalCost: {
     type: Sequelize.FLOAT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isNumeric: true,
+      min: 0
+    }
   },
   shipping_Date: {
     type: Sequelize.DATE
@@ -22,7 +30,11 @@ const Order = db.define('order', {
   },
   status: {
     type: Sequelize.STRING,
-    defaultValue: 'Cart'
+    defaultValue: 'Cart',
+    allowNull: false,
+    validate: {
+      isIn: [['Cart', 'Placed']]
+    }
   }
 })
 
