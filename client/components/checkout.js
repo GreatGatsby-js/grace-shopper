@@ -10,21 +10,21 @@ class DisconnectedCheckout extends Component {
     this.state = {
       total: 0
     }
-    this.getCartTotal = this.getCartTotal.bind(this)
+    // this.getCartTotal = this.getCartTotal.bind(this)
   }
-  async componentDidMount() {
-    console.log('before mounting', this.props)
-    const theTotal = await this.getCartTotal()
-    this.setState({total: theTotal})
-  }
+  // async componentDidMount() {
+  //   console.log('before mounting', this.props)
+  //   const theTotal = await this.getCartTotal()
+  //   this.setState({total: theTotal})
+  // }
 
-  async getCartTotal() {
-    console.log('getting cart?')
-    const {data} = await axios.get(
-      `/api/cart/order/total/${this.props.match.params.orderId}`
-    )
-    return data
-  }
+  // async getCartTotal() {
+  //   console.log('getting cart?')
+  //   const {data} = await axios.get(
+  //     `/api/cart/order/total/${this.props.match.params.orderId}`
+  //   )
+  //   return data
+  // }
 
   render() {
     console.log('checkout props', this.props)
