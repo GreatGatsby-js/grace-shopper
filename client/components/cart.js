@@ -7,6 +7,7 @@ import {
   fetchDecreaseProductQty,
   fetchDeleteItem
 } from '../store'
+import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
@@ -67,15 +68,17 @@ class DisconnectedCart extends Component {
               </div>
             )
           })}
-          <button
+          {/* <button
             type="button"
             onClick={() => {
               this.props.fetchPlaceOrder(this.props.orderId)
             }}
           >
-            Checkout
-          </button>
-          {/* <Link to={`/checkout/${this.props.userId}`}>Checkout</Link> */}
+            Proceed to Checkout
+          </button> */}
+          <Link to={`/checkout/${this.props.orderId}`}>
+            Proceed to Checkout
+          </Link>
         </div>
       )
     }

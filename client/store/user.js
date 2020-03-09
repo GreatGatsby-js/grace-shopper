@@ -173,8 +173,12 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    const order = await axios.get(`/api/cart/order/${res.data.id}`)
-    dispatch(getUser(res.data || {}, order.data.id))
+    let orderId = null
+    if (res.data) {
+      const order = await axios.get(`/api/cart/order/${res.data.id}`)
+      orderId = order.id
+    }
+    dispatch(getUser(res.data || {}, orderId))
   } catch (err) {
     console.error(err)
   }

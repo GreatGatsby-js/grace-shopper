@@ -18,6 +18,17 @@ router.get('/order/:userId', async (req, res, next) => {
   }
 })
 
+//getting order total, only
+router.get(`/order/total/:orderId`, async (req, res, next) => {
+  console.log('\ngetting total\n')
+  try {
+    let order = await Order.findByPk(req.params.orderId)
+    res.send(order.dataValues.totalCost)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/order', async (req, res, next) => {
   const price = req.body.product.price * req.body.qty
   try {
