@@ -1,11 +1,51 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
-export const AdminViewProducts = props => {
-  const {product} = props
+import {fetchProducts} from '../store/admin-products.js'
 
-  return (
-    <div className="adminComponent">This will eventually display products</div>
-  )
+class AdminViewProducts extends Component {
+  componentDidMount() {
+    this.props.fetchProducts()
+  }
+
+  render() {
+    const products = this.props.products
+    return (
+      <div className="adminComponent">
+        ALL PRODUCTS
+        <div>
+          {products.map(prod => (
+            <li key={prod.id}>
+              <div> Name: {prod.name} </div>
+              <div>Description: {prod.description}</div>
+              <div>Price: {prod.price}</div>
+              {/* <div>Image Source: {prod.imageUrl}</div> */}
+            </li>
+            // WE SHOULD ADD BUTTONS HERE TO EDIT PRODUCTS
+          ))}
+        </div>
+      </div>
+    )
+  }
 }
 
-export default AdminViewProducts
+/**
+ * CONTAINER
+ */
+const mapState = state => {
+  // console.log('state', state)
+  return {
+    products: state.adminProducts.allProducts
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts())
+  }
+}
+
+// The `withRouter` wrapper makes sure that updates are not blocked
+// when the url changes
+export default withRouter(connect(mapState, mapDispatch)(AdminViewProducts))

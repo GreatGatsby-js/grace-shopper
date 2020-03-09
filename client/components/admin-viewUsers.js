@@ -11,15 +11,15 @@ class AdminViewUsers extends Component {
 
   render() {
     const users = this.props.users
-    console.log(users)
+
     return (
       <div className="adminComponent">
         ALL USERS
         <div>
           {users.map(user => (
             <li key={user.id}>
-              Name: {user.name}
-              Email: {user.email}
+              <div>ID: {user.id}</div>
+              <div>Email: {user.email}</div>
             </li>
           ))}
         </div>
@@ -32,7 +32,6 @@ class AdminViewUsers extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log('state', state)
   return {
     users: state.adminUsers.allDatabaseUsers
   }
