@@ -57,11 +57,9 @@ const addedToCart = (product, qty) => {
   }
 }
 
-export const fetchOrderId = userId => async dispatch => {
-  const placeOrder = () => {
-    return {
-      type: PLACE_ORDER
-    }
+const placeOrder = () => {
+  return {
+    type: PLACE_ORDER
   }
 }
 
