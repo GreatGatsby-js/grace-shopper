@@ -231,6 +231,7 @@ export default function(state = defaultUser, action) {
         ...state,
         cart: [...state.cart, {product: action.product, qty: action.qty}]
       }
+
     case PLACE_ORDER:
       return {
         ...state,
