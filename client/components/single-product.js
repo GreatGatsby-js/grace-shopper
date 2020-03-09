@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {fetchSingleProduct, fetchAddToCart} from '../store'
+import {increaseGuestQty} from '../store/guestCartFuncs'
 // import {ProductPreview} from './product-preview'
 
 /**
@@ -22,20 +23,31 @@ class SingleProduct extends Component {
           <div id="single-info">
             <p className="price">${this.props.product.price}</p>
             <p>{this.props.product.description}</p>
-            <button
-              type="button"
-              id="add-to-cart"
-              onClick={() => {
-                console.log('clicked')
-                this.props.fetchAddToCart(
-                  this.props.product,
-                  this.props.userId,
-                  1
-                )
-              }}
-            >
-              add to cart
-            </button>
+
+            {this.props.isLoggedIn ? (
+              <button
+                type="button"
+                id="add-to-cart"
+                onClick={() => {
+                  console.log('clicked')
+                  this.props.fetchAddToCart(
+                    this.props.product,
+                    this.props.userId,
+                    1
+                  )
+                }}
+              >
+                add to cart
+              </button>
+            ) : (
+              <button
+                id="add-to-cart"
+                type="button"
+                onClick={() => increaseGuestQty(this.props.product)}
+              >
+                add to cart
+              </button>
+            )}
           </div>
         </div>
         {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
@@ -48,8 +60,10 @@ class SingleProduct extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  const id = state.user.databaseUser.id
   return {
-    userId: state.user.databaseUser.id,
+    isLoggedIn: !!id,
+    userId: id,
     product: state.products.singleProduct //placeholder text. might need to update based on what's in the store
   }
 }

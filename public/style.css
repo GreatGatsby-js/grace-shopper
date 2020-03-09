@@ -27,10 +27,17 @@ h2 {
   text-align: center;
 }
 
+#components {
+  position: relative;
+  top: 10rem;
+}
+
 #header {
   display: flex;
   height: 80px;
-  width: 60%;
+  width: 100%;
+  background-color: var(--main-bg-color);
+  /* position: fixed; */
   /* border: 2px solid red; */
 }
 
@@ -95,6 +102,14 @@ h2 {
   background-color: #fff;
   color: #444;
   cursor: default;
+}
+
+#nav-container {
+  /* border: 1px solid yellow; */
+  position: fixed;
+  top: 0rem;
+  z-index: 9999;
+  width: 100%;
 }
 
 .space {
@@ -267,4 +282,197 @@ h2 {
   font-family: 'Paytone One', sans-serif;
   font-size: 3em;
   color: var(--detail-color);
+}
+
+#cart-page {
+  /* border: 2px solid yellow; */
+  display: flex;
+  flex-direction: column;
+}
+
+#cart-container {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row-reverse;
+  align-self: center;
+  width: 90%;
+}
+
+#checkout {
+  /* border: 1px solid green; */
+  width: 65%;
+  height: 15rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  font-weight: bold;
+}
+.total-price {
+  color: var(--detail-color);
+}
+.checkout-btn {
+  /* background-color: var(--detail-color); */
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--detail-color);
+  font-size: 1.5rem;
+  height: 4rem;
+  transition: ease-in-out 0.2s;
+}
+
+.checkout-btn:hover {
+  transition: ease-in-out 0.2s;
+  background-color: var(--detail-color);
+  box-shadow: 0px 3px 28px rgb(243, 223, 112);
+}
+
+/* #cart-item-list {
+  border: 1px solid orange;
+} */
+
+#item-container {
+  border-bottom: 1px dotted var(--nav-bar-color);
+  margin: 15px;
+  padding: 15px;
+}
+
+#cart-item {
+  /* border: 1px solid black; */
+  display: flex;
+  height: 10rem;
+  width: 70%;
+  /* margin: 10px; */
+  padding: 15px;
+}
+
+.cart-pic {
+  width: 30%;
+  height: auto;
+  box-shadow: 0px 5px 22px var(--nav-bar-color);
+}
+
+.cart-item-name {
+  border-bottom: 1px solid orange;
+  padding: 5px;
+}
+.indiv-price {
+  /* border: 1px solid hotpink; */
+  font-style: italic;
+  margin: 0;
+}
+
+#cartinfo-container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  /* border: 1px solid green; */
+  padding: 5px;
+  margin: 10px;
+}
+
+.edit-button {
+  /* border: 1px solid purple; */
+  margin: 6px;
+  outline: none;
+  background-color: var(--duck-box-color);
+  color: var(--nav-bar-color);
+  position: relative;
+  top: 0.4rem;
+  border: 1px solid black;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.edit-button:active {
+  background-color: #d1b44d;
+  border: 1px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+
+#cart-qty {
+  /* border: 1px solid yellow; */
+  display: flex;
+  padding: 4px;
+  height: 2.5rem;
+}
+
+label {
+  display: block;
+}
+
+form div {
+  margin: 1em;
+  width: 300px;
+}
+
+.email-div {
+  border: 1px solid black;
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+  background-color: rgb(181, 189, 184);
+  display: block;
+  width: 300px;
+  font-weight: bold;
+}
+
+.password-div {
+  border: 1px solid black;
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+  background-color: rgb(181, 189, 184);
+  display: block;
+  font-weight: bold;
+}
+
+.login {
+  width: 80px;
+  font-weight: bold;
+  font-size: small;
+  margin-left: 110px;
+}
+
+/*google{*/
+/*  color:red;*/
+/*   padding-left:300px;*/
+/* }*/
+
+.auth-form {
+  display: block;
+  height: 300px;
+  width: 300px;
+  padding-left: 300px;
+  font-weight: bold;
+  padding-right: 300px;
+  padding-top: 95px;
+  /*background-color: lightgoldenrodyellow ;*/
+  margin-left: 200px;
+  border: 10px solid gray;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, rgb(255, 238, 204), rgb(255, 195, 77));
+}
+
+.email-input {
+  display: block;
+  width: 293px;
+  font-weight: bold;
+}
+
+.password-input {
+  display: block;
+  width: 293px;
+  font-weight: bold;
+}
+
+#goog {
+  margin-left: 95px;
+  border: 1px solid gray;
+  border-left: 3px solid gray;
+  border-top: 3px solid gray;
+  /*background-color: rgb(181, 189, 184);*/
+  /*display: block;*/
+  font-weight: bold;
+  background-color: mintcream;
 }

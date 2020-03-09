@@ -88,6 +88,59 @@ const products = [
     price: 300,
     imageUrl:
       'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Zodiac-rubber-duck-slant-right-Amsterdam-duck-Store.jpg'
+  },
+  {
+    name: 'duckingham palace guard',
+    description:
+      'protector of the historical Duckingham Palace in the United Duckdom',
+    price: 250,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/10/Royal-Guard-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
+  },
+  {
+    name: 'the fowlfather',
+    description: 'head of shady underwater business dealings',
+    price: 999,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/09/Godfeather-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
+  },
+  {
+    name: 'mother of duckies',
+    description:
+      'Duckerys of the House Foiegaryen, the Feather of Her Name, The Uncooked, Queen of the Watercress, the Rholings, and the Baby Ducks, Queen of Meestream, Khaleesi of the Great Grass Sea, Protector of the Pond, Lady Regent of the Seven Flocks, Breaker of Six-Pack Rings and Mother of Duckies.',
+    price: 200,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2018/08/Game-of-birds-Rubber-Duck.jpg'
+  },
+  {
+    name: 'Quackzalcoatl',
+    description:
+      'In Mesoamerican myth, Quackzalcoatl is feathered serpent deity, a mythical culture hero from whom almost all mesoamerican peoples claim descent.',
+    price: 2012,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Aztec-rubber-duck-front-Amsterdam-Duck-Store.jpg'
+  },
+  {
+    name: 'dank duck',
+    description: 'suh dude. i could go for some sandwiches right now',
+    price: 420,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/03/Hemp-rubber-duck-Amsterdam-Duck-Store.jpg'
+  },
+  {
+    name: 'billium shakesbirb',
+    description: 'to quack or not to quack',
+    price: 1616,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2016/03/Y-DUCK-SHAKESPEARE.jpg'
+  },
+  {
+    name: 'batDuck',
+    description:
+      'playboy millionaire who lost his parents in a tragic accident. archnemesis is the penguin',
+    price: 100,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2015/07/dark-rubber-duck-leaning.jpg'
   }
 ]
 
