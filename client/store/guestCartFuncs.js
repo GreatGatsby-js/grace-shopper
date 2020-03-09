@@ -37,16 +37,12 @@ export function decreaseGuestQty(product) {
 
     localStorage.setItem(id, duck)
   }
-  //  else {
-  //   //if it is at 1 then we have to remove the item
-  //   removeFromCart(product)
-
-  // }
 }
 
 //remove entire items from the cart
 export function removeFromCart(product) {
   const id = product.id.toString()
+
   localStorage.removeItem(id)
 }
 
