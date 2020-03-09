@@ -11,7 +11,10 @@ const Product = db.define('product', {
   },
   price: {
     type: Sequelize.FLOAT,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    }
   },
 
   imageUrl: {
