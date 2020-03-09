@@ -2,7 +2,9 @@
 
 _Good things come in pairs_
 
-Visit our website at https://grace-shopper-great-gatsby.herokuapp.com/
+Visit our [website here][heroku-website]
+
+[heroku-website]: https://grace-shopper-great-gatsby.herokuapp.com/
 
 
 ## Sample
@@ -10,7 +12,10 @@ Visit our website at https://grace-shopper-great-gatsby.herokuapp.com/
 To use this as boilerplate, you'll need to take the following steps:
 
 * Sample
+  * More Sample
 * Sample
+  * cool sample bullets
+  * for reference
 
 ```
 git sample
@@ -26,50 +31,9 @@ Sample Text Within Code Styling
 
 ```
 
-## Customize
-
-Now that you've got the code, follow these steps to get acclimated:
-
-* Update project name and description in `package.json` and
-  `.travis.yml` files
-* `npm install`
-* Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-
-```
-export MY_APP_NAME=boilermaker
-createdb $MY_APP_NAME
-createdb $MY_APP_NAME-test
-```
-
-* By default, running `npm test` will use `boilermaker-test`, while
-  regular development uses `boilermaker`
-* Create a file called `secrets.js` in the project root
-  * This file is listed in `.gitignore`, and will _only_ be required
-    in your _development_ environment
-  * Its purpose is to attach the secret environment variables that you
-    will use while developing
-  * However, it's **very** important that you **not** push it to
-    Github! Otherwise, _prying eyes_ will find your secret API keys!
-  * It might look like this:
-
-```
-process.env.GOOGLE_CLIENT_ID = 'hush hush'
-process.env.GOOGLE_CLIENT_SECRET = 'pretty secret'
-process.env.GOOGLE_CALLBACK = '/auth/google/callback'
-```
-
-### OAuth
-
-* To use OAuth with Google, complete the steps above with a real client
-  ID and client secret supplied from Google
-  * You can get them from the [Google APIs dashboard][google-apis].
-
-[google-apis]: https://console.developers.google.com/apis/credentials
-
-
 
 _**NOTE**_ that this sample text `sample` sample sample.
+
 
 
 ### Heroku Deployment Information (remove later) 
