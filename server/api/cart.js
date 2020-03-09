@@ -66,10 +66,41 @@ router.put('/order/:orderId', async (req, res, next) => {
   }
 })
 
+router.delete('/:userId/:orderId/:productId', async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      where: {
+        id: req.params.orderId
+      },
+      include: [
+        {
+          model: Product,
+          through: {
+            where: {
+              productId: req.params.productId
+            }
+          }
+        }
+      ]
+    })
+    const lineitem = order.dataValues.products[0].lineitem
+    await lineitem.destroy()
+    const response = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        status: 'Cart'
+      },
+      include: [Product]
+    })
+    res.send(response)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //method for increasing or decreasing product quantity in the cart. Returns the updated order
 router.put('/:userId/:orderId/:productId', async (req, res, next) => {
   try {
-    console.log('order id', req.params.orderId)
     const order = await Order.findOne({
       where: {
         id: req.params.orderId
@@ -140,7 +171,6 @@ router.get('/:userId', async (req, res, next) => {
       },
       include: [Product]
     })
-    console.log('backend response is', response)
     res.send(response)
   } catch (error) {
     next(error)
