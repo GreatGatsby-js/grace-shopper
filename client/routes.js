@@ -45,14 +45,14 @@ class Routes extends Component {
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
         {/* <Route component={NoMatches} /> */}
-        <Route path="/cart/:userId" component={Cart} />
 
-        <Route exact path="/guest/cart" component={GuestCart} />
+        <Route exact path="/cart" component={GuestCart} />
         <Route path="/checkout/:userId" component={Checkout} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            <Route path="/cart/:userId" component={Cart} />
             <Route exact path="/userhome" component={UserHome} />
           </Switch>
         )}
