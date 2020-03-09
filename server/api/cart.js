@@ -92,7 +92,6 @@ router.delete('/:userId/:orderId/:productId', async (req, res, next) => {
       },
       include: [Product]
     })
-    // console.log('order', order)
     res.send(response)
   } catch (err) {
     next(err)
@@ -172,7 +171,6 @@ router.get('/:userId', async (req, res, next) => {
       },
       include: [Product]
     })
-    console.log('backend response is', response)
     res.send(response)
   } catch (error) {
     next(error)
