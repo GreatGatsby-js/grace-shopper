@@ -14,7 +14,6 @@ class GuestCart extends Component {
   }
 
   componentDidMount() {
-    console.log('mounted')
     this.setState(this.getLocalStorage())
   }
 
