@@ -48,13 +48,14 @@ class GuestCart extends Component {
         </center>
         <div id="cart-container">
           <div id="checkout">
-            <p className="total">
+            {/* <p className="total">
               total price here: <span className="total-price">many dollar</span>
-            </p>
+            </p> */}
             {/* <Link to='/checkout/guest'>Checkout</Link> */}
             {/* <button className="checkout-btn" type="button">
               checkout
             </button> */}
+            <Checkout total={12} />
           </div>
 
           <div id="cart-item-list">
@@ -136,7 +137,6 @@ class GuestCart extends Component {
                 </div>
               </div>
             ))}
-            <Checkout total={12} />
           </div>
         </div>
       </div>

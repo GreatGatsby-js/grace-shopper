@@ -46,6 +46,9 @@ const Navbar = props => {
               <Link to="/cart" className="navButtons">
                 Cart
               </Link>
+              {/* <Link to="/cart" className="navButtons" onClick={getLocalStorage}>
+                Cart
+              </Link> */}
             </div>
           )}
         </nav>
