@@ -10,6 +10,7 @@ import {
   SingleProducts,
   Cart,
   GuestHome,
+  OrderConfirmation,
   Checkout
 } from './components'
 import GuestCart from './components/guestCart'
@@ -44,7 +45,6 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
-        {/* <Route component={NoMatches} /> */}
 
         <Route exact path="/cart" component={GuestCart} />
         <Route path="/checkout/:userId" component={Checkout} />
@@ -57,11 +57,9 @@ class Routes extends Component {
           </Switch>
         )}
 
-        {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
-
         {/* Displays when things are broken */}
         <Route component={NoMatches} />
+        <Route exact path="/confirmation" component={OrderConfirmation} />
       </Switch>
     )
   }
@@ -72,7 +70,7 @@ class Routes extends Component {
  */
 const mapState = state => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
+    // Being 'logged in' for our purposes will be defined as having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.databaseUser.id
   }

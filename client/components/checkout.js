@@ -12,7 +12,7 @@ const DisconnectedCheckout = props => {
       <div>
         Hey guest! We actually need you to make an account before placing an
         order. Click{' '}
-        <Link to="/login" className="navButtons">
+        <Link to="/signup" className="navButtons">
           here
         </Link>{' '}
         to do that first! Then you can navigate back to your cart.
@@ -23,39 +23,50 @@ const DisconnectedCheckout = props => {
   return (
     <div>
       {/* Your total is {props.total} */}
-      <label>
-        Name:
-        <input type="text" name="name" />
-      </label>
-      <label>
-        Address line 1:
-        <input type="text" name="addres1" />
-      </label>
-      <label>
-        Address line 2:
-        <input type="text" name="address1" />
-      </label>
-      <label>
-        City:
-        <input type="text" name="city" />
-      </label>
-      <label>
-        State:
-        <input type="text" name="state" />
-      </label>
-      <label>
-        Postal code:
-        <input type="text" name="postal-code" />
-      </label>
-      <button
-        type="button"
-        onClick={() => {
-          console.log('order id', props.orderId)
-          props.fetchPlaceOrder(props.orderId)
-        }}
-      >
-        Confirm Order
-      </button>
+
+      <div id="checkout-form">
+        <hr />
+        <label>
+          Name:
+          <br />
+          <input type="text" name="name" />
+        </label>
+
+        <label>
+          Address line 1:
+          <input type="text" name="addres1" />
+        </label>
+        <label>
+          Address line 2:
+          <input type="text" name="address1" />
+        </label>
+        <label>
+          City:
+          <input type="text" name="city" />
+        </label>
+        <label>
+          State:
+          <input type="text" name="state" />
+        </label>
+        <label>
+          Postal code:
+          <input type="text" name="postal-code" />
+        </label>
+        <hr />
+      </div>
+      <center>
+        <button
+          className="checkout-btn"
+          type="button"
+          onClick={() => {
+            console.log('order id', props.orderId)
+            props.fetchPlaceOrder(props.orderId)
+            // history.push('/confirmation')
+          }}
+        >
+          Confirm Order
+        </button>
+      </center>
     </div>
   )
 }

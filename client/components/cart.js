@@ -35,62 +35,92 @@ class DisconnectedCart extends Component {
       )
     } else {
       return (
-        <div>
-          {this.props.cart.map(item => {
-            return (
-              <div key={item.id}>
-                {item.lineitem.quantity}
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.props.fetchIncreaseProductQty(
-                      this.props.userId,
-                      this.props.orderId,
-                      item.id
-                    )
-                  }}
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.props.fetchDecreaseProductQty(
-                      this.props.userId,
-                      this.props.orderId,
-                      item.id
-                    )
-                  }}
-                >
-                  -
-                </button>
-                of the {item.name}
-                <button
-                  type="button"
-                  onClick={() => {
-                    this.props.fetchDeleteItem(
-                      this.props.userId,
-                      this.props.orderId,
-                      item.id
-                    )
-                  }}
-                >
-                  delete
-                </button>
+        <div id="cart-page">
+          <div>
+            <center>
+              <h1>your cart</h1>
+            </center>
+            <div id="cart-container">
+              <div id="checkout">
+                <p className="total">
+                  Your total is:{' '}
+                  <span className="total-price">${this.props.total}</span>
+                </p>
+                <Checkout total={this.props.total} />
               </div>
-            )
-          })}
-          <div>Your total is ${this.props.total}</div>
-          <Checkout total={this.props.total} />
-          {/* <button
-            type="button"
-            onClick={this.renderCheckout}
-          >
-            Proceed to Checkout
-          </button> */}
-          {/* <Link to={`/checkout/${this.props.orderId}`}>
-            Proceed to Checkout
-          </Link> */}
+
+              <div id="cart-item-list">
+                {this.props.cart.map(item => {
+                  console.log('item is ', item)
+                  return (
+                    <div key={item.id} id="item-container">
+                      <div id="cart-item">
+                        <img className="cart-pic" src={item.imageUrl} />
+                        <div id="cartinfo-container">
+                          <p className="cart-item-name">{item.name}</p>
+                          <p className="indiv-price">${item.price} each</p>
+                          <div id="cart-qty">
+                            <p>qty: {item.lineitem.quantity}</p>
+                            <button
+                              className="edit-button"
+                              type="button"
+                              onClick={() => {
+                                this.props.fetchIncreaseProductQty(
+                                  this.props.userId,
+                                  this.props.orderId,
+                                  item.id
+                                )
+                              }}
+                            >
+                              +
+                            </button>
+
+                            <button
+                              className="edit-button"
+                              type="button"
+                              onClick={() => {
+                                this.props.fetchDecreaseProductQty(
+                                  this.props.userId,
+                                  this.props.orderId,
+                                  item.id
+                                )
+                              }}
+                            >
+                              -
+                            </button>
+                            <button
+                              className="edit-button"
+                              type="button"
+                              onClick={() => {
+                                this.props.fetchDeleteItem(
+                                  this.props.userId,
+                                  this.props.orderId,
+                                  item.id
+                                )
+                              }}
+                            >
+                              delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              {/* <div>Your total is ${this.props.total}</div> */}
+              {/* <Checkout total={this.props.total} /> */}
+              {/* <button
+              type="button"
+              onClick={this.renderCheckout}
+            >
+              Proceed to Checkout
+            </button> */}
+              {/* <Link to={`/checkout/${this.props.orderId}`}>
+              Proceed to Checkout
+            </Link> */}
+            </div>
+          </div>
         </div>
       )
     }
