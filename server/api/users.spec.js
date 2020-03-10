@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
@@ -16,7 +14,8 @@ describe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        email: codysEmail,
+        password: '1234'
       })
     })
 
