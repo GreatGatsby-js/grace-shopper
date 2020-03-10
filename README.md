@@ -6,15 +6,18 @@ Visit our [website here][heroku-website]
 
 [heroku-website]: https://grace-shopper-great-gatsby.herokuapp.com/
 
-## Sample
+## Getting started
 
-To use this as boilerplate, you'll need to take the following steps:
-
-* Sample
-  * More Sample
-* Sample
-  * cool sample bullets
-  * for reference
+Fork and clone this repo
+```
+npm install
+```
+Start the build process and your application with: 
+npm run start-dev; 
+if you're using Windows, you may need to execute npm run start-server and npm run build-watch separately (in their own terminal tabs)
+If you navigate to the URL you should see some UI already :) [We already have some connection code to get you started]
+Check out the starting seed file in seed.js - you can run it by executing npm run seed
+Create final-project and final-project-test databases
 
 ```
 git sample
