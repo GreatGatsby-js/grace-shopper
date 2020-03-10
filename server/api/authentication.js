@@ -1,10 +1,8 @@
 // middleware for authentication
+const {User} = require('../db/models')
 
 async function authorize(req, res, next) {
-  console.log('im in authentication')
-  // set user on-success
-  const user = await req.db.users.findByPk(req.user.id)
-  console.log('user check', user)
+  const user = await User.findByPk(req.user.id)
 
   if (user.isAdmin) {
     next() //continue to next middleware if user is an admin

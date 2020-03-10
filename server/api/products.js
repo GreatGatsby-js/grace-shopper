@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Product} = require('../db/models') //NOTE: assumes a model named Product exists
 
-const authorize = require('./authentication') //function that verifies user is admin
+const authorize = require('./authentication') //middleware function that verifies user is admin
 
 module.exports = router
 
@@ -25,7 +25,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', authorize, async (req, res, next) => {
   try {
     const product = await Product.create(req.body)
     res.json(product)
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:projectId', async (req, res, next) => {
+router.put('/:projectId', authorize, async (req, res, next) => {
   const prodId = req.params.productId
   try {
     const product = await Product.findByPk(prodId)
@@ -45,7 +45,7 @@ router.put('/:projectId', async (req, res, next) => {
   }
 })
 
-router.delete('/:projectId', async (req, res, next) => {
+router.delete('/:projectId', authorize, async (req, res, next) => {
   const prodId = req.params.productId
   try {
     await Product.destroy({
