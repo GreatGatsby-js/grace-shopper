@@ -147,13 +147,16 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
 
     if (!data) {
-      const {data} = await axios.post(`/api/cart/order`, {
+      console.log('no data')
+      const response = await axios.post(`/api/cart/order`, {
         product,
         userId,
         qty
       })
-      dispatch(gotOrderId(data.id))
+
+      dispatch(gotOrderId(response.data.id))
     } else {
+      console.log('data')
       const response = await axios.put(`/api/cart/order/${data.id}`, {
         product,
         userId,
