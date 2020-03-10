@@ -19,7 +19,8 @@ The website allows guests and logged-in users to do the following:
 4) Logged-in users can place the order after adding their products to the cart.
 5) The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
 6) The cart of the logged-in user empties after checkout.
-7) The admin has can add or delete or update information of the product.
+7) The admin can view all users and products.
+7) The admin can add or delete or update information of the product.
 
 
 ## Getting started
