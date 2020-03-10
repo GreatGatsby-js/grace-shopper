@@ -52,18 +52,19 @@ npm test
 ```
 
 ## Deployment tools
+```
+Heroku
+Travis
+Travis CLI
+```
 
-### Heroku 
-### Travis
-### Travis CLI
-
-
-## License
-This project is licensed under the MIT License - see the LICENSE.md file for details
 
 ## Project Status :
 This project is still in progress.
 
 ## Project Members :
 Mikayla Toffler, Laura Armfield-Perez, Tiffany Ma, Nadia Sultana
+
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
