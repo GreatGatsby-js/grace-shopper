@@ -14,11 +14,12 @@ The Lux Ducks shop is an ecommerce website where the luxurious premium ducks are
 
 The website allows guests and logged-in users to do the following:
 1) View the homepage and view all the ducks and each product with details.
-2) Choose one or more items to add to cart.
+2) Users and guests can choose one or more items to add to cart.
 3) Guests are requested to sign up and login for placing an order.
 4) Logged-in users can place the order after adding their products to the cart.
 5) The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
 6) The cart of the logged-in user empties after checkout.
+7) The admin has can add or delete or update information of the product.
 
 
 ## Getting started
