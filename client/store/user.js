@@ -80,7 +80,7 @@ export const fetchIncreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'increase'}
     )
-    dispatch(gotLineItems(data.products, data.total))
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -96,7 +96,7 @@ export const fetchDecreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'decrease'}
     )
-    dispatch(gotLineItems(data.products, data.total))
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -111,7 +111,8 @@ export const fetchDeleteItem = (
     const {data} = await axios.delete(
       `/api/cart/${userId}/${orderId}/${productId}`
     )
-    dispatch(gotLineItems(data.products, data.total))
+    console.log('data', data)
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -192,7 +193,12 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    dispatch(getUser(res.data))
+    let orderId = null
+    if (res.data) {
+      const order = await axios.get(`/api/cart/order/${res.data.id}`)
+      orderId = order.data.id
+    }
+    dispatch(getUser(res.data, orderId))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
