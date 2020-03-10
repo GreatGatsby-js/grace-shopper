@@ -22,8 +22,6 @@ const DisconnectedCheckout = props => {
   //else
   return (
     <div>
-      {/* Your total is {props.total} */}
-
       <div id="checkout-form">
         <hr />
         <label>

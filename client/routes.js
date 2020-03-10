@@ -45,6 +45,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
+        <Route exact path="/confirmation" component={OrderConfirmation} />
 
         <Route exact path="/cart" component={GuestCart} />
         <Route path="/checkout/:userId" component={Checkout} />
@@ -59,7 +60,6 @@ class Routes extends Component {
 
         {/* Displays when things are broken */}
         <Route component={NoMatches} />
-        <Route exact path="/confirmation" component={OrderConfirmation} />
       </Switch>
     )
   }
