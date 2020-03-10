@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {fetchPlaceOrder} from '../store'
 import {Link, NavLink} from 'react-router-dom'
@@ -53,18 +53,6 @@ const DisconnectedCheckout = props => {
         <hr />
       </div>
       <center>
-        {/* <button
-          className="checkout-btn"
-          type="button"
-          onClick={() => {
-            console.log('order id', props.orderId)
-            props.fetchPlaceOrder(props.orderId)
-            history.push('/confirmation')
-          }}
-        >
-          Confirm Order
-        </button> */}
-
         <NavLink
           to="/confirmation"
           className="checkout-btn"
