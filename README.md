@@ -6,6 +6,20 @@ Visit our [website here][heroku-website]
 
 [heroku-website]: https://grace-shopper-great-gatsby.herokuapp.com/
 
+## Introduction
+
+The Lux Ducks shop is an ecommerce website where the luxurious premium ducks are just not an eye candy to you but you can make them your very own on purchasisng it! Happy Shopping! Have a nice duck!
+
+## Features
+
+The website allows guests and logge-in users to do the follwoing:
+1) View the homepage and view all the ducks and each product with details.
+2) Choose one or more items to add to cart.
+3) Guests are requested to sign up and login for placing an order.
+4) Logged-in users can place the order after adding their products to the cart.
+5)The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart.
+
+
 ## Getting started
 
 Fork and clone this repo
