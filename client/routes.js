@@ -10,6 +10,7 @@ import {
   SingleProducts,
   Cart,
   GuestHome,
+  OrderConfirmation,
   Checkout
 } from './components'
 import GuestCart from './components/guestCart'
@@ -63,6 +64,7 @@ class Routes extends Component {
 
         {/* Displays when things are broken */}
         <Route component={NoMatches} />
+        <Route exact path="/confirmation" component={OrderConfirmation} />
       </Switch>
     )
   }
