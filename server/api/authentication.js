@@ -1,6 +1,6 @@
 // middleware for authentication
 
-export default async function authorize(req, res, next) {
+async function authorize(req, res, next) {
   console.log('im in authentication')
   // set user on-success
   const user = await req.db.users.findByPk(req.user.id)
@@ -12,3 +12,5 @@ export default async function authorize(req, res, next) {
     res.status(403).redirect('/') // if not admin, redirect them
   }
 }
+
+module.exports = authorize

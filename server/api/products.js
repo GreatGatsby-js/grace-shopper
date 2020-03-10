@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const {Product} = require('../db/models') //NOTE: assumes a model named Product exists
 
-import authorize from './authentication' //function that verifies user is admin
+const authorize = require('./authentication') //function that verifies user is admin
 
 module.exports = router
 

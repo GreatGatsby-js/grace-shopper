@@ -21,23 +21,4 @@ const Product = db.define('product', {
   }
 })
 
-//edit products
-// Product.prototype.editName = async function(newName) {
-//   this.name = newName
-//   await this.save()
-// }
-
-// Product.prototype.editDescription = async function(newDescription) {
-//   this.description = newDescription
-//   await this.save()
-// }
-// Product.prototype.editPrice = async function(newPrice) {
-//   this.price = newPrice
-//   await this.save()
-// }
-// Product.prototype.editImage = async function(newImageUrl) {
-//   this.imageUrl = newImageUrl
-//   await this.save()
-// }
-
 module.exports = Product

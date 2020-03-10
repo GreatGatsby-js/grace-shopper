@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 import {fetchProducts} from '../store/admin-products.js'
+import AddProduct from './admin-addProduct'
 
 class AdminViewProducts extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class AdminViewProducts extends Component {
     return (
       <div className="adminComponent">
         ALL PRODUCTS
+        <AddProduct />
         <div>
           {products.map(prod => (
             <li key={prod.id}>

@@ -11,14 +11,14 @@ const initialState = {
 }
 
 /*  ACTION CREATORS  */
-const gotProducts = allProducts => {
+export const gotProducts = allProducts => {
   return {
     type: ADMIN_GET_ALL_PRODUCTS,
     allProducts
   }
 }
 
-const addProject = newProd => ({
+export const addProduct = newProd => ({
   type: ADMIN_ADD_PRODUCT,
   newProd
 })
@@ -33,16 +33,16 @@ export const fetchProducts = () => async dispatch => {
   }
 }
 
-export const addToProjects = () => async dispatch => {
+export const addToProducts = () => async dispatch => {
   try {
     const {data} = await axios.post('/api/products')
-    dispatch(addProject(data))
+    dispatch(addProduct(data))
   } catch (err) {
     console.log(err)
   }
 }
 
-export const editThisProject = prod => async dispatch => {
+export const editThisProduct = prod => async dispatch => {
   try {
     await axios.put(`/api/products/${prod.id}`)
 

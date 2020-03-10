@@ -10,7 +10,6 @@ import AdminViewProducts from './admin-viewProducts'
  */
 export const UserHome = props => {
   const {email, isAdmin} = props
-  console.log(props)
 
   if (isAdmin === true) {
     return (
