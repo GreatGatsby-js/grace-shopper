@@ -4,6 +4,7 @@ import {
   decreaseGuestQty,
   removeFromCart
 } from '../store/guestCartFuncs'
+import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
 
 class GuestCart extends Component {
@@ -135,6 +136,7 @@ class GuestCart extends Component {
                 </div>
               </div>
             ))}
+            <Checkout total={12} />
           </div>
         </div>
       </div>
