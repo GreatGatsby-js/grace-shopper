@@ -1,8 +1,7 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {fetchPlaceOrder} from '../store'
 import {Link} from 'react-router-dom'
-// import axios from 'axios'
 
 const DisconnectedCheckout = props => {
   console.log('checkout props', props)
@@ -59,7 +58,6 @@ const DisconnectedCheckout = props => {
           onClick={() => {
             console.log('order id', props.orderId)
             props.fetchPlaceOrder(props.orderId)
-            // history.push('/confirmation')
           }}
         >
           Confirm Order
