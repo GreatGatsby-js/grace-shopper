@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Product} = require('../db/models') //NOTE: assumes a model named Product exists
+const {Product} = require('../db/models')
 
 const authorize = require('./authentication') //middleware function that verifies user is admin
 

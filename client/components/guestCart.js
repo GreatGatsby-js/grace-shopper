@@ -5,12 +5,10 @@ import {
   removeFromCart
 } from '../store/guestCartFuncs'
 import {Checkout} from '../components'
-import {Link} from 'react-router-dom'
 
 class GuestCart extends Component {
   constructor() {
     super()
-    // this.state = this.getLocalStorage()
     this.state = {}
     this.getLocalStorage = this.getLocalStorage.bind(this)
   }
@@ -21,17 +19,14 @@ class GuestCart extends Component {
   }
 
   getLocalStorage() {
-    //getting products from local storage and setting them on the state
     const keys = Object.keys(localStorage)
 
     let startState = {}
     keys.forEach(key => {
-      //making sure to ignore anything in local storage that isn't one of our products
       try {
         let curr = localStorage.getItem(key)
         let parsed = JSON.parse(curr)
 
-        //if the item we got from local storage has a product property add it to our state
         if (parsed.qty && parsed.product) startState[key] = parsed
       } catch (error) {
         console.error('ignored- not a product for our state')
@@ -48,13 +43,6 @@ class GuestCart extends Component {
         </center>
         <div id="cart-container">
           <div id="checkout">
-            {/* <p className="total">
-              total price here: <span className="total-price">many dollar</span>
-            </p> */}
-            {/* <Link to='/checkout/guest'>Checkout</Link> */}
-            {/* <button className="checkout-btn" type="button">
-              checkout
-            </button> */}
             <Checkout total={12} />
           </div>
 
@@ -89,7 +77,6 @@ class GuestCart extends Component {
                           )
                         }}
                       >
-                        {/* increase qty */}
                         +
                       </button>
 
@@ -105,7 +92,6 @@ class GuestCart extends Component {
                           )
                         }}
                       >
-                        {/* decrease qty */}
                         -
                       </button>
 
@@ -117,10 +103,8 @@ class GuestCart extends Component {
                             console.log('clicked delete')
                             const prodToDelete = this.state[key].product
 
-                            //remove item from local storage
                             removeFromCart(prodToDelete)
 
-                            //take it off the state
                             const newState = this.getLocalStorage()
                             this.setState(newState)
 

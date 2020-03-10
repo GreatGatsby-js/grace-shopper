@@ -9,10 +9,9 @@ import {
   AllProducts,
   SingleProducts,
   Cart,
-  GuestHome,
-  OrderConfirmation,
-  Checkout
+  GuestHome
 } from './components'
+import OrderConfirmation from './components/order-confirmation'
 import GuestCart from './components/guestCart'
 import {me} from './store'
 
@@ -45,16 +44,15 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProducts} />
-        <Route exact path="/confirmation" component={OrderConfirmation} />
+        <Route path="/confirmation" component={OrderConfirmation} />
 
         <Route exact path="/cart" component={GuestCart} />
-        <Route path="/checkout/:userId" component={Checkout} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/cart/:userId" component={Cart} />
-            <Route exact path="/userhome" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
           </Switch>
         )}
 

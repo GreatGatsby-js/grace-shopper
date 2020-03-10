@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Link} from 'react-router-dom'
-// import PropTypes from 'prop-types'
-// import {Login, Signup, UserHome} from './components'
+import {withRouter, Link} from 'react-router-dom'
 import {fetchProducts} from '../store/products.js'
 import ProductPreview from './product-preview'
 
@@ -18,7 +16,6 @@ class AllProducts extends Component {
     return (
       <div>
         <div id="all-products">
-          {/* <h2>All Products</h2> */}
           <div className="productBox">
             {this.props.products.length
               ? // if there are products, render them

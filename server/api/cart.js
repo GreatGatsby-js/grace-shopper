@@ -11,7 +11,6 @@ router.get('/order/:userId', async (req, res, next) => {
         status: 'Cart'
       }
     })
-    // console.log('order', order)
     res.send(order)
   } catch (err) {
     next(err)
@@ -39,7 +38,13 @@ router.post('/order', async (req, res, next) => {
       shipping_address: 'temp',
       userId: req.body.userId
     })
-    res.sendStatus(200)
+    const lineItem = await LineItem.create({
+      orderId: order.id,
+      productId: req.body.product.id,
+      quantity: 1,
+      purchasedPrice: req.body.product.price
+    })
+    res.send(order)
   } catch (error) {
     next(error)
   }
@@ -108,7 +113,17 @@ router.delete('/:userId/:orderId/:productId', async (req, res, next) => {
       ]
     })
     const lineitem = order.dataValues.products[0].lineitem
+    const removedItemQty = lineitem.quantity
+    const removedItemPrice = lineitem.purchasedPrice
     await lineitem.destroy()
+    const orderOldQty = order.totalQuantity
+
+    const orderOldCost = order.totalCost
+    await order.update({
+      totalCost: orderOldCost - removedItemPrice,
+      totalQuantity: orderOldQty - removedItemQty
+    })
+    await order.save()
     const response = await Order.findOne({
       where: {
         userId: req.params.userId,
@@ -140,22 +155,40 @@ router.put('/:userId/:orderId/:productId', async (req, res, next) => {
         }
       ]
     })
+    const orderOldQty = order.totalQuantity
+    const orderOldCost = order.totalCost
     const product = order.dataValues.products[0]
     const lineitem = product.lineitem
-    const oldQty = lineitem.dataValues.quantity
+    const oldItemQty = lineitem.quantity
+    const oldItemPrice = lineitem.purchasedPrice
     if (req.body.action === 'increase') {
       await lineitem.update({
-        quantity: oldQty + 1
+        quantity: oldItemQty + 1,
+        purchasedPrice: oldItemPrice + product.price
       })
-    } else if (oldQty === 1) {
+      await order.update({
+        totalQuantity: orderOldQty + 1,
+        totalCost: orderOldCost + product.price
+      })
+    } else if (oldItemQty === 1) {
       //delete from db
       await lineitem.destroy()
+      await order.update({
+        totalQuantity: orderOldQty - 1,
+        totalCost: orderOldCost - product.price
+      })
     } else {
       await lineitem.update({
-        quantity: oldQty - 1
+        quantity: oldItemQty - 1,
+        purchasedPrice: oldItemPrice - product.price
+      })
+      await order.update({
+        totalQuantity: orderOldQty - 1,
+        totalCost: orderOldCost - product.price
       })
     }
     await lineitem.save()
+    await order.save()
     const response = await Order.findOne({
       where: {
         userId: req.params.userId,
@@ -163,9 +196,7 @@ router.put('/:userId/:orderId/:productId', async (req, res, next) => {
       },
       include: [Product]
     })
-    // console.log('order', order)
     res.send(response)
-    //decrease quantity on this product
   } catch (err) {
     next(err)
   }

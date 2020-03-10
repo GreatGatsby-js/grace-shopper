@@ -14,6 +14,7 @@ const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
+const GOT_ORDER_ID = 'GOT_ORDER_ID'
 
 /**
  * INITIAL STATE
@@ -48,6 +49,13 @@ const gotLineItems = (lineItems, total) => {
   }
 }
 
+const gotOrderId = orderId => {
+  return {
+    type: GOT_ORDER_ID,
+    orderId
+  }
+}
+
 // const addedToCart = (product, qty) => {
 //   return {
 //     type: ADDED_TO_CART,
@@ -72,7 +80,7 @@ export const fetchIncreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'increase'}
     )
-    dispatch(gotLineItems(data.products, data.total))
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -88,7 +96,7 @@ export const fetchDecreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'decrease'}
     )
-    dispatch(gotLineItems(data.products, data.total))
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -103,7 +111,8 @@ export const fetchDeleteItem = (
     const {data} = await axios.delete(
       `/api/cart/${userId}/${orderId}/${productId}`
     )
-    dispatch(gotLineItems(data.products, data.total))
+    console.log('data', data)
+    dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
   }
@@ -138,12 +147,16 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
 
     if (!data) {
+      console.log('no data')
       const response = await axios.post(`/api/cart/order`, {
         product,
         userId,
         qty
       })
+
+      dispatch(gotOrderId(response.data.id))
     } else {
+      console.log('data')
       const response = await axios.put(`/api/cart/order/${data.id}`, {
         product,
         userId,
@@ -183,7 +196,12 @@ export const auth = (email, password, method) => async dispatch => {
   }
 
   try {
-    dispatch(getUser(res.data))
+    let orderId = null
+    if (res.data) {
+      const order = await axios.get(`/api/cart/order/${res.data.id}`)
+      orderId = order.data.id
+    }
+    dispatch(getUser(res.data, orderId))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -205,6 +223,12 @@ export const logout = () => async dispatch => {
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
+    case GOT_ORDER_ID: {
+      return {
+        ...state,
+        orderId: action.orderId
+      }
+    }
     case GOT_LINE_ITEMS: {
       return {
         ...state,

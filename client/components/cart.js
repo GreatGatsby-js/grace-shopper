@@ -11,21 +11,10 @@ import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
-  // constructor(){
-  //   super();
-  //   this.state = {
-  //     readyForCheckout: false
-  //   }
-  //   this.renderCheckout = this.renderCheckout.bind(this);
-  // }
   componentDidMount() {
     this.props.fetchLineItems(this.props.match.params.userId)
   }
-  // renderCheckout(){
-  //   this.setState({
-  //     readyForCheckout: true
-  //   })
-  // }
+
   render() {
     if (this.props.cart.length === 0) {
       return (
@@ -92,6 +81,7 @@ class DisconnectedCart extends Component {
                               className="edit-button"
                               type="button"
                               onClick={() => {
+                                console.log('props for delete', this.props)
                                 this.props.fetchDeleteItem(
                                   this.props.userId,
                                   this.props.orderId,
@@ -108,17 +98,6 @@ class DisconnectedCart extends Component {
                   )
                 })}
               </div>
-              {/* <div>Your total is ${this.props.total}</div> */}
-              {/* <Checkout total={this.props.total} /> */}
-              {/* <button
-              type="button"
-              onClick={this.renderCheckout}
-            >
-              Proceed to Checkout
-            </button> */}
-              {/* <Link to={`/checkout/${this.props.orderId}`}>
-              Proceed to Checkout
-            </Link> */}
             </div>
           </div>
         </div>
