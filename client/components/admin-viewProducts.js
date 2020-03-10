@@ -9,7 +9,9 @@ import EditProduct from './admin-editProduct'
 class AdminViewProducts extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      editableProducts: {}
+    }
   }
 
   async componentDidMount() {
@@ -40,10 +42,9 @@ class AdminViewProducts extends Component {
         <div>
           {products.map(prod => (
             <li key={prod.id}>
-              {
-                // this.state.editableProducts[prod.id] === true ?
-                //   <EditProduct product={prod} />
-                //   :
+              {this.state.editableProducts[prod.id] === true ? (
+                <EditProduct product={prod} />
+              ) : (
                 <div>
                   <div> Name: {prod.name} </div>
                   <div>Description: {prod.description}</div>
@@ -65,7 +66,7 @@ class AdminViewProducts extends Component {
                   </button>
                   <button type="submit">Delete</button>
                 </div>
-              }
+              )}
             </li>
           ))}
         </div>
