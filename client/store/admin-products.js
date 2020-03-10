@@ -43,6 +43,7 @@ export const addToProducts = () => async dispatch => {
 }
 
 export const editThisProduct = prod => async dispatch => {
+  console.log("i'm in edit thunk")
   try {
     await axios.put(`/api/products/${prod.id}`)
 

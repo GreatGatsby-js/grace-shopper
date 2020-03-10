@@ -13,30 +13,35 @@ The Lux Ducks shop is an ecommerce website where the luxurious premium ducks are
 ## Features
 
 The website allows guests and logged-in users to do the following:
-1) View the homepage and view all the ducks and each product with details.
-2) Choose one or more items to add to cart.
-3) Guests are requested to sign up and login for placing an order.
-4) Logged-in users can place the order after adding their products to the cart.
-5) The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
-6) The cart of the logged-in user empties after checkout.
 
+1.  View the homepage and view all the ducks and each product with details.
+2.  Users and guests can choose one or more items to add to cart.
+3.  Guests are requested to sign up and login for placing an order.
+4.  Logged-in users can place the order after adding their products to the cart.
+5.  The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
+6.  The cart of the logged-in user empties after checkout.
+7.  The admin has can add or delete or update information of the product.
 
 ## Getting started
 
 Fork and clone this repo
+
 ```
 npm install
 ```
-Start the build process and your application with: 
+
+Start the build process and your application with:
+
 ```
-npm run start-dev; 
+npm run start-dev;
 ```
+
 If you're using Windows, you may need to execute npm run start-server and npm run build-watch separately (in their own terminal tabs)
 
 Create the following postgres databases using the command:
 
 ```
-createbd grace-shopper 
+createbd grace-shopper
 create grace-shopper-test
 ```
 
@@ -53,19 +58,21 @@ npm test
 ```
 
 ## Deployment tools
+
 ```
 Heroku
 Travis
 Travis CLI
 ```
 
-
 ## Project Status :
+
 This project is still in progress.
 
 ## Project Members :
+
 Mikayla Toffler, Laura Armfield-Perez, Tiffany Ma, Nadia Sultana
 
 ## License
-This project is licensed under the MIT License - see the LICENSE.md file for details
 
+This project is licensed under the MIT License - see the LICENSE.md file for details
