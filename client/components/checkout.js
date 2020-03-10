@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchPlaceOrder} from '../store'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 // import axios from 'axios'
 
 const DisconnectedCheckout = props => {
@@ -53,17 +53,28 @@ const DisconnectedCheckout = props => {
         <hr />
       </div>
       <center>
-        <button
+        {/* <button
           className="checkout-btn"
           type="button"
           onClick={() => {
             console.log('order id', props.orderId)
             props.fetchPlaceOrder(props.orderId)
-            // history.push('/confirmation')
+            history.push('/confirmation')
           }}
         >
           Confirm Order
-        </button>
+        </button> */}
+
+        <NavLink
+          to="/confirmation"
+          className="checkout-btn"
+          onClick={() => {
+            console.log('order id', props.orderId)
+            props.fetchPlaceOrder(props.orderId)
+          }}
+        >
+          Confirm Order
+        </NavLink>
       </center>
     </div>
   )

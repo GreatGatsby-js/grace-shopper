@@ -1,10 +1,15 @@
 import React from 'react'
 
-export function OrderConfirmation() {
+function OrderConfirmation() {
+  console.log('confirmation page')
   return (
     <div>
       <h2>congrats! your bougie duck is on it's way!</h2>
-      <p>look out for a confirmation email from us shortly!</p>
+      <center>
+        <p>look out for a confirmation email from us shortly!</p>
+      </center>
     </div>
   )
 }
+
+export default OrderConfirmation
