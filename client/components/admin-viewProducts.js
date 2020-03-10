@@ -27,36 +27,46 @@ class AdminViewProducts extends Component {
   render() {
     const products = this.props.products
 
-    // console.log("state", this.state)
-    // console.log(this.state.editableProducts);
+    console.log('state', this.state)
+    console.log('editableProducts', this.state.editableProducts)
     return (
       <div className="adminComponent">
         <h2>ALL PRODUCTS</h2>
-        <AddProduct />
+
+        <div>
+          <AddProduct />
+        </div>
+
         <div>
           {products.map(prod => (
             <li key={prod.id}>
-              <div> Name: {prod.name} </div>
-              <div>Description: {prod.description}</div>
-              <div>Price: {prod.price}</div>
-              {/* <div>Image Source: {prod.imageUrl}</div> */}
-              {/* <EditProduct product={prod}/> */}
-              <button
-                type="button"
-                onClick={() => {
-                  const newEditableProducts = Object.assign(
-                    {},
-                    this.state.editableProducts
-                  )
-                  newEditableProducts[prod.id] = true
-                  this.setState({editableProducts: newEditableProducts})
-                }}
-              >
-                Edit
-              </button>
-              <button type="submit">Delete</button>
+              {
+                // this.state.editableProducts[prod.id] === true ?
+                //   <EditProduct product={prod} />
+                //   :
+                <div>
+                  <div> Name: {prod.name} </div>
+                  <div>Description: {prod.description}</div>
+                  <div>Price: {prod.price}</div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      console.log('button clicked')
+                      const newEditableProducts = Object.assign(
+                        {},
+                        this.state.editableProducts
+                      )
+                      newEditableProducts[prod.id] = true
+                      this.setState({editableProducts: newEditableProducts})
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button type="submit">Delete</button>
+                </div>
+              }
             </li>
-            // WE SHOULD ADD BUTTONS HERE TO EDIT PRODUCTS
           ))}
         </div>
       </div>
@@ -64,9 +74,7 @@ class AdminViewProducts extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+/*  CONTAINER   */
 const mapState = state => {
   return {
     products: state.adminProducts.allProducts
