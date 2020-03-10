@@ -13,9 +13,9 @@ class AdminViewProducts extends Component {
     this.state = {
       editableProducts: {}
     }
-    // this.handleEditProduct = this.handleEditProduct.bind(this)
+
     this.editProduct = this.editProduct.bind(this)
-    this.deleteProduct = this.deleteProduct.bind(this)
+    this.handleDeleteProduct = this.handleDeleteProduct.bind(this)
   }
 
   async componentDidMount() {
@@ -30,32 +30,17 @@ class AdminViewProducts extends Component {
     })
   }
 
-  // handleEditProduct(event) {
-  //   console.log('button clicked')
-  //   console.log("state", this.state.editableProducts)
-  //   console.log("event target", event)
-  // const newEditableProducts = Object.assign(
-  //   {},
-  //   this.state.editableProducts
-  // )
-  // // newEditableProducts[prod.id] = true
-  // this.state.editableProducts =
-  // this.setState({editableProducts: newEditableProducts})
-  // }
-
   editProduct(id) {
     let editable = this.state.editableProducts
     editable[id] = false
     this.setState({editableProducts: editable})
   }
 
-  async deleteProduct(id) {
-    event.preventDefault()
-    // const prodId = this.props.product.id
-    console.log('id in delete product', id)
-    const response = await axios.delete(`/api/products/${id}`)
+  async handleDeleteProduct(id) {
+    // event.preventDefault()
+
+    const response = await axios.get(`/api/products/${id}`)
     this.props.delete(response.data)
-    // this.props.onUpdate(this.state)
   }
 
   render() {
@@ -102,10 +87,9 @@ class AdminViewProducts extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      this.deleteProduct(prod.id)
+                      this.handleDeleteProduct(prod.id)
                     }}
                   >
-                    {' '}
                     Delete
                   </button>
                 </div>

@@ -43,7 +43,6 @@ export const addToProducts = () => async dispatch => {
 }
 
 export const editThisProduct = prod => async dispatch => {
-  console.log("i'm in edit thunk")
   try {
     await axios.put(`/api/products/${prod.id}`)
 
@@ -55,8 +54,6 @@ export const editThisProduct = prod => async dispatch => {
 }
 
 export const removeFromProducts = product => async dispatch => {
-  console.log("i'm in delete thunk")
-  console.log(product)
   try {
     await axios.delete(`/api/products/${product.id}`)
     const {data} = await axios.get('/api/products')

@@ -36,12 +36,8 @@ router.post('/', authorize, async (req, res, next) => {
 
 router.put('/:productId', authorize, async (req, res, next) => {
   const prodId = req.params.productId
-  console.log("i'm in /api/put")
   try {
-    console.log('prodId', prodId)
-    console.log('req.params', req.params)
     const product = await Product.findByPk(prodId)
-    console.log('product in api/put', product)
     await product.update(req.body)
     await product.save()
     res.json(product)
@@ -51,9 +47,7 @@ router.put('/:productId', authorize, async (req, res, next) => {
 })
 
 router.delete('/:productId', authorize, async (req, res, next) => {
-  console.log("i'm in api/products")
   const prodId = req.params.productId
-  console.log(prodId)
   try {
     await Product.destroy({
       where: {
