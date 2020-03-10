@@ -12,10 +12,8 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
-// const GOT_ORDER_ID = 'GOT_ORDER_ID'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
-const INCREASED_CART_QTY = 'INCREASED_CART_QTY'
 
 /**
  * INITIAL STATE
@@ -23,7 +21,10 @@ const INCREASED_CART_QTY = 'INCREASED_CART_QTY'
 const defaultUser = {
   databaseUser: {},
   orderId: null,
-  cart: []
+  cart: {
+    items: [],
+    total: 0
+  }
 }
 
 /**
@@ -38,24 +39,22 @@ const getUser = (user, orderId = null) => {
 }
 const removeUser = () => ({type: REMOVE_USER})
 
-const gotLineItems = lineItems => {
+const gotLineItems = (lineItems, total) => {
+  console.log('line items', lineItems, 'total', total)
   return {
     type: GOT_LINE_ITEMS,
-    lineItems
+    lineItems,
+    total
   }
 }
 
-// const gotOrderId = orderId => {
-//   return {type: GOT_ORDER_ID, orderId}
+// const addedToCart = (product, qty) => {
+//   return {
+//     type: ADDED_TO_CART,
+//     product,
+//     qty
+//   }
 // }
-
-const addedToCart = (product, qty) => {
-  return {
-    type: ADDED_TO_CART,
-    product,
-    qty
-  }
-}
 
 const placeOrder = () => {
   return {
@@ -73,7 +72,7 @@ export const fetchIncreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'increase'}
     )
-    dispatch(gotLineItems(data.products))
+    dispatch(gotLineItems(data.products, data.total))
   } catch (err) {
     console.error(err)
   }
@@ -89,7 +88,7 @@ export const fetchDecreaseProductQty = (
       `/api/cart/${userId}/${orderId}/${productId}`,
       {action: 'decrease'}
     )
-    dispatch(gotLineItems(data.products))
+    dispatch(gotLineItems(data.products, data.total))
   } catch (err) {
     console.error(err)
   }
@@ -104,7 +103,7 @@ export const fetchDeleteItem = (
     const {data} = await axios.delete(
       `/api/cart/${userId}/${orderId}/${productId}`
     )
-    dispatch(gotLineItems(data.products))
+    dispatch(gotLineItems(data.products, data.total))
   } catch (err) {
     console.error(err)
   }
@@ -112,6 +111,7 @@ export const fetchDeleteItem = (
 
 export const fetchPlaceOrder = orderId => async dispatch => {
   try {
+    console.log('placing order')
     const {data} = await axios.put(`/api/cart/${orderId}`)
     dispatch(placeOrder())
   } catch (err) {
@@ -119,25 +119,14 @@ export const fetchPlaceOrder = orderId => async dispatch => {
   }
 }
 
-// export const fetchOrderId = userId => async dispatch => {
-//   try {
-//     const order = await axios.get(`/api/cart/order/${userId}`)
-//     console.log('store orderid', order)
-//     if (order) {
-//       dispatch(gotOrderId(order.data.id))
-//     }
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-
 export const fetchLineItems = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/cart/${userId}`)
+    console.log(data)
     if (data) {
-      dispatch(gotLineItems(data.products))
+      dispatch(gotLineItems(data.products, data.totalCost))
     } else {
-      dispatch(gotLineItems([]))
+      dispatch(gotLineItems([], 0))
     }
   } catch (err) {
     console.error(err)
@@ -173,8 +162,13 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    const order = await axios.get(`/api/cart/order/${res.data.id}`)
-    dispatch(getUser(res.data || {}, order.data.id))
+    let orderId = null
+    if (res.data) {
+      console.log('data!!')
+      const order = await axios.get(`/api/cart/order/${res.data.id}`)
+      orderId = order.data.id
+    }
+    dispatch(getUser(res.data || {}, orderId))
   } catch (err) {
     console.error(err)
   }
@@ -214,7 +208,10 @@ export default function(state = defaultUser, action) {
     case GOT_LINE_ITEMS: {
       return {
         ...state,
-        cart: [...action.lineItems]
+        cart: {
+          items: [...action.lineItems],
+          total: action.total
+        }
       }
     }
     case GET_USER: {
@@ -229,13 +226,22 @@ export default function(state = defaultUser, action) {
     case ADDED_TO_CART:
       return {
         ...state,
-        cart: [...state.cart, {product: action.product, qty: action.qty}]
+        cart: {
+          items: [
+            ...state.cart.items,
+            {product: action.product, qty: action.qty}
+          ],
+          total: action.total
+        }
       }
 
     case PLACE_ORDER:
       return {
         ...state,
-        cart: [],
+        cart: {
+          items: [],
+          total: 0
+        },
         orderId: null
       }
     default:

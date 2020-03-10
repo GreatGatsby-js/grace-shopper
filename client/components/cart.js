@@ -7,12 +7,25 @@ import {
   fetchDecreaseProductQty,
   fetchDeleteItem
 } from '../store'
+import {Checkout} from '../components'
 import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
+  // constructor(){
+  //   super();
+  //   this.state = {
+  //     readyForCheckout: false
+  //   }
+  //   this.renderCheckout = this.renderCheckout.bind(this);
+  // }
   componentDidMount() {
     this.props.fetchLineItems(this.props.match.params.userId)
   }
+  // renderCheckout(){
+  //   this.setState({
+  //     readyForCheckout: true
+  //   })
+  // }
   render() {
     if (this.props.cart.length === 0) {
       return (
@@ -67,15 +80,17 @@ class DisconnectedCart extends Component {
               </div>
             )
           })}
-          <button
+          <div>Your total is ${this.props.total}</div>
+          <Checkout total={this.props.total} />
+          {/* <button
             type="button"
-            onClick={() => {
-              this.props.fetchPlaceOrder(this.props.orderId)
-            }}
+            onClick={this.renderCheckout}
           >
-            Checkout
-          </button>
-          {/* <Link to={`/checkout/${this.props.userId}`}>Checkout</Link> */}
+            Proceed to Checkout
+          </button> */}
+          {/* <Link to={`/checkout/${this.props.orderId}`}>
+            Proceed to Checkout
+          </Link> */}
         </div>
       )
     }
@@ -91,7 +106,8 @@ const mapStateToProps = state => {
   return {
     userId: id, //might be null
     orderId: state.user.orderId, //might be null
-    cart: [...state.user.cart]
+    cart: [...state.user.cart.items],
+    total: state.user.cart.total
   }
 }
 

@@ -6,7 +6,6 @@ Visit our [website here][heroku-website]
 
 [heroku-website]: https://grace-shopper-great-gatsby.herokuapp.com/
 
-
 ## Sample
 
 To use this as boilerplate, you'll need to take the following steps:
@@ -28,15 +27,11 @@ sample sample sample sample sample sample sample sample sample sample sample sam
 
 ```
 Sample Text Within Code Styling
-
 ```
-
 
 _**NOTE**_ that this sample text `sample` sample sample.
 
-
-
-### Heroku Deployment Information (remove later) 
+### Heroku Deployment Information (remove later)
 
 Your local copy of the application can be pushed up to Heroku at will,
 using Boilermaker's handy deployment script:
