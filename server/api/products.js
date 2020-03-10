@@ -51,7 +51,9 @@ router.put('/:productId', authorize, async (req, res, next) => {
 })
 
 router.delete('/:productId', authorize, async (req, res, next) => {
+  console.log("i'm in api/products")
   const prodId = req.params.productId
+  console.log(prodId)
   try {
     await Product.destroy({
       where: {

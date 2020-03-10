@@ -30,7 +30,7 @@ const productForm = props => {
     <form onSubmit={onSubmit}>
       <h3>{formTitle}</h3>
 
-      <label htmlFor="projectName">Product Name: {nameFieldReq}</label>
+      <label htmlFor="productName">Product Name: {nameFieldReq}</label>
       <input type="text" name="name" value={name} onChange={onChange} />
 
       <label htmlFor="description">Description: {descriptionFieldReq}</label>

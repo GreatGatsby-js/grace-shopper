@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import axios from 'axios'
 
-import {fetchProducts} from '../store/admin-products.js'
+import {fetchProducts, removeFromProducts} from '../store/admin-products.js'
 import AddProduct from './admin-addProduct'
 import EditProduct from './admin-editProduct'
 
@@ -14,6 +15,7 @@ class AdminViewProducts extends Component {
     }
     // this.handleEditProduct = this.handleEditProduct.bind(this)
     this.editProduct = this.editProduct.bind(this)
+    this.deleteProduct = this.deleteProduct.bind(this)
   }
 
   async componentDidMount() {
@@ -45,6 +47,15 @@ class AdminViewProducts extends Component {
     let editable = this.state.editableProducts
     editable[id] = false
     this.setState({editableProducts: editable})
+  }
+
+  async deleteProduct(id) {
+    event.preventDefault()
+    // const prodId = this.props.product.id
+    console.log('id in delete product', id)
+    const response = await axios.delete(`/api/products/${id}`)
+    this.props.delete(response.data)
+    // this.props.onUpdate(this.state)
   }
 
   render() {
@@ -87,7 +98,16 @@ class AdminViewProducts extends Component {
                   >
                     Edit
                   </button>
-                  <button type="submit">Delete</button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      this.deleteProduct(prod.id)
+                    }}
+                  >
+                    {' '}
+                    Delete
+                  </button>
                 </div>
               )}
             </li>
@@ -107,7 +127,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    delete: prod => dispatch(removeFromProducts(prod))
   }
 }
 
