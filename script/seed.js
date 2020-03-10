@@ -13,27 +13,28 @@ const seed = async () => {
   try {
     await db.sync({force: true})
 
-    //creates and seeds the User database model
+    //creates instances and seeds the User database model
     const allUsers = await Promise.all(
       users.map(user => {
         return User.create(user)
       })
     )
 
-    // const allProducts =
+    //creates instances and seeds the Product database model
     await Promise.all(
       products.map(product => {
         return Product.create(product)
       })
     )
 
+    //creates instances and seeds the Order database model
     const allOrders = await Promise.all(
       orders.map(order => {
         return Order.create(order)
       })
     )
 
-    // const allLineItems =
+    //creates instances and seeds the LineItem database model
     await Promise.all(
       lineitems.map(lineItem => {
         return LineItem.create(lineItem)
@@ -52,14 +53,6 @@ const seed = async () => {
     await user1.addOrder(order1)
     await user2.addOrder(order2)
     await user3.addOrder(order3)
-
-    // const product1 = allProducts[0]
-    // const product2 = allProducts[1]
-    // const product3 = allProducts[2]
-
-    // const lineitem1 = allLineItems[0]
-    // const lineitem2 = allLineItems[1]
-    // const lineitem3 = allLineItems[2]
   } catch (err) {
     console.log(red(err))
   }
