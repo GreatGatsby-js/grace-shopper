@@ -39,7 +39,13 @@ router.post('/order', async (req, res, next) => {
       shipping_address: 'temp',
       userId: req.body.userId
     })
-    res.sendStatus(200)
+    const lineItem = await LineItem.create({
+      orderId: order.id,
+      productId: req.body.product.id,
+      quantity: 1,
+      purchasedPrice: req.body.product.price
+    })
+    res.send(order)
   } catch (error) {
     next(error)
   }

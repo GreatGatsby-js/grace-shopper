@@ -14,6 +14,7 @@ const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
 const GOT_LOCAL_STORAGE = 'GOT_LOCAL_STORAGE'
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
+const GOT_ORDER_ID = 'GOT_ORDER_ID'
 
 /**
  * INITIAL STATE
@@ -45,6 +46,13 @@ const gotLineItems = (lineItems, total) => {
     type: GOT_LINE_ITEMS,
     lineItems,
     total
+  }
+}
+
+const gotOrderId = orderId => {
+  return {
+    type: GOT_ORDER_ID,
+    orderId
   }
 }
 
@@ -138,11 +146,12 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
 
     if (!data) {
-      const response = await axios.post(`/api/cart/order`, {
+      const {data} = await axios.post(`/api/cart/order`, {
         product,
         userId,
         qty
       })
+      dispatch(gotOrderId(data.id))
     } else {
       const response = await axios.put(`/api/cart/order/${data.id}`, {
         product,
@@ -205,6 +214,12 @@ export const logout = () => async dispatch => {
  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
+    case GOT_ORDER_ID: {
+      return {
+        ...state,
+        orderId: action.orderId
+      }
+    }
     case GOT_LINE_ITEMS: {
       return {
         ...state,

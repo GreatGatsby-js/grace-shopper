@@ -92,6 +92,7 @@ class DisconnectedCart extends Component {
                               className="edit-button"
                               type="button"
                               onClick={() => {
+                                console.log('props for delete', this.props)
                                 this.props.fetchDeleteItem(
                                   this.props.userId,
                                   this.props.orderId,
