@@ -67,10 +67,9 @@ class GuestCart extends Component {
                           onClick={() => {
                             increaseGuestQty(product)
 
-                            this.setState(
-                              {[key]: JSON.parse(localStorage.getItem(key))},
-                              () => console.log('increase state', this.state)
-                            )
+                            this.setState({
+                              [key]: JSON.parse(localStorage.getItem(key))
+                            })
                           }}
                         >
                           +
@@ -82,10 +81,9 @@ class GuestCart extends Component {
                           onClick={() => {
                             decreaseGuestQty(product)
 
-                            this.setState(
-                              {[key]: JSON.parse(localStorage.getItem(key))},
-                              () => console.log('decrease state', this.state)
-                            )
+                            this.setState({
+                              [key]: JSON.parse(localStorage.getItem(key))
+                            })
                           }}
                         >
                           -
@@ -96,7 +94,6 @@ class GuestCart extends Component {
                           type="button"
                           onClick={() => {
                             try {
-                              console.log('clicked delete')
                               const prodToDelete = product
 
                               removeFromCart(prodToDelete)
