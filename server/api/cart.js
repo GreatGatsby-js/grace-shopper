@@ -11,7 +11,6 @@ router.get('/order/:userId', async (req, res, next) => {
         status: 'Cart'
       }
     })
-    // console.log('order', order)
     res.send(order)
   } catch (err) {
     next(err)
@@ -163,9 +162,7 @@ router.put('/:userId/:orderId/:productId', async (req, res, next) => {
       },
       include: [Product]
     })
-    // console.log('order', order)
     res.send(response)
-    //decrease quantity on this product
   } catch (err) {
     next(err)
   }

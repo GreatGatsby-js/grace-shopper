@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {fetchPlaceOrder} from '../store'
 import {Link, NavLink} from 'react-router-dom'
