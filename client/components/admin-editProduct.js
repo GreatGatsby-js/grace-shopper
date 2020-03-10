@@ -8,7 +8,6 @@ import ProductForm from './admin-productForm'
 class EditProduct extends Component {
   constructor(props) {
     super(props)
-    console.log('props', props)
     this.state = {
       name: props.product.name,
       description: props.product.description,
@@ -27,8 +26,13 @@ class EditProduct extends Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const response = await axios.post('/api/products/', this.state)
+    const prodId = this.props.product.id
+    console.log(this.state)
+    const response = await axios.put(`/api/products/${prodId}`, this.state)
     this.props.onUpdate(response.data)
+    // this.props.onUpdate(this.state)
+
+    this.props.switchToFalse() //changes this.state.editableProducts[id] back to false so the component changes back to product view instead of editProductForm
 
     this.setState({
       name: '',

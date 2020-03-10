@@ -12,6 +12,8 @@ class AdminViewProducts extends Component {
     this.state = {
       editableProducts: {}
     }
+    // this.handleEditProduct = this.handleEditProduct.bind(this)
+    this.editProduct = this.editProduct.bind(this)
   }
 
   async componentDidMount() {
@@ -26,11 +28,28 @@ class AdminViewProducts extends Component {
     })
   }
 
+  // handleEditProduct(event) {
+  //   console.log('button clicked')
+  //   console.log("state", this.state.editableProducts)
+  //   console.log("event target", event)
+  // const newEditableProducts = Object.assign(
+  //   {},
+  //   this.state.editableProducts
+  // )
+  // // newEditableProducts[prod.id] = true
+  // this.state.editableProducts =
+  // this.setState({editableProducts: newEditableProducts})
+  // }
+
+  editProduct(id) {
+    let editable = this.state.editableProducts
+    editable[id] = false
+    this.setState({editableProducts: editable})
+  }
+
   render() {
     const products = this.props.products
 
-    console.log('state', this.state)
-    console.log('editableProducts', this.state.editableProducts)
     return (
       <div className="adminComponent">
         <h2>ALL PRODUCTS</h2>
@@ -43,17 +62,21 @@ class AdminViewProducts extends Component {
           {products.map(prod => (
             <li key={prod.id}>
               {this.state.editableProducts[prod.id] === true ? (
-                <EditProduct product={prod} />
+                <EditProduct
+                  product={prod}
+                  switchToFalse={() => this.editProduct(prod.id)}
+                />
               ) : (
                 <div>
-                  <div> Name: {prod.name} </div>
+                  <div>Name: {prod.name} </div>
                   <div>Description: {prod.description}</div>
                   <div>Price: {prod.price}</div>
 
                   <button
                     type="button"
                     onClick={() => {
-                      console.log('button clicked')
+                      // this.handleEditProduct(id)
+
                       const newEditableProducts = Object.assign(
                         {},
                         this.state.editableProducts
