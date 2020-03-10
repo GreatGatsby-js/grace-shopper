@@ -17,7 +17,8 @@ The website allows guests and logged-in users to do the following:
 2) Choose one or more items to add to cart.
 3) Guests are requested to sign up and login for placing an order.
 4) Logged-in users can place the order after adding their products to the cart.
-5)The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart.
+5) The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
+6) The cart of the logged-in user empties after checkout.
 
 
 ## Getting started
