@@ -8,7 +8,6 @@ import {
   fetchDeleteItem
 } from '../store'
 import {Checkout} from '../components'
-import {Link} from 'react-router-dom'
 
 class DisconnectedCart extends Component {
   componentDidMount() {
@@ -40,7 +39,6 @@ class DisconnectedCart extends Component {
 
               <div id="cart-item-list">
                 {this.props.cart.map(item => {
-                  console.log('item is ', item)
                   return (
                     <div key={item.id} id="item-container">
                       <div id="cart-item">
@@ -81,7 +79,6 @@ class DisconnectedCart extends Component {
                               className="edit-button"
                               type="button"
                               onClick={() => {
-                                console.log('props for delete', this.props)
                                 this.props.fetchDeleteItem(
                                   this.props.userId,
                                   this.props.orderId,
@@ -113,8 +110,8 @@ const mapStateToProps = state => {
   }
 
   return {
-    userId: id, //might be null
-    orderId: state.user.orderId, //might be null
+    userId: id,
+    orderId: state.user.orderId,
     cart: [...state.user.cart.items],
     total: state.user.cart.total
   }

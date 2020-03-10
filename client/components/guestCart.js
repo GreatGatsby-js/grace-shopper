@@ -100,7 +100,6 @@ class GuestCart extends Component {
                         type="button"
                         onClick={() => {
                           try {
-                            console.log('clicked delete')
                             const prodToDelete = this.state[key].product
 
                             removeFromCart(prodToDelete)

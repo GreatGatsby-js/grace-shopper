@@ -52,8 +52,6 @@ router.post('/order', async (req, res, next) => {
 
 router.put('/order/:orderId', async (req, res, next) => {
   try {
-    //lineitem.create with prod id and order id
-    //check if lineitem with this order and product exists already
     let lineitem = await LineItem.findOne({
       where: {
         orderId: req.params.orderId,

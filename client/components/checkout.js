@@ -5,7 +5,6 @@ import {Link, NavLink} from 'react-router-dom'
 // import axios from 'axios'
 
 const DisconnectedCheckout = props => {
-  console.log('checkout props', props)
   //if guest user, must make acct first so that we can store in DB.
   if (!props.isLoggedIn) {
     return (
@@ -53,18 +52,6 @@ const DisconnectedCheckout = props => {
         <hr />
       </div>
       <center>
-        {/* <button
-          className="checkout-btn"
-          type="button"
-          onClick={() => {
-            console.log('order id', props.orderId)
-            props.fetchPlaceOrder(props.orderId)
-            history.push('/confirmation')
-          }}
-        >
-          Confirm Order
-        </button> */}
-
         <NavLink
           to="/confirmation"
           className="checkout-btn"

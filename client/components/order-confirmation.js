@@ -1,7 +1,6 @@
 import React from 'react'
 
 function OrderConfirmation() {
-  console.log('confirmation page')
   return (
     <div>
       <h2>congrats! your bougie duck is on it's way!</h2>
