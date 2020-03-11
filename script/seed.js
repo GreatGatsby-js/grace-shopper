@@ -1,6 +1,6 @@
 'use strict'
 
-const {green, red} = require('chalk')
+// const {green, red} = require('chalk')
 const db = require('../server/db')
 const {User, Product, Order, LineItem} = require('../server/db/models')
 
