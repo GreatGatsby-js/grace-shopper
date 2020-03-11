@@ -56,7 +56,6 @@ const DisconnectedCheckout = props => {
           to="/confirmation"
           className="checkout-btn"
           onClick={() => {
-            console.log('order id', props.orderId)
             props.fetchPlaceOrder(props.orderId)
           }}
         >
