@@ -10,13 +10,16 @@ class AllProducts extends Component {
   }
 
   render() {
+    const products = this.props.products.slice() //slicing to make a copy of the props to sort
+    products.sort((product1, product2) => product1.id - product2.id) //sorts products by comparing id values
+
     return (
       <div>
         <div id="all-products">
           <div className="productBox">
-            {this.props.products.length
+            {products.length
               ? // if there are products, render them
-                this.props.products.map(product => (
+                products.map(product => (
                   <div key={product.id} id="product-container">
                     <Link to={`/products/${product.id}`}>
                       <ProductPreview product={product} />

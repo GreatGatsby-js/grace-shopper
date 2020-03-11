@@ -27,17 +27,11 @@ class EditProduct extends Component {
   async handleSubmit(event) {
     event.preventDefault()
     const prodId = this.props.product.id
-    console.log(this.state)
+
     const response = await axios.put(`/api/products/${prodId}`, this.state)
     this.props.onUpdate(response.data)
 
     this.props.switchToFalse() //changes this.state.editableProducts[id] back to false so the component changes back to product view instead of editProductForm
-
-    this.setState({
-      name: '',
-      description: '',
-      price: ''
-    })
   }
 
   render() {

@@ -14,7 +14,6 @@ class AdminViewProducts extends Component {
       editableProducts: {}
     }
 
-    this.editProduct = this.editProduct.bind(this)
     this.handleDeleteProduct = this.handleDeleteProduct.bind(this)
   }
 
@@ -30,22 +29,33 @@ class AdminViewProducts extends Component {
     })
   }
 
-  editProduct(id) {
-    let editable = this.state.editableProducts
-    editable[id] = false
-    this.setState({editableProducts: editable})
+  makeProductEditable = productId => {
+    this.setState(prevState => {
+      const newEditableProducts = Object.assign({}, prevState.editableProducts)
+      newEditableProducts[productId] = true
+      return {editableProducts: newEditableProducts}
+    })
+  }
+
+  makeProductUneditable = productId => {
+    this.setState(prevState => {
+      const newEditableProducts = Object.assign({}, prevState.editableProducts)
+      newEditableProducts[productId] = false
+      return {editableProducts: newEditableProducts}
+    })
   }
 
   async handleDeleteProduct(id) {
-    // event.preventDefault()
-
     const response = await axios.get(`/api/products/${id}`)
     this.props.delete(response.data)
   }
 
   render() {
-    const products = this.props.products
+    const products = this.props.products.slice() //slicing to make a copy of the props to sort
 
+    products.sort((product1, product2) => product1.id - product2.id) //sorts products
+    // number comparater to keep products from re-rendering at the bottom
+    // after editing a product, redux/react re-renders component at bottom of page
     return (
       <div className="adminComponent">
         <h2>ALL PRODUCTS</h2>
@@ -60,7 +70,7 @@ class AdminViewProducts extends Component {
               {this.state.editableProducts[prod.id] === true ? (
                 <EditProduct
                   product={prod}
-                  switchToFalse={() => this.editProduct(prod.id)}
+                  switchToFalse={() => this.makeProductUneditable(prod.id)}
                 />
               ) : (
                 <div>
@@ -71,14 +81,7 @@ class AdminViewProducts extends Component {
                   <button
                     type="button"
                     onClick={() => {
-                      // this.handleEditProduct(id)
-
-                      const newEditableProducts = Object.assign(
-                        {},
-                        this.state.editableProducts
-                      )
-                      newEditableProducts[prod.id] = true
-                      this.setState({editableProducts: newEditableProducts})
+                      this.makeProductEditable(prod.id)
                     }}
                   >
                     Edit
