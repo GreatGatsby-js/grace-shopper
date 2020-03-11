@@ -33,7 +33,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
         .catch(done)
     }
   )
-
   passport.use(strategy)
 
   router.get(
