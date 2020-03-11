@@ -5,6 +5,7 @@ const authorize = require('./authentication') //middleware function that verifie
 
 module.exports = router
 
+// GETS ALL PRODUCTS
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll()
@@ -15,6 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// GETS SINGLE PRODUCT
 router.get('/:productId', async (req, res, next) => {
   const prodId = req.params.productId
   try {
@@ -25,6 +27,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
+// ADD NEW PRODUCT
 router.post('/', authorize, async (req, res, next) => {
   try {
     const product = await Product.create(req.body)
@@ -34,6 +37,7 @@ router.post('/', authorize, async (req, res, next) => {
   }
 })
 
+// EDIT A PRODUCT
 router.put('/:productId', authorize, async (req, res, next) => {
   const prodId = req.params.productId
   try {
@@ -46,6 +50,7 @@ router.put('/:productId', authorize, async (req, res, next) => {
   }
 })
 
+// REMOVE A PRODUCT
 router.delete('/:productId', authorize, async (req, res, next) => {
   const prodId = req.params.productId
   try {
