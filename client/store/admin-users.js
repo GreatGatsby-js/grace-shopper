@@ -2,12 +2,10 @@ import axios from 'axios'
 import history from '../history'
 
 /*  ACTION TYPES   */
-// const ADMIN_GET_USER = 'GET_USER'
+// const ADMIN_GET_USER = 'GET_USER' //for future use
 const ADMIN_GET_ALL_USERS = 'ADMIN_GET_USERS'
 
-/**
- * INITIAL STATE
- */
+/*  INITIAL STATE  */
 const defaultUser = {
   databaseUser: {},
   // orderId: null,
@@ -38,6 +36,7 @@ export const fetchUsers = () => async dispatch => {
 /*  REDUCER */
 export default function(state = defaultUser, action) {
   switch (action.type) {
+    // commented out but left for future use
     // case ADMIN_GET_USER: {
     //   return {
     //     ...state,

@@ -4,9 +4,6 @@ import {withRouter, Link} from 'react-router-dom'
 import {fetchProducts} from '../store/products.js'
 import ProductPreview from './product-preview'
 
-/**
- * COMPONENT
- */
 class AllProducts extends Component {
   componentDidMount() {
     this.props.fetchProducts()
@@ -35,9 +32,6 @@ class AllProducts extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     products: state.products.allProducts

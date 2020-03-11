@@ -1,19 +1,17 @@
 import axios from 'axios'
 import history from '../history'
 
-/**
- * ACTION TYPES
- */
+/* USER ACTION TYPES  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
+
+/* CART ACTION TYPES  */
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
 
-/**
- * INITIAL STATE
- */
+/*  INITIAL STATE  */
 const defaultUser = {
   databaseUser: {},
   orderId: null,
@@ -23,9 +21,7 @@ const defaultUser = {
   }
 }
 
-/**
- * ACTION CREATORS
- */
+/*  USER ACTION CREATORS  */
 const getUser = (user, orderId = null) => {
   return {
     type: GET_USER,
@@ -35,8 +31,8 @@ const getUser = (user, orderId = null) => {
 }
 const removeUser = () => ({type: REMOVE_USER})
 
+/*  CART ACTION CREATORS  */
 const gotLineItems = (lineItems, total) => {
-  console.log('line items', lineItems, 'total', total)
   return {
     type: GOT_LINE_ITEMS,
     lineItems,
@@ -98,7 +94,6 @@ export const fetchDeleteItem = (
     const {data} = await axios.delete(
       `/api/cart/${userId}/${orderId}/${productId}`
     )
-    console.log('data', data)
     dispatch(gotLineItems(data.products, data.totalCost))
   } catch (err) {
     console.error(err)
@@ -107,7 +102,6 @@ export const fetchDeleteItem = (
 
 export const fetchPlaceOrder = orderId => async dispatch => {
   try {
-    console.log('placing order')
     const {data} = await axios.put(`/api/cart/${orderId}`)
     dispatch(placeOrder())
   } catch (err) {
@@ -118,7 +112,6 @@ export const fetchPlaceOrder = orderId => async dispatch => {
 export const fetchLineItems = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/cart/${userId}`)
-    console.log(data)
     if (data) {
       dispatch(gotLineItems(data.products, data.totalCost))
     } else {
@@ -134,7 +127,6 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     let {data} = await axios.get(`/api/cart/order/${userId}`)
 
     if (!data) {
-      console.log('no data')
       const response = await axios.post(`/api/cart/order`, {
         product,
         userId,
@@ -143,7 +135,6 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
 
       dispatch(gotOrderId(response.data.id))
     } else {
-      console.log('data')
       const response = await axios.put(`/api/cart/order/${data.id}`, {
         product,
         userId,
@@ -156,15 +147,13 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     console.error(error)
   }
 }
-/**
- * THUNK CREATORS
- */
+
+/*  THUNK CREATORS   */
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     let orderId = null
     if (res.data) {
-      console.log('data!!')
       const order = await axios.get(`/api/cart/order/${res.data.id}`)
       orderId = order.data.id
     }
@@ -205,9 +194,7 @@ export const logout = () => async dispatch => {
   }
 }
 
-/**
- * REDUCER
- */
+/*  REDUCER  */
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GOT_ORDER_ID: {

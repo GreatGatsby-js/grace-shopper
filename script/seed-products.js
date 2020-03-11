@@ -9,6 +9,56 @@ const products = [
   },
 
   {
+    name: 'dr. mcducky',
+    description: 'head of neuro at Seattle Goose Mercy Duck Hospital',
+    price: 900,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/03/Surgeon-Rubber-Duck-slant-right-Amsterdam-Duck-Store.jpg'
+  },
+
+  {
+    name: 'the zodiac quacker',
+    description: '',
+    price: 300,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Zodiac-rubber-duck-slant-right-Amsterdam-duck-Store.jpg'
+  },
+
+  {
+    name: 'duckingham palace guard',
+    description:
+      'protector of the historical Duckingham Palace in the United Duckdom',
+    price: 250,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/10/Royal-Guard-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
+  },
+
+  {
+    name: 'the fowlfather',
+    description: 'head of shady underwater business dealings',
+    price: 999,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/09/Godfeather-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
+  },
+
+  {
+    name: 'Quackzalcoatl',
+    description:
+      'In Mesoamerican myth, Quackzalcoatl is feathered serpent deity, a mythical culture hero from whom almost all mesoamerican peoples claim descent.',
+    price: 2012,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Aztec-rubber-duck-front-Amsterdam-Duck-Store.jpg'
+  },
+
+  {
+    name: 'ariana granduck',
+    description: 'add to cart. thank u, next',
+    price: 900,
+    imageUrl:
+      'https://amsterdamduckstore.com/wp-content/uploads/2019/08/Ariana-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
+  },
+
+  {
     name: 'happy duck',
     description:
       'Life is even more fun with this cheerful rubber duck! This duck becomes everyones playmate',
@@ -61,13 +111,7 @@ const products = [
     imageUrl:
       'https://amsterdamduckstore.com/wp-content/uploads/2020/01/Photographer-rubber-duck-front-Amsterdam-Duck-Store.jpg'
   },
-  {
-    name: 'ariana granduck',
-    description: 'add to cart. thank u, next',
-    price: 900,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/08/Ariana-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
-  },
+
   {
     name: 'statue of duckberty',
     description: 'Caution: this duck is life size',
@@ -75,35 +119,7 @@ const products = [
     imageUrl:
       'https://amsterdamduckstore.com/wp-content/uploads/2015/09/liberty-rubber-duck-front-e1569407748113.jpg'
   },
-  {
-    name: 'dr. mcducky',
-    description: 'head of neuro at Seattle Goose Mercy Duck Hospital',
-    price: 900,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/03/Surgeon-Rubber-Duck-slant-right-Amsterdam-Duck-Store.jpg'
-  },
-  {
-    name: 'the zodiac quacker',
-    description: '',
-    price: 300,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Zodiac-rubber-duck-slant-right-Amsterdam-duck-Store.jpg'
-  },
-  {
-    name: 'duckingham palace guard',
-    description:
-      'protector of the historical Duckingham Palace in the United Duckdom',
-    price: 250,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/10/Royal-Guard-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
-  },
-  {
-    name: 'the fowlfather',
-    description: 'head of shady underwater business dealings',
-    price: 999,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/09/Godfeather-rubber-duck-leaning-Amsterdam-Duck-Store.jpg'
-  },
+
   {
     name: 'mother of duckies',
     description:
@@ -112,14 +128,7 @@ const products = [
     imageUrl:
       'https://amsterdamduckstore.com/wp-content/uploads/2018/08/Game-of-birds-Rubber-Duck.jpg'
   },
-  {
-    name: 'Quackzalcoatl',
-    description:
-      'In Mesoamerican myth, Quackzalcoatl is feathered serpent deity, a mythical culture hero from whom almost all mesoamerican peoples claim descent.',
-    price: 2012,
-    imageUrl:
-      'https://amsterdamduckstore.com/wp-content/uploads/2019/12/Aztec-rubber-duck-front-Amsterdam-Duck-Store.jpg'
-  },
+
   {
     name: 'dank duck',
     description: 'suh dude. i could go for some sandwiches right now',
