@@ -1,17 +1,19 @@
 import axios from 'axios'
 import history from '../history'
 
-/* USER ACTION TYPES  */
+/**
+ * ACTION TYPES
+ */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GOT_LINE_ITEMS = 'GOT_LINE_ITEMS'
-
-/* CART ACTION TYPES  */
 const ADDED_TO_CART = 'ADDED_TO_CART'
 const PLACE_ORDER = 'PLACE_ORDER'
 const GOT_ORDER_ID = 'GOT_ORDER_ID'
 
-/*  INITIAL STATE  */
+/**
+ * INITIAL STATE
+ */
 const defaultUser = {
   databaseUser: {},
   orderId: null,
@@ -21,7 +23,9 @@ const defaultUser = {
   }
 }
 
-/*  USER ACTION CREATORS  */
+/**
+ * ACTION CREATORS
+ */
 const getUser = (user, orderId = null) => {
   return {
     type: GET_USER,
@@ -31,7 +35,6 @@ const getUser = (user, orderId = null) => {
 }
 const removeUser = () => ({type: REMOVE_USER})
 
-/*  CART ACTION CREATORS  */
 const gotLineItems = (lineItems, total) => {
   return {
     type: GOT_LINE_ITEMS,
@@ -147,8 +150,9 @@ export const fetchAddToCart = (product, userId, qty = 1) => async dispatch => {
     console.error(error)
   }
 }
-
-/*  THUNK CREATORS   */
+/**
+ * THUNK CREATORS
+ */
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -194,7 +198,9 @@ export const logout = () => async dispatch => {
   }
 }
 
-/*  REDUCER  */
+/**
+ * REDUCER
+ */
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GOT_ORDER_ID: {
