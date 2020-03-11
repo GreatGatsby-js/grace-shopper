@@ -68,7 +68,6 @@ const DisconnectedCheckout = props => {
 }
 
 const mapState = state => {
-  console.log('state is', state)
   return {
     isLoggedIn: !!state.user.databaseUser.id,
     total: state.user.cart.total,

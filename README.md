@@ -18,10 +18,12 @@ The website allows guests and logged-in users to do the following:
 2.  Users and guests can choose one or more items to add to cart.
 3.  Guests are requested to sign up and login for placing an order.
 4.  Logged-in users can place the order after adding their products to the cart.
-5.  The cart allows the users and guests to increase and decrease the quantity of the products they added to the cart before placing an order.
-6.  The cart of the logged-in user empties after checkout.
+5.  The cart allows the users and guests to delete a product and increase or decrease the quantity of the products they added to the cart before placing an order.
+6.  The cart of the logged-in user empties after confirming the order.
 7.  The admin can view all users and products.
 8.  The admin can add or delete or update information of the product.
+
+<img width="748" alt="Screen Shot 2020-03-10 at 10 16 42 PM" src="https://user-images.githubusercontent.com/34702996/76376184-145c8d80-631e-11ea-934d-ba1445d5c226.png">
 
 ## Getting started
 
@@ -42,8 +44,8 @@ If you're using Windows, you may need to execute npm run start-server and npm ru
 Create the following postgres databases using the command:
 
 ```
-createbd grace-shopper
-create grace-shopper-test
+createdb grace-shopper
+createdb grace-shopper-test
 ```
 
 Check out the starting seed file in seed.js - you can run it by executing

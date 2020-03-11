@@ -28,9 +28,7 @@ class AdminViewUsers extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+/*  CONTAINER  */
 const mapState = state => {
   return {
     users: state.adminUsers.allDatabaseUsers
