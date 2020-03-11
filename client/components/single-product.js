@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {fetchSingleProduct, fetchAddToCart} from '../store'
 import {increaseGuestQty} from '../store/guestCartFuncs'
+import Toast from 'light-toast'
 
 /**
  * COMPONENT
@@ -27,6 +28,7 @@ class SingleProduct extends Component {
                 type="button"
                 id="add-to-cart"
                 onClick={() => {
+                  Toast.success('Item Added to Cart', 1000)
                   this.props.fetchAddToCart(
                     this.props.product,
                     this.props.userId,
@@ -40,7 +42,10 @@ class SingleProduct extends Component {
               <button
                 id="add-to-cart"
                 type="button"
-                onClick={() => increaseGuestQty(this.props.product)}
+                onClick={() => {
+                  Toast.success('Item Added to Cart', 1000)
+                  increaseGuestQty(this.props.product)
+                }}
               >
                 add to cart
               </button>
