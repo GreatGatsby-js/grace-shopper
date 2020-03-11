@@ -33,12 +33,6 @@ class EditProduct extends Component {
     // this.props.onUpdate(this.state)
 
     this.props.switchToFalse() //changes this.state.editableProducts[id] back to false so the component changes back to product view instead of editProductForm
-
-    this.setState({
-      name: '',
-      description: '',
-      price: ''
-    })
   }
 
   render() {
