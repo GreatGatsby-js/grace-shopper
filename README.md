@@ -42,8 +42,8 @@ If you're using Windows, you may need to execute npm run start-server and npm ru
 Create the following postgres databases using the command:
 
 ```
-createbd grace-shopper
-create grace-shopper-test
+createdb grace-shopper
+createdb grace-shopper-test
 ```
 
 Check out the starting seed file in seed.js - you can run it by executing
