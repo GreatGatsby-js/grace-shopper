@@ -23,7 +23,9 @@ The website allows guests and logged-in users to do the following:
 7.  The admin can view all users and products.
 8.  The admin can add or delete or update information of the product.
 
+##Schema
 
+<img width="748" alt="Screen Shot 2020-03-10 at 10 16 42 PM" src="https://user-images.githubusercontent.com/34702996/76376184-145c8d80-631e-11ea-934d-ba1445d5c226.png">
 
 ## Getting started
 
