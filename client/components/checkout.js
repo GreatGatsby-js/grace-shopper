@@ -5,7 +5,6 @@ import {Link, NavLink} from 'react-router-dom'
 // import axios from 'axios'
 
 const DisconnectedCheckout = props => {
-  console.log('checkout props', props)
   //if guest user, must make acct first so that we can store in DB.
   if (!props.isLoggedIn) {
     return (

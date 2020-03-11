@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {fetchSingleProduct, fetchAddToCart} from '../store'
 import {increaseGuestQty} from '../store/guestCartFuncs'
-// import {ProductPreview} from './product-preview'
 
 /**
  * COMPONENT
@@ -14,7 +13,6 @@ class SingleProduct extends Component {
   }
 
   render() {
-    console.log('single product props')
     return (
       <div id="single-container">
         <h2 className="single-name">{this.props.product.name}</h2>
@@ -29,7 +27,6 @@ class SingleProduct extends Component {
                 type="button"
                 id="add-to-cart"
                 onClick={() => {
-                  console.log('clicked')
                   this.props.fetchAddToCart(
                     this.props.product,
                     this.props.userId,
@@ -50,7 +47,6 @@ class SingleProduct extends Component {
             )}
           </div>
         </div>
-        {/* Alternative would be a single product view component, similar to product-preview component but with more details */}
       </div>
     )
   }
@@ -64,7 +60,7 @@ const mapState = state => {
   return {
     isLoggedIn: !!id,
     userId: id,
-    product: state.products.singleProduct //placeholder text. might need to update based on what's in the store
+    product: state.products.singleProduct
   }
 }
 

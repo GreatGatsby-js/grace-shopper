@@ -19,7 +19,6 @@ router.get('/order/:userId', async (req, res, next) => {
 
 //getting order total, only
 router.get(`/order/total/:orderId`, async (req, res, next) => {
-  console.log('\ngetting total\n')
   try {
     let order = await Order.findByPk(req.params.orderId)
     res.send(order.dataValues.totalCost)
@@ -52,8 +51,6 @@ router.post('/order', async (req, res, next) => {
 
 router.put('/order/:orderId', async (req, res, next) => {
   try {
-    //lineitem.create with prod id and order id
-    //check if lineitem with this order and product exists already
     let lineitem = await LineItem.findOne({
       where: {
         orderId: req.params.orderId,
