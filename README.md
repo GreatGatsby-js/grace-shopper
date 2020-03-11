@@ -23,6 +23,8 @@ The website allows guests and logged-in users to do the following:
 7.  The admin can view all users and products.
 8.  The admin can add or delete or update information of the product.
 
+
+
 ## Getting started
 
 Fork and clone this repo
